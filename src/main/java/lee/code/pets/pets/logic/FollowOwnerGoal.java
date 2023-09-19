@@ -1,11 +1,14 @@
 package lee.code.pets.pets.logic;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.EnumSet;
 
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class FollowOwnerGoal extends Goal {
@@ -25,6 +28,7 @@ public class FollowOwnerGoal extends Goal {
   public boolean canUse() {
     owner = mob.getTarget();
     if (owner == null) return false;
+    if (!mob.getPassengers().isEmpty()) return false;
     final float distance = 15;
     if (owner.distanceToSqr(mob) > (double) (distance * distance)) {
       mob.setPos(owner.getX(), owner.getY(), owner.getZ());
@@ -42,17 +46,31 @@ public class FollowOwnerGoal extends Goal {
   }
 
   @Override
+  public void tick() {
+    final BlockPos frontPos = mob.blockPosition().relative(mob.getDirection());
+    final BlockState frontBlockState = mob.level().getBlockState(frontPos);
+    if (frontBlockState.isSolidRender(mob.level(), frontPos) || frontBlockState.getBlock() instanceof LeavesBlock) {
+      // Jump logic here.
+      mob.getJumpControl().jump();
+    }
+  }
+
+  @Override
   public void start() {
-    mob.getNavigation().moveTo(xOffset, owner.getY(), zOffset, speed);
+    moveTo();
   }
 
   @Override
   public boolean canContinueToUse() {
-    return !mob.getNavigation().isDone() && !mob.getPassengers().isEmpty();
+    return !mob.getPassengers().isEmpty();
   }
 
   @Override
   public void stop() {
-    mob.getNavigation().stop();
+
+  }
+
+  private void moveTo() {
+    mob.getMoveControl().setWantedPosition(xOffset, owner.getY(), zOffset, speed);
   }
 }
