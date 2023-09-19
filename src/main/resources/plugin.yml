@@ -1,0 +1,12 @@
+name: $name
+version: $version
+main: lee.code.pets.Pets
+description: $description
+author: Lee
+api-version: "$apiVersion"
+depend: [ProtocolLib, GoldmanEconomy, GoldmanColors, GoldmanPlayerData]
+commands:
+  pets:
+    description: Main pets command.
+    permission: pets.command.use
+    aliases: [pet]
