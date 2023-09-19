@@ -1,7 +1,7 @@
 package lee.code.pets.pets;
 
 import lee.code.pets.pets.controllers.ControllerLookFlying;
-import lee.code.pets.pets.logic.FollowOwnerGoal;
+import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

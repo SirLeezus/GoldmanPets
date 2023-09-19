@@ -1,4 +1,4 @@
-package lee.code.pets.pets.logic;
+package lee.code.pets.pets.goals;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
