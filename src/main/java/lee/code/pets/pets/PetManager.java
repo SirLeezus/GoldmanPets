@@ -2,9 +2,7 @@ package lee.code.pets.pets;
 
 import lee.code.pets.pets.pet.animal.*;
 import lee.code.pets.pets.pet.animal.CatPet;
-import lee.code.pets.pets.pet.mob.BlazePet;
-import lee.code.pets.pets.pet.mob.PhantomPet;
-import lee.code.pets.pets.pet.mob.ZombiePet;
+import lee.code.pets.pets.pet.mob.*;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
@@ -27,6 +25,10 @@ public class PetManager  {
       case BLAZE -> spawn(player.getWorld(), new BlazePet(player, data[0]));
       case SNIFFER -> spawn(player.getWorld(), new SnifferPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case RABBIT -> spawn(player.getWorld(), new RabbitPet(player, Boolean.parseBoolean(data[0]), data[1], data[2]));
+      case SLIME -> spawn(player.getWorld(), new SlimePet(player, data[0], data[1]));
+      case MAGMA_CUBE -> spawn(player.getWorld(), new MagmaCubePet(player, data[0], data[1]));
+      case RAVAGER -> spawn(player.getWorld(), new RavagerPet(player, data[0]));
+      case CREEPER -> spawn(player.getWorld(), new CreeperPet(player, data[0], Boolean.parseBoolean(data[1])));
     }
   }
 
