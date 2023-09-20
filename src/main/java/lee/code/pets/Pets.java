@@ -5,8 +5,8 @@ import com.comphenix.protocol.ProtocolManager;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import lee.code.pets.commands.CommandManager;
 import lee.code.pets.commands.TabCompletion;
-import lee.code.pets.listeners.KeyboardPacketListener;
 import lee.code.pets.listeners.MobInteractListener;
+import lee.code.pets.pets.PetManager;
 import lombok.Getter;
 import me.lucko.commodore.CommodoreProvider;
 import me.lucko.commodore.file.CommodoreFileReader;
@@ -16,12 +16,14 @@ import java.io.IOException;
 
 public class Pets extends JavaPlugin {
   @Getter private CommandManager commandManager;
+  @Getter private PetManager petManager;
   @Getter private ProtocolManager protocolManager;
 
   @Override
   public void onEnable() {
     this.commandManager = new CommandManager(this);
     this.protocolManager = ProtocolLibrary.getProtocolManager();
+    this.petManager = new PetManager();
     registerCommands();
     registerPacketListeners();
     registerListeners();

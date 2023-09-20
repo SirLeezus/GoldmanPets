@@ -12,9 +12,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class FollowOwnerGoal extends Goal {
-  private final Mob mob;
-  private LivingEntity owner;
-  private final double speed;
+  protected final Mob mob;
+  protected LivingEntity owner;
+  protected final double speed;
   private double xOffset;
   private double zOffset;
 

@@ -2,8 +2,9 @@ package lee.code.pets.commands.cmds;
 
 import lee.code.pets.Pets;
 import lee.code.pets.commands.SubCommand;
-import lee.code.pets.pets.SheepPet;
+import lee.code.pets.pets.pet.SheepPet;
 import net.minecraft.server.level.ServerLevel;
+import org.bukkit.DyeColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.entity.Player;
@@ -51,9 +52,8 @@ public class TestCMD extends SubCommand {
 
   @Override
   public void perform(Player player, String[] args) {
-    final ServerLevel world = ((CraftWorld) player.getWorld()).getHandle();
-    final SheepPet cow = new SheepPet(player, player.getLocation(), "&e&lTesting");
-    world.addFreshEntity(cow, CreatureSpawnEvent.SpawnReason.CUSTOM);
+    pets.getPetManager().spawnChicken(player, "&6&lCHICKEN");
+    pets.getPetManager().spawnSheep(player, "&6&lSHEEP", DyeColor.CYAN);
   }
 
   @Override
