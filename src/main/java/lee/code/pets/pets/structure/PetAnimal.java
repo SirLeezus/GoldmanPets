@@ -27,6 +27,14 @@ public abstract class PetAnimal extends Animal {
   }
 
   @Override
+  public void ageUp(int age) {
+  }
+
+  @Override
+  public void ageUp(int age, boolean overGrow) {
+  }
+
+  @Override
   public void load(CompoundTag compoundTag) {
 
   }

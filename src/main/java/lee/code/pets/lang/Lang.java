@@ -10,6 +10,7 @@ public enum Lang {
   PREFIX("&e&lTowns &6➔ "),
   ERROR_NO_PERMISSION("&cYou do not have permission for this."),
   ERROR_ONE_COMMAND_AT_A_TIME("&cYou're currently processing another command, please wait for it to finish."),
+  BLANK_UUID("ffffffff-ffff-ffff-ffff-ffffffffffff"),
 
   ;
   @Getter private final String string;
