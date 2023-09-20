@@ -2,6 +2,7 @@ package lee.code.pets.pets;
 
 import lee.code.pets.pets.pet.animal.*;
 import lee.code.pets.pets.pet.animal.CatPet;
+import lee.code.pets.pets.pet.mob.BlazePet;
 import lee.code.pets.pets.pet.mob.PhantomPet;
 import lee.code.pets.pets.pet.mob.ZombiePet;
 import net.minecraft.world.entity.Entity;
@@ -23,6 +24,7 @@ public class PetManager  {
       case VILLAGER -> spawn(player.getWorld(), new VillagerPet(player, Boolean.parseBoolean(data[0]), data[1], data[2], data[3], data[4]));
       case BEE -> spawn(player.getWorld(), new BeePet(player, Boolean.parseBoolean(data[0]), data[1]));
       case ZOMBIE -> spawn(player.getWorld(), new ZombiePet(player, Boolean.parseBoolean(data[0]), data[1]));
+      case BLAZE -> spawn(player.getWorld(), new BlazePet(player, data[0]));
     }
   }
 
