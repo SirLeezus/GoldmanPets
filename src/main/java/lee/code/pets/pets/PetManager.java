@@ -1,5 +1,7 @@
 package lee.code.pets.pets;
 
+import lee.code.pets.pets.pet.animal.VillagerPet;
+import lee.code.pets.pets.pet.tamable.CatPet;
 import lee.code.pets.pets.pet.animal.ChickenPet;
 import lee.code.pets.pets.pet.animal.WolfPet;
 import lee.code.pets.pets.pet.mob.PhantomPet;
@@ -19,6 +21,8 @@ public class PetManager  {
       case CHICKEN -> spawn(player.getWorld(), new ChickenPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case PHANTOM -> spawn(player.getWorld(), new PhantomPet(player, data[0]));
       case WOLF -> spawn(player.getWorld(), new WolfPet(player, Boolean.parseBoolean(data[0]), data[1]));
+      case CAT -> spawn(player.getWorld(), new CatPet(player, Boolean.parseBoolean(data[0]), data[1], data[2], data[3]));
+      case VILLAGER -> spawn(player.getWorld(), new VillagerPet(player, Boolean.parseBoolean(data[0]), data[1]));
     }
   }
 

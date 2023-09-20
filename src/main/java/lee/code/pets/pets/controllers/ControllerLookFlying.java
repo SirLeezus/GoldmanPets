@@ -7,8 +7,11 @@ import net.minecraft.world.phys.Vec3;
 import java.util.UUID;
 
 public class ControllerLookFlying extends ControllerWASD {
-  public ControllerLookFlying(Mob mob, UUID owner) {
+  private final float speed;
+
+  public ControllerLookFlying(Mob mob, UUID owner, float speed) {
     super(mob, owner);
+    this.speed = speed;
   }
 
   @Override
@@ -31,7 +34,10 @@ public class ControllerLookFlying extends ControllerWASD {
     final double motionZ = forward * Math.cos(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
 
     // Set the mob's motion
-    mob.setDeltaMovement(new Vec3(motionX, motionY, motionZ));
+    mob.setSpeed(speed); // You can adjust the speed as needed.
+    mob.setZza(forward);
+    mob.setXxa(0.0F);
+    mob.setYya((float) motionY); // Set vertical motion here
 
     // Adjust mob's rotation based on the player's yaw
     mob.setYRot(yaw);

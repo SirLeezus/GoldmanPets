@@ -7,18 +7,18 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerType;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-import java.util.Objects;
+public class VillagerPet extends Villager {
 
-public class WolfPet extends Wolf {
-
-  public WolfPet(Player player, boolean baby, String name) {
-    super(EntityType.WOLF, ((CraftWorld) player.getLocation().getWorld()).getHandle());
+  public VillagerPet(Player player, boolean baby, String name) {
+    super(EntityType.VILLAGER, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
@@ -29,6 +29,11 @@ public class WolfPet extends Wolf {
     moveControl = new ControllerWASD(this, player.getUniqueId());
     if (baby) setBaby(true);
     setAttributes();
+    setVillagerData(getVillagerData().setProfession(VillagerProfession.ARMORER));
+    setVillagerData(getVillagerData().setType(VillagerType.JUNGLE));
+    setVillagerData(getVillagerData().setLevel(5));
+    targetSelector.getAvailableGoals().clear();
+    getBrain().removeAllBehaviors();
   }
 
   @Override
@@ -37,7 +42,7 @@ public class WolfPet extends Wolf {
   }
 
   protected void setAttributes() {
-    Objects.requireNonNull(getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.23000000417232513D);
+    getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
   }
 
   @Override
