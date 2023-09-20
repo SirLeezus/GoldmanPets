@@ -4,6 +4,7 @@ import lee.code.pets.Pets;
 import lee.code.pets.commands.SubCommand;
 import org.bukkit.DyeColor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class TestCMD extends SubCommand {
 
   @Override
   public void perform(Player player, String[] args) {
-    pets.getPetManager().spawnPhantom(player, "&6&lWEEEEEEEW");
+    pets.getPetManager().spawn(player, EntityType.SHEEP, new String[]{"&6&lSUPPPPP", "RED"});
   }
 
   @Override
