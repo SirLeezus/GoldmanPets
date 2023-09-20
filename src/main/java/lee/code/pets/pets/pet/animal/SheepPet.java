@@ -29,17 +29,12 @@ public class SheepPet extends Sheep {
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
     if (baby) setBaby(true);
-    setAttributes();
     setColor(DyeColor.valueOf(color));
   }
 
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
-  }
-
-  protected void setAttributes() {
-    Objects.requireNonNull(getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.23000000417232513D);
   }
 
   @Override

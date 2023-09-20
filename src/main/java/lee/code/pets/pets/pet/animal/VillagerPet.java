@@ -28,7 +28,6 @@ public class VillagerPet extends Villager {
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
     if (baby) setBaby(true);
-    setAttributes();
     setVillagerData(getVillagerData().setProfession(VillagerProfession.ARMORER));
     setVillagerData(getVillagerData().setType(VillagerType.JUNGLE));
     setVillagerData(getVillagerData().setLevel(5));
@@ -39,10 +38,6 @@ public class VillagerPet extends Villager {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
-  }
-
-  protected void setAttributes() {
-    getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.23000000417232513D);
   }
 
   @Override

@@ -3,6 +3,7 @@ package lee.code.pets.pets;
 import lee.code.pets.pets.pet.animal.*;
 import lee.code.pets.pets.pet.animal.CatPet;
 import lee.code.pets.pets.pet.mob.PhantomPet;
+import lee.code.pets.pets.pet.mob.ZombiePet;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
@@ -21,6 +22,7 @@ public class PetManager  {
       case CAT -> spawn(player.getWorld(), new CatPet(player, Boolean.parseBoolean(data[0]), data[1], data[2], data[3]));
       case VILLAGER -> spawn(player.getWorld(), new VillagerPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case BEE -> spawn(player.getWorld(), new BeePet(player, Boolean.parseBoolean(data[0]), data[1]));
+      case ZOMBIE -> spawn(player.getWorld(), new ZombiePet(player, Boolean.parseBoolean(data[0]), data[1]));
     }
   }
 
