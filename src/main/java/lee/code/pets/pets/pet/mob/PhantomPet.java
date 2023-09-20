@@ -3,9 +3,9 @@ package lee.code.pets.pets.pet.mob;
 import lee.code.pets.pets.controllers.ControllerLookFlying;
 import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Phantom;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
@@ -24,8 +24,7 @@ public class PhantomPet extends Phantom {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerLookFlying(this, player.getUniqueId(), 5);
-    setAttributes();
+    moveControl = new ControllerLookFlying(this, player.getUniqueId());
   }
 
   @Override
@@ -33,7 +32,12 @@ public class PhantomPet extends Phantom {
     goalSelector.addGoal(0, new FollowOwnerGoal(this, 3));
   }
 
-  protected void setAttributes() {
-    getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+  @Override
+  public void load(CompoundTag compoundTag) {
+  }
+
+  @Override
+  public boolean save(CompoundTag compoundTag) {
+    return false;
   }
 }

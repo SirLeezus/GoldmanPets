@@ -7,11 +7,9 @@ import net.minecraft.world.phys.Vec3;
 import java.util.UUID;
 
 public class ControllerLookFlying extends ControllerWASD {
-  private final float speed;
 
-  public ControllerLookFlying(Mob mob, UUID owner, float speed) {
+  public ControllerLookFlying(Mob mob, UUID owner) {
     super(mob, owner);
-    this.speed = speed;
   }
 
   @Override
@@ -34,7 +32,7 @@ public class ControllerLookFlying extends ControllerWASD {
     final double motionZ = forward * Math.cos(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
 
     // Set the mob's motion
-    mob.setSpeed(speed); // You can adjust the speed as needed.
+    mob.setSpeed(0.2F); // You can adjust the speed as needed.
     mob.setZza(forward);
     mob.setXxa(0.0F);
     mob.setYya((float) motionY); // Set vertical motion here
