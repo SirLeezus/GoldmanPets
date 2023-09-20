@@ -26,6 +26,7 @@ public class PetManager  {
       case ZOMBIE -> spawn(player.getWorld(), new ZombiePet(player, Boolean.parseBoolean(data[0]), data[1]));
       case BLAZE -> spawn(player.getWorld(), new BlazePet(player, data[0]));
       case SNIFFER -> spawn(player.getWorld(), new SnifferPet(player, Boolean.parseBoolean(data[0]), data[1]));
+      case RABBIT -> spawn(player.getWorld(), new RabbitPet(player, Boolean.parseBoolean(data[0]), data[1], data[2]));
     }
   }
 
