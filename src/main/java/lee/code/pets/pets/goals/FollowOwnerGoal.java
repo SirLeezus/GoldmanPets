@@ -50,7 +50,6 @@ public class FollowOwnerGoal extends Goal {
     final BlockPos frontPos = mob.blockPosition().relative(mob.getDirection());
     final BlockState frontBlockState = mob.level().getBlockState(frontPos);
     if (frontBlockState.isSolidRender(mob.level(), frontPos) || frontBlockState.getBlock() instanceof LeavesBlock) {
-      // Jump logic here.
       mob.getJumpControl().jump();
     }
   }

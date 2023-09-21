@@ -2,6 +2,7 @@ package lee.code.pets.pets;
 
 import lee.code.pets.pets.pet.animal.*;
 import lee.code.pets.pets.pet.animal.CatPet;
+import lee.code.pets.pets.pet.fish.CodPet;
 import lee.code.pets.pets.pet.mob.*;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.World;
@@ -29,6 +30,9 @@ public class PetManager  {
       case MAGMA_CUBE -> spawn(player.getWorld(), new MagmaCubePet(player, data[0], data[1]));
       case RAVAGER -> spawn(player.getWorld(), new RavagerPet(player, data[0]));
       case CREEPER -> spawn(player.getWorld(), new CreeperPet(player, data[0], Boolean.parseBoolean(data[1])));
+      case SKELETON -> spawn(player.getWorld(), new SkeletonPet(player, data[0]));
+      case HORSE -> spawn(player.getWorld(), new HorsePet(player, Boolean.parseBoolean(data[0]), data[1], data[2], data[3]));
+      case COD -> spawn(player.getWorld(), new CodPet(player, data[0]));
     }
   }
 

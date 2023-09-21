@@ -27,9 +27,7 @@ public class ControllerLookFlying extends ControllerWASD {
     final float forward = Math.max(0, (float) riddenInput.z);
     final float pitch = rider.getXRot();
     final float yaw = rider.getYRot();
-    final double motionX = forward * -Math.sin(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
     final double motionY = forward * -Math.sin(Math.toRadians(pitch));
-    final double motionZ = forward * Math.cos(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
 
     // Set the mob's motion
     mob.setSpeed(0.2F); // You can adjust the speed as needed.
