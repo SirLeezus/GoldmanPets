@@ -11,9 +11,11 @@ import net.minecraft.world.phys.Vec3;
 import java.util.UUID;
 
 public class ControllerWASDWater extends ControllerWASD {
+  private final boolean landSupport;
 
-  public ControllerWASDWater(Mob mob, UUID owner) {
+  public ControllerWASDWater(Mob mob, UUID owner, boolean landSupport) {
     super(mob, owner);
+    this.landSupport = landSupport;
   }
 
   @Override
@@ -47,14 +49,19 @@ public class ControllerWASDWater extends ControllerWASD {
 
     if (!mob.isInWater()) {
       // Limit upward motion if out of water
-      motionY = -0.04D;
+      motionY = -0.5D;
 
       // If solid block below entity out of water, slow down
       final BlockPos downPos = mob.blockPosition().relative(Direction.DOWN);
       final BlockState frontBlockState = mob.level().getBlockState(downPos);
       if (!(frontBlockState.getBlock() instanceof LiquidBlock)) {
-        mob.getJumpControl().jump();
-        return;
+        if (!landSupport) {
+          mob.getJumpControl().jump();
+          return;
+        }
+        if (rider.jumping) mob.getJumpControl().jump();
+        motionX *= 0.2;
+        motionZ *= 0.2;
       }
     }
 

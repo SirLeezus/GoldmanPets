@@ -11,12 +11,14 @@ public class FollowOwnerWaterGoal extends Goal {
   private final double speed;
   private final float minDistance;
   private final float maxDistance;
+  private final boolean landSupport;
 
-  public FollowOwnerWaterGoal(Mob mob, double speed, float minDistance, float maxDistance) {
+  public FollowOwnerWaterGoal(Mob mob, double speed, float minDistance, float maxDistance, boolean landSupport) {
     this.mob = mob;
     this.speed = speed;
     this.minDistance = minDistance;
     this.maxDistance = maxDistance;
+    this.landSupport = landSupport;
     this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
   }
 
@@ -52,7 +54,7 @@ public class FollowOwnerWaterGoal extends Goal {
     mob.lookAt(mob.getTarget(), 30.0F, 30.0F);
 
     if (!mob.isInWater()) {
-      mob.getJumpControl().jump();
+      if (!landSupport) mob.getJumpControl().jump();
     }
 
     if (distanceToOwner > maxDistance) {

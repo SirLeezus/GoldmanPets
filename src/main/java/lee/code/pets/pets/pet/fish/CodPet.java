@@ -25,12 +25,12 @@ public class CodPet extends Cod {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDWater(this, player.getUniqueId());
+    moveControl = new ControllerWASDWater(this, player.getUniqueId(), false);
   }
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerWaterGoal(this, 0.4f, 5, 20));
+    goalSelector.addGoal(0, new FollowOwnerWaterGoal(this, 0.4f, 5, 20, false));
   }
 
   @Override
