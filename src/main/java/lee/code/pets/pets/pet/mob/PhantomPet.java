@@ -1,7 +1,7 @@
 package lee.code.pets.pets.pet.mob;
 
 import lee.code.pets.pets.controllers.ControllerWASDFlying;
-import lee.code.pets.pets.goals.FollowOwnerGoal;
+import lee.code.pets.pets.goals.FollowOwnerFlyingGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -30,7 +30,7 @@ public class PhantomPet extends Phantom {
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerGoal(this, 3));
+    goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.4, 5, 20));
   }
 
   @Override

@@ -1,0 +1,58 @@
+package lee.code.pets.pets.goals;
+
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.EnumSet;
+
+public class FollowOwnerFlyingGoal extends Goal {
+  private final Mob mob;
+  private final double speed;
+  private final float minDistance;
+  private final float maxDistance;
+
+  public FollowOwnerFlyingGoal(Mob mob, double speed, float minDistance, float maxDistance) {
+    this.mob = mob;
+    this.speed = speed;
+    this.minDistance = minDistance;
+    this.maxDistance = maxDistance;
+    this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
+  }
+
+  @Override
+  public boolean canUse() {
+    if (!mob.getPassengers().isEmpty() || mob.getTarget() == null) return false;
+    double distanceToOwner = mob.distanceTo(mob.getTarget());
+    return distanceToOwner >= minDistance;
+  }
+
+  @Override
+  public void start() {
+  }
+
+  @Override
+  public void stop() {
+  }
+
+  @Override
+  public void tick() {
+    if (mob.getTarget() == null) return;
+    final Vec3 ownerPos = mob.getTarget().position();
+    final double dx = ownerPos.x - mob.getX();
+    final double dy = ownerPos.y - mob.getY();
+    final double dz = ownerPos.z - mob.getZ();
+    final double distanceToOwner = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+    final double speedX = dx / distanceToOwner * speed;
+    final double speedY = dy / distanceToOwner * speed;
+    final double speedZ = dz / distanceToOwner * speed;
+
+    mob.setDeltaMovement(speedX, speedY, speedZ);
+    mob.lookAt(mob.getTarget(), 180.0f, 90.0f);
+
+    if (distanceToOwner > maxDistance) {
+      mob.setPos(ownerPos.x, ownerPos.y, ownerPos.z);
+    }
+  }
+}
