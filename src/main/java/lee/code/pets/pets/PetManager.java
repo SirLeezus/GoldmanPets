@@ -52,13 +52,7 @@ public class PetManager  {
       case MUSHROOM_COW -> spawn(player.getWorld(), new MushroomCowPet(player, Boolean.parseBoolean(data[0]), data[1], data[2]));
       case WARDEN -> spawn(player.getWorld(), new WardenPet(player, data[0]));
       case WITHER -> spawn(player.getWorld(), new WitherPet(player, data[0]));
-      case ENDER_DRAGON -> {
-        spawn(player.getWorld(), new EnderDragonPet(player, data[0]));
-        final EnderDragonPet enderDragonPet = new EnderDragonPet(player, data[0]);
-        final CraftEntity entity = enderDragonPet.getBukkitEntity();
-        entity.addPassenger(player);
-        entity.spawnAt(player.getLocation(), CreatureSpawnEvent.SpawnReason.CUSTOM);
-      }
+      case ENDERMAN -> spawn(player.getWorld(), new EndermanPet(player, data[0]));
     }
   }
 
