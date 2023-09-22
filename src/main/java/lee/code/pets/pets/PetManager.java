@@ -41,6 +41,7 @@ public class PetManager  {
       case STRIDER -> spawn(player.getWorld(), new StriderPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case SNOWMAN -> spawn(player.getWorld(), new SnowGolemPet(player, data[0], Boolean.parseBoolean(data[1])));
       case IRON_GOLEM -> spawn(player.getWorld(), new IronGolemPet(player, data[0]));
+      case ZOGLIN -> spawn(player.getWorld(), new ZoglinPet(player, Boolean.parseBoolean(data[0]), data[1]));
     }
   }
 
