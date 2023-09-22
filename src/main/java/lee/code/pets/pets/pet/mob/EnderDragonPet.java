@@ -34,7 +34,7 @@ public class EnderDragonPet extends Mob {
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerFlyingDragonGoal(this, 0.4, 10, 30));
+    goalSelector.addGoal(0, new FollowOwnerFlyingDragonGoal(this, 0.6, 7, 40));
   }
 
   @Override

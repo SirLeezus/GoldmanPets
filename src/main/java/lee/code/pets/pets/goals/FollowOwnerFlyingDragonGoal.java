@@ -2,6 +2,7 @@ package lee.code.pets.pets.goals;
 
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.EnumSet;
@@ -49,8 +50,15 @@ public class FollowOwnerFlyingDragonGoal extends Goal {
     final double distanceToOwner = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
     final double speedX = dx / distanceToOwner * speed;
-    final double speedY = dy / distanceToOwner * speed;
+    double speedY = dy / distanceToOwner * speed;
     final double speedZ = dz / distanceToOwner * speed;
+
+    // Check for blocks 5 blocks down from the dragon's current position
+    final BlockState blockState = mob.level().getBlockState(mob.blockPosition().offset(0, -5, 0));
+    if (!blockState.isAir()) {
+      // Apply upward force if a block is detected
+      speedY = 0.5; // You can adjust the upward force as needed
+    }
 
     mob.setDeltaMovement(speedX, speedY, speedZ);
     mob.setYRot((float) targetYaw + 180f);
