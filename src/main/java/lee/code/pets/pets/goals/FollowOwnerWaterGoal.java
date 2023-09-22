@@ -4,6 +4,8 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.EnumSet;
+
 public class FollowOwnerWaterGoal extends Goal {
   private final Mob mob;
   private final double speed;
@@ -15,6 +17,7 @@ public class FollowOwnerWaterGoal extends Goal {
     this.speed = speed;
     this.minDistance = minDistance;
     this.maxDistance = maxDistance;
+    this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
   }
 
   @Override
@@ -26,12 +29,10 @@ public class FollowOwnerWaterGoal extends Goal {
 
   @Override
   public void start() {
-    super.start();
   }
 
   @Override
   public void stop() {
-    super.stop();
   }
 
   @Override

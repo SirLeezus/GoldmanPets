@@ -21,7 +21,7 @@ public class FollowOwnerGoal extends Goal {
   public FollowOwnerGoal(Mob mob, double speed) {
     this.mob = mob;
     this.speed = speed;
-    this.setFlags(EnumSet.of(Flag.MOVE));
+    this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
   }
 
   @Override
@@ -56,18 +56,16 @@ public class FollowOwnerGoal extends Goal {
 
   @Override
   public void start() {
-    super.start();
     moveTo();
   }
 
   @Override
   public boolean canContinueToUse() {
-    return mob.getPassengers().isEmpty();
+    return !mob.getPassengers().isEmpty();
   }
 
   @Override
   public void stop() {
-    super.stop();
   }
 
   protected void moveTo() {
