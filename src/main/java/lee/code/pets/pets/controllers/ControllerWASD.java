@@ -18,7 +18,7 @@ public class ControllerWASD extends MoveControl {
 
   @Override
   public boolean hasWanted() {
-    return mob.getPassengers().isEmpty() ? super.hasWanted() : rider != null;
+    return rider != null;
   }
 
   @Override
@@ -53,10 +53,10 @@ public class ControllerWASD extends MoveControl {
       yaw -= 180;
       forward *= -1;
     }
-    mob.setYRot(yaw); // Set the yaw rotation of the mob
 
-    // Set the desired speed and direction of the mob.
-    mob.setSpeed(0.2F); // You can adjust the speed as needed.
+    // Set the mob's motion
+    mob.setYRot(yaw);
+    mob.setSpeed(0.2F);
     mob.setZza(forward);
     mob.setXxa(0.0F);
     if (rider.jumping) jump();

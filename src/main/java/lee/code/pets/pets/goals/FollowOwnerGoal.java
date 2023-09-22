@@ -15,13 +15,13 @@ public class FollowOwnerGoal extends Goal {
   protected final Mob mob;
   protected LivingEntity owner;
   protected final double speed;
-  private double xOffset;
-  private double zOffset;
+  protected double xOffset;
+  protected double zOffset;
 
   public FollowOwnerGoal(Mob mob, double speed) {
     this.mob = mob;
     this.speed = speed;
-    this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
+    this.setFlags(EnumSet.of(Flag.MOVE));
   }
 
   @Override
@@ -56,20 +56,21 @@ public class FollowOwnerGoal extends Goal {
 
   @Override
   public void start() {
+    super.start();
     moveTo();
   }
 
   @Override
   public boolean canContinueToUse() {
-    return !mob.getPassengers().isEmpty();
+    return mob.getPassengers().isEmpty();
   }
 
   @Override
   public void stop() {
-
+    super.stop();
   }
 
-  private void moveTo() {
+  protected void moveTo() {
     mob.getMoveControl().setWantedPosition(xOffset, owner.getY(), zOffset, speed);
   }
 }

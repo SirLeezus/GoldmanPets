@@ -23,19 +23,16 @@ public class ControllerLookFlying extends ControllerWASD {
     this.rider = player;
     final Vec3 riddenInput = getRiddenInput(rider);
 
-    // Calculate the movement direction based on the player's pitch and yaw angles
     final float forward = Math.max(0, (float) riddenInput.z);
     final float pitch = rider.getXRot();
     final float yaw = rider.getYRot();
     final double motionY = forward * -Math.sin(Math.toRadians(pitch));
 
     // Set the mob's motion
-    mob.setSpeed(0.2F); // You can adjust the speed as needed.
+    mob.setYRot(yaw);
+    mob.setSpeed(0.2F);
     mob.setZza(forward);
     mob.setXxa(0.0F);
-    mob.setYya((float) motionY); // Set vertical motion here
-
-    // Adjust mob's rotation based on the player's yaw
-    mob.setYRot(yaw);
+    mob.setYya((float) motionY);
   }
 }
