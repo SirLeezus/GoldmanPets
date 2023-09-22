@@ -1,7 +1,7 @@
 package lee.code.pets.pets.pet.mob;
 
-import lee.code.pets.pets.controllers.ControllerWASD;
-import lee.code.pets.pets.goals.FollowOwnerGoal;
+import lee.code.pets.pets.controllers.ControllerWASDFlying;
+import lee.code.pets.pets.goals.FollowOwnerFlyingGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -21,15 +21,16 @@ public class BlazePet extends Blaze {
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
+    setNoGravity(true);
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASD(this, player.getUniqueId());
+    moveControl = new ControllerWASDFlying(this, player.getUniqueId());
   }
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
+    goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.4, 5, 10));
   }
 
   @Override

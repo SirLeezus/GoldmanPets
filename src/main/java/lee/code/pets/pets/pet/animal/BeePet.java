@@ -33,7 +33,7 @@ public class BeePet extends Animal {
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.4, 10, 25));
+    goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.4, 5, 10));
   }
 
   public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
