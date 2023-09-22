@@ -10,6 +10,7 @@ import lee.code.pets.pets.pet.mob.*;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R1.entity.CraftEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -49,6 +50,14 @@ public class PetManager  {
       case WITCH -> spawn(player.getWorld(), new WitchPet(player, data[0]));
       case COW -> spawn(player.getWorld(), new CowPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case MUSHROOM_COW -> spawn(player.getWorld(), new MushroomCowPet(player, Boolean.parseBoolean(data[0]), data[1], data[2]));
+      case WARDEN -> spawn(player.getWorld(), new WardenPet(player, data[0]));
+      case ENDER_DRAGON -> {
+        spawn(player.getWorld(), new EnderDragonPet(player, data[0]));
+        final EnderDragonPet enderDragonPet = new EnderDragonPet(player, data[0]);
+        final CraftEntity entity = enderDragonPet.getBukkitEntity();
+        entity.addPassenger(player);
+        entity.spawnAt(player.getLocation(), CreatureSpawnEvent.SpawnReason.CUSTOM);
+      }
     }
   }
 
