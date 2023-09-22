@@ -36,6 +36,8 @@ public class PetManager  {
       case COD -> spawn(player.getWorld(), new CodPet(player, data[0]));
       case DOLPHIN -> spawn(player.getWorld(), new DolphinPet(player, data[0]));
       case GHAST -> spawn(player.getWorld(), new GhastPet(player, data[0]));
+      case BAT -> spawn(player.getWorld(), new BatPet(player, data[0]));
+      case ALLAY -> spawn(player.getWorld(), new AllayPet(player, data[0]));
     }
   }
 
