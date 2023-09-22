@@ -1,6 +1,6 @@
 package lee.code.pets.pets.pet.animal;
 
-import lee.code.pets.pets.controllers.ControllerLookFlying;
+import lee.code.pets.pets.controllers.ControllerWASDFlying;
 import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +26,7 @@ public class BeePet extends Animal {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerLookFlying(this, player.getUniqueId());
+    moveControl = new ControllerWASDFlying(this, player.getUniqueId());
     if (baby) setBaby(true);
   }
 

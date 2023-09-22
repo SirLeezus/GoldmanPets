@@ -29,7 +29,7 @@ public class CodPet extends Cod {
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
+    goalSelector.addGoal(0, new FollowOwnerWaterGoal(this, 0.4f, 5, 20));
   }
 
   @Override

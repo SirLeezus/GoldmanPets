@@ -6,9 +6,9 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.UUID;
 
-public class ControllerLookFlying extends ControllerWASD {
+public class ControllerWASDFlying extends ControllerWASD {
 
-  public ControllerLookFlying(Mob mob, UUID owner) {
+  public ControllerWASDFlying(Mob mob, UUID owner) {
     super(mob, owner);
   }
 
