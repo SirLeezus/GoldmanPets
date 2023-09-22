@@ -47,6 +47,7 @@ public class PetManager  {
       case TURTLE -> spawn(player.getWorld(), new TurtlePet(player, Boolean.parseBoolean(data[0]), data[1]));
       case AXOLOTL -> spawn(player.getWorld(), new AxolotlPet(player, Boolean.parseBoolean(data[0]), data[1], data[2]));
       case WITCH -> spawn(player.getWorld(), new WitchPet(player, data[0]));
+      case COW -> spawn(player.getWorld(), new CowPet(player, Boolean.parseBoolean(data[0]), data[1]));
     }
   }
 
