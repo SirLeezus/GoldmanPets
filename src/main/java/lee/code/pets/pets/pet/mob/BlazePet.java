@@ -26,6 +26,8 @@ public class BlazePet extends Blaze {
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDFlying(this, player.getUniqueId());
+    targetSelector.getAvailableGoals().clear();
+    getBrain().removeAllBehaviors();
   }
 
   @Override

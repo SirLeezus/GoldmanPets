@@ -27,6 +27,8 @@ public class RavagerPet extends Mob {
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
+    targetSelector.getAvailableGoals().clear();
+    getBrain().removeAllBehaviors();
   }
 
   @Override

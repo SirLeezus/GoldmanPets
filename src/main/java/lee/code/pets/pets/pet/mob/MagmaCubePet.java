@@ -26,6 +26,8 @@ public class MagmaCubePet extends MagmaCube {
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
     setSize(Integer.parseInt(size), true);
+    targetSelector.getAvailableGoals().clear();
+    getBrain().removeAllBehaviors();
   }
 
   @Override

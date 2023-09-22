@@ -26,8 +26,10 @@ public class SheepPet extends Sheep {
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    if (baby) setBaby(true);
+    setBaby(baby);
     setColor(DyeColor.valueOf(color));
+    targetSelector.getAvailableGoals().clear();
+    getBrain().removeAllBehaviors();
   }
 
   @Override

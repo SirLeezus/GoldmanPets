@@ -2,6 +2,7 @@ package lee.code.pets.pets;
 
 import lee.code.pets.pets.pet.animal.*;
 import lee.code.pets.pets.pet.animal.CatPet;
+import lee.code.pets.pets.pet.fish.AxolotlPet;
 import lee.code.pets.pets.pet.fish.CodPet;
 import lee.code.pets.pets.pet.fish.DolphinPet;
 import lee.code.pets.pets.pet.fish.TurtlePet;
@@ -44,6 +45,7 @@ public class PetManager  {
       case IRON_GOLEM -> spawn(player.getWorld(), new IronGolemPet(player, data[0]));
       case ZOGLIN -> spawn(player.getWorld(), new ZoglinPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case TURTLE -> spawn(player.getWorld(), new TurtlePet(player, Boolean.parseBoolean(data[0]), data[1]));
+      case AXOLOTL -> spawn(player.getWorld(), new AxolotlPet(player, Boolean.parseBoolean(data[0]), data[1], data[2]));
     }
   }
 

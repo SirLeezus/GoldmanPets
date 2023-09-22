@@ -27,7 +27,7 @@ public class VillagerPet extends Villager {
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    if (baby) setBaby(true);
+    setBaby(baby);
     setVillagerData(getVillagerData().setProfession(VillagerProfessionUtil.valueOf(profession).getVillagerProfession()));
     setVillagerData(getVillagerData().setType(VillagerTypeUtil.valueOf(type).getVillagerType()));
     setVillagerData(getVillagerData().setLevel(Integer.parseInt(level)));

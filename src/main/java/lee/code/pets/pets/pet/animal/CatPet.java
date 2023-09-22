@@ -27,10 +27,12 @@ public class CatPet extends Cat {
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    if (baby) setBaby(true);
+    setBaby(baby);
     setVariant(CatUtil.valueOf(variant).getCatVariant());
     setTame(true);
     setCollarColor(DyeColor.valueOf(collarColor));
+    targetSelector.getAvailableGoals().clear();
+    getBrain().removeAllBehaviors();
   }
 
   @Override
