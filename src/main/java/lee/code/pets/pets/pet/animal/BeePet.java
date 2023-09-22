@@ -23,6 +23,7 @@ public class BeePet extends Animal {
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setNoGravity(true);
+    setCanPickUpLoot(false);
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);

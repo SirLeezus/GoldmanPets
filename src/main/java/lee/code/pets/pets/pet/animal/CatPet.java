@@ -22,6 +22,7 @@ public class CatPet extends Cat {
     setInvulnerable(true);
     setCustomNameVisible(true);
     setPersistenceRequired(true);
+    setCanPickUpLoot(false);
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);

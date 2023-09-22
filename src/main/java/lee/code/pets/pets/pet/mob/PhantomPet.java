@@ -21,6 +21,7 @@ public class PhantomPet extends Phantom {
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setShouldBurnInDay(false);
+    setCanPickUpLoot(false);
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
