@@ -8,6 +8,7 @@ public class MobInteractListener implements Listener {
 
   @EventHandler
   public void onPlayerInteract(PlayerInteractEntityEvent e) {
+    if (e.getPlayer().isSneaking()) return;
     e.getRightClicked().addPassenger(e.getPlayer());
   }
 }

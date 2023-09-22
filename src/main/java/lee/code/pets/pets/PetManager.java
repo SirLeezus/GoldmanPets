@@ -38,6 +38,7 @@ public class PetManager  {
       case GHAST -> spawn(player.getWorld(), new GhastPet(player, data[0]));
       case BAT -> spawn(player.getWorld(), new BatPet(player, data[0]));
       case ALLAY -> spawn(player.getWorld(), new AllayPet(player, data[0]));
+      case STRIDER -> spawn(player.getWorld(), new StriderPet(player, Boolean.parseBoolean(data[0]), data[1]));
     }
   }
 
