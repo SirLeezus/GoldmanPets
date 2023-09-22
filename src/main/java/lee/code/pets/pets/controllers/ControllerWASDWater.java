@@ -32,13 +32,12 @@ public class ControllerWASDWater extends ControllerWASD {
     float strafe = (float) riddenInput.x * 0.25F;
     if (forward <= 0.0F) forward *= 0.5F;
 
-    // Calculate the player's yaw and pitch
     final float yaw = rider.getBukkitYaw();
     final float pitch = rider.getXRot();
 
     // Calculate the direction based on yaw and pitch
     double motionX = forward * -Math.sin(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
-    double motionY = forward * -Math.sin(Math.toRadians(pitch)); // Adjust vertical motion based on pitch
+    double motionY = forward * -Math.sin(Math.toRadians(pitch));
     double motionZ = forward * Math.cos(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
 
     // Add upward motion when jumping
