@@ -68,6 +68,7 @@ public class PetManager  {
       case SPIDER -> spawn(player.getWorld(), new SpiderPet(player, data[0]));
       case LLAMA -> spawn(player.getWorld(), new LlamaPet(player, Boolean.parseBoolean(data[0]), data[1], data[2]));
       case GOAT -> spawn(player.getWorld(), new GoatPet(player, Boolean.parseBoolean(data[0]), data[1], Boolean.parseBoolean(data[2])));
+      case CAVE_SPIDER -> spawn(player.getWorld(), new CaveSpiderPet(player, data[0]));
     }
   }
 
