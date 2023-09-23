@@ -24,7 +24,7 @@ public class TurtlePet extends Turtle {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDWater(this, player.getUniqueId(), true);
+    moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false);
     setBaby(baby);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();

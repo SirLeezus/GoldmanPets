@@ -12,10 +12,12 @@ import java.util.UUID;
 
 public class ControllerWASDWater extends ControllerWASD {
   private final boolean landSupport;
+  private final boolean jumpOnLand;
 
-  public ControllerWASDWater(Mob mob, UUID owner, boolean landSupport) {
+  public ControllerWASDWater(Mob mob, UUID owner, boolean landSupport, boolean jumpOnLand) {
     super(mob, owner);
     this.landSupport = landSupport;
+    this.jumpOnLand = jumpOnLand;
   }
 
   @Override
@@ -56,7 +58,7 @@ public class ControllerWASDWater extends ControllerWASD {
       final BlockState frontBlockState = mob.level().getBlockState(downPos);
       if (!(frontBlockState.getBlock() instanceof LiquidBlock)) {
         if (!landSupport) {
-          mob.getJumpControl().jump();
+          if (jumpOnLand) mob.getJumpControl().jump();
           return;
         }
         if (rider.jumping) mob.getJumpControl().jump();

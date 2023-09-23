@@ -2,15 +2,11 @@ package lee.code.pets.pets;
 
 import lee.code.pets.pets.pet.animal.*;
 import lee.code.pets.pets.pet.animal.CatPet;
-import lee.code.pets.pets.pet.fish.AxolotlPet;
-import lee.code.pets.pets.pet.fish.CodPet;
-import lee.code.pets.pets.pet.fish.DolphinPet;
-import lee.code.pets.pets.pet.fish.TurtlePet;
+import lee.code.pets.pets.pet.fish.*;
 import lee.code.pets.pets.pet.mob.*;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_20_R1.entity.CraftEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -57,6 +53,8 @@ public class PetManager  {
       case DONKEY -> spawn(player.getWorld(), new DonkeyPet(player, Boolean.parseBoolean(data[0]), data[1], Boolean.parseBoolean(data[2])));
       case FROG -> spawn(player.getWorld(), new FrogPet(player, data[0], data[1]));
       case FOX -> spawn(player.getWorld(), new FoxPet(player, Boolean.parseBoolean(data[0]), data[1], data[2]));
+      case SQUID -> spawn(player.getWorld(), new SquidPet(player, data[0]));
+      case GLOW_SQUID -> spawn(player.getWorld(), new GlowSquidPet(player, data[0]));
     }
   }
 

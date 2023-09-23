@@ -24,7 +24,7 @@ public class DolphinPet extends Dolphin {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDWater(this, player.getUniqueId(), false);
+    moveControl = new ControllerWASDWater(this, player.getUniqueId(), false, true);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

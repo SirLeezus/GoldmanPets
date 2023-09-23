@@ -1,4 +1,4 @@
-package lee.code.pets.pets.pet.animal;
+package lee.code.pets.pets.pet.fish;
 
 import lee.code.pets.pets.controllers.ControllerWASDWater;
 import lee.code.pets.pets.goals.FollowOwnerWaterGoal;
@@ -25,7 +25,7 @@ public class FrogPet extends Frog {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDWater(this, player.getUniqueId(), true);
+    moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false);
     setVariant(FrogUtil.valueOf(variant).getFrogVariant());
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
