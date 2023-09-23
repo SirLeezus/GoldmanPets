@@ -67,6 +67,7 @@ public class PetManager  {
       case WANDERING_TRADER -> spawn(player.getWorld(), new WanderingTraderPet(player, data[0]));
       case SPIDER -> spawn(player.getWorld(), new SpiderPet(player, data[0]));
       case LLAMA -> spawn(player.getWorld(), new LlamaPet(player, Boolean.parseBoolean(data[0]), data[1], data[2]));
+      case GOAT -> spawn(player.getWorld(), new GoatPet(player, Boolean.parseBoolean(data[0]), data[1], Boolean.parseBoolean(data[2])));
     }
   }
 
