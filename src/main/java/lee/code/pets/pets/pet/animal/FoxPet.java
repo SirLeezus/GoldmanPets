@@ -1,22 +1,24 @@
 package lee.code.pets.pets.pet.animal;
 
-import lee.code.pets.pets.controllers.ControllerWASDWater;
-import lee.code.pets.pets.goals.FollowOwnerWaterGoal;
-import lee.code.pets.pets.pet.util.FrogUtil;
+import lee.code.pets.pets.controllers.ControllerWASD;
+import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.frog.Frog;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.Animal;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-public class FrogPet extends Frog {
+public class FoxPet extends Animal {
 
-  public FrogPet(Player player, String name, String variant) {
-    super(EntityType.FROG, ((CraftWorld) player.getLocation().getWorld()).getHandle());
+  //TODO FIX setting fox type
+
+  public FoxPet(Player player, boolean baby, String name, String type) {
+    super(EntityType.FOX, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
@@ -25,15 +27,16 @@ public class FrogPet extends Frog {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDWater(this, player.getUniqueId(), true);
-    setVariant(FrogUtil.valueOf(variant).getFrogVariant());
+    moveControl = new ControllerWASD(this, player.getUniqueId());
+    setBaby(baby);
+    //setVariant(Type.SNOW);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerWaterGoal(this, 0.4f, 5, 20, true));
+    goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
   }
 
   @Override
@@ -42,6 +45,11 @@ public class FrogPet extends Frog {
 
   @Override
   public void ageUp(int age, boolean overGrow) {
+  }
+
+  @Override
+  public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
+    return null;
   }
 
   @Override
