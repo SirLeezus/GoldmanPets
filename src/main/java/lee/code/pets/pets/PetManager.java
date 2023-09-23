@@ -58,6 +58,7 @@ public class PetManager  {
       case OCELOT -> spawn(player.getWorld(), new OcelotPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case PARROT -> spawn(player.getWorld(), new ParrotPet(player, data[0], data[1]));
       case PIG -> spawn(player.getWorld(), new PigPet(player, Boolean.parseBoolean(data[0]), data[1]));
+      case PUFFERFISH -> spawn(player.getWorld(), new PufferFishPet(player, data[0]));
     }
   }
 
