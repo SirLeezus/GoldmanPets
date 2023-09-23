@@ -6,13 +6,13 @@ import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Ravager;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-public class RavagerPet extends Mob {
+public class RavagerPet extends Ravager {
 
   //TODO CONTROLLER WONT WORK
 
@@ -26,14 +26,14 @@ public class RavagerPet extends Mob {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASD(this, player.getUniqueId());
+    //moveControl = new ControllerWASD(this, player.getUniqueId());
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
+    goalSelector.addGoal(0, new FollowOwnerGoal(this, 3));
   }
 
   @Override
