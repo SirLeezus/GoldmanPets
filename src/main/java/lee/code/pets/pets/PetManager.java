@@ -53,6 +53,7 @@ public class PetManager  {
       case WARDEN -> spawn(player.getWorld(), new WardenPet(player, data[0]));
       case WITHER -> spawn(player.getWorld(), new WitherPet(player, data[0]));
       case ENDERMAN -> spawn(player.getWorld(), new EndermanPet(player, data[0]));
+      case CAMEL -> spawn(player.getWorld(), new CamelPet(player, Boolean.parseBoolean(data[0]), data[1]));
     }
   }
 
