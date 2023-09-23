@@ -3,7 +3,7 @@ package lee.code.pets.pets;
 import lee.code.pets.pets.pet.animal.*;
 import lee.code.pets.pets.pet.animal.CatPet;
 import lee.code.pets.pets.pet.fish.*;
-import lee.code.pets.pets.pet.mob.*;
+import lee.code.pets.pets.pet.monster.*;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
@@ -57,6 +57,7 @@ public class PetManager  {
       case GLOW_SQUID -> spawn(player.getWorld(), new GlowSquidPet(player, data[0]));
       case OCELOT -> spawn(player.getWorld(), new OcelotPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case PARROT -> spawn(player.getWorld(), new ParrotPet(player, data[0], data[1]));
+      case PIG -> spawn(player.getWorld(), new PigPet(player, Boolean.parseBoolean(data[0]), data[1]));
     }
   }
 

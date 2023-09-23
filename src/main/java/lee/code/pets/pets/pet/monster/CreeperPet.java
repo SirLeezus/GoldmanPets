@@ -1,4 +1,4 @@
-package lee.code.pets.pets.pet.mob;
+package lee.code.pets.pets.pet.monster;
 
 import lee.code.pets.pets.controllers.ControllerWASD;
 import lee.code.pets.pets.goals.FollowOwnerGoal;
@@ -6,16 +6,16 @@ import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Creeper;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-public class WitchPet extends Mob {
+public class CreeperPet extends Creeper {
 
-  public WitchPet(Player player, String name) {
-    super(EntityType.WITCH, ((CraftWorld) player.getLocation().getWorld()).getHandle());
+  public CreeperPet(Player player, String name, boolean powered) {
+    super(EntityType.CREEPER, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
@@ -25,6 +25,7 @@ public class WitchPet extends Mob {
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
+    setPowered(powered);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

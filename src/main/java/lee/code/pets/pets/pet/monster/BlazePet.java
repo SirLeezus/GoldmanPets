@@ -1,4 +1,4 @@
-package lee.code.pets.pets.pet.mob;
+package lee.code.pets.pets.pet.monster;
 
 import lee.code.pets.pets.controllers.ControllerWASDFlying;
 import lee.code.pets.pets.goals.FollowOwnerFlyingGoal;

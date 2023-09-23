@@ -1,21 +1,21 @@
-package lee.code.pets.pets.pet.mob;
+package lee.code.pets.pets.pet.monster;
 
-import lee.code.pets.pets.controllers.ControllerWASDFlying;
-import lee.code.pets.pets.goals.FollowOwnerFlyingGoal;
+import lee.code.pets.pets.controllers.ControllerWASD;
+import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.monster.Ghast;
+import net.minecraft.world.entity.Mob;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-public class GhastPet extends Ghast {
+public class EndermanPet extends Mob {
 
-  public GhastPet(Player player, String name) {
-    super(EntityType.GHAST, ((CraftWorld) player.getLocation().getWorld()).getHandle());
+  public EndermanPet(Player player, String name) {
+    super(EntityType.ENDERMAN, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
@@ -24,14 +24,14 @@ public class GhastPet extends Ghast {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDFlying(this, player.getUniqueId());
+    moveControl = new ControllerWASD(this, player.getUniqueId());
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.4, 10, 15));
+    goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
   }
 
   @Override

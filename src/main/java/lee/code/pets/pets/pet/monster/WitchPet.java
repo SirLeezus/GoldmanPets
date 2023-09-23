@@ -1,4 +1,4 @@
-package lee.code.pets.pets.pet.mob;
+package lee.code.pets.pets.pet.monster;
 
 import lee.code.pets.pets.controllers.ControllerWASD;
 import lee.code.pets.pets.goals.FollowOwnerGoal;
@@ -12,10 +12,10 @@ import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-public class EndermanPet extends Mob {
+public class WitchPet extends Mob {
 
-  public EndermanPet(Player player, String name) {
-    super(EntityType.ENDERMAN, ((CraftWorld) player.getLocation().getWorld()).getHandle());
+  public WitchPet(Player player, String name) {
+    super(EntityType.WITCH, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
