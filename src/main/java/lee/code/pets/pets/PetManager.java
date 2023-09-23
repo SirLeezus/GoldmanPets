@@ -55,6 +55,7 @@ public class PetManager  {
       case FOX -> spawn(player.getWorld(), new FoxPet(player, Boolean.parseBoolean(data[0]), data[1], data[2]));
       case SQUID -> spawn(player.getWorld(), new SquidPet(player, data[0]));
       case GLOW_SQUID -> spawn(player.getWorld(), new GlowSquidPet(player, data[0]));
+      case OCELOT -> spawn(player.getWorld(), new OcelotPet(player, Boolean.parseBoolean(data[0]), data[1]));
     }
   }
 
