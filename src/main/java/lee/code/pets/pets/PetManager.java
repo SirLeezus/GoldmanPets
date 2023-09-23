@@ -65,6 +65,7 @@ public class PetManager  {
       case TADPOLE -> spawn(player.getWorld(), new TadpolePet(player, data[0]));
       case TROPICAL_FISH -> spawn(player.getWorld(), new TropicalFishPet(player, data[0], data[1], data[2], data[3]));
       case WANDERING_TRADER -> spawn(player.getWorld(), new WanderingTraderPet(player, data[0]));
+      case SPIDER -> spawn(player.getWorld(), new SpiderPet(player, data[0]));
     }
   }
 
