@@ -60,8 +60,8 @@ public class PetManager  {
       case PIG -> spawn(player.getWorld(), new PigPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case PUFFERFISH -> spawn(player.getWorld(), new PufferFishPet(player, data[0]));
       case SALMON -> spawn(player.getWorld(), new SalmonPet(player, data[0]));
-      case SKELETON_HORSE -> spawn(player.getWorld(), new SkeletonHorsePet(player, Boolean.parseBoolean(data[0]), data[1]));
-      case ZOMBIE_HORSE -> spawn(player.getWorld(), new ZombieHorsePet(player, Boolean.parseBoolean(data[0]), data[1]));
+      case SKELETON_HORSE -> spawn(player.getWorld(), new SkeletonHorsePet(player, Boolean.parseBoolean(data[0]), Boolean.parseBoolean(data[1]), data[2]));
+      case ZOMBIE_HORSE -> spawn(player.getWorld(), new ZombieHorsePet(player, Boolean.parseBoolean(data[0]), Boolean.parseBoolean(data[1]), data[2]));
       case TADPOLE -> spawn(player.getWorld(), new TadpolePet(player, data[0]));
       case TROPICAL_FISH -> spawn(player.getWorld(), new TropicalFishPet(player, data[0], data[1], data[2], data[3]));
       case WANDERING_TRADER -> spawn(player.getWorld(), new WanderingTraderPet(player, data[0]));

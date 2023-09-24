@@ -48,7 +48,7 @@ public class TestCMD extends SubCommand {
 
   @Override
   public void perform(Player player, String[] args) {
-    pets.getPetManager().spawn(player, EntityType.HORSE, new String[]{"true", "true", "&d&lGIGA CHAD", "WHITE", "BLACK_DOTS"});
+    pets.getPetManager().spawn(player, EntityType.SKELETON_HORSE, new String[]{"true", "true", "&d&lGIGA CHAD"});
   }
 
   @Override
