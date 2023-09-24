@@ -17,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class LlamaPet extends Llama {
 
-  public LlamaPet(Player player, boolean baby, String name, String variant, String carpet) {
+  public LlamaPet(Player player, boolean baby, boolean chest, String name, String variant, String carpet) {
     super(EntityType.LLAMA, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
@@ -30,6 +30,7 @@ public class LlamaPet extends Llama {
     moveControl = new ControllerWASD(this, player.getUniqueId());
     setBaby(baby);
     setVariant(Variant.valueOf(variant));
+    setChest(chest);
     inventory.setItem(1, CraftItemStack.asNMSCopy(new ItemStack(Material.valueOf(carpet))));
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
