@@ -72,6 +72,7 @@ public class PetManager  {
       case PANDA -> spawn(player.getWorld(), new PandaPet(player, Boolean.parseBoolean(data[0]), data[1], data[2], data[3]));
       case PIGLIN -> spawn(player.getWorld(), new PiglinPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case ZOMBIFIED_PIGLIN -> spawn(player.getWorld(), new ZombifiedPiglinPet(player, Boolean.parseBoolean(data[0]), data[1]));
+      case POLAR_BEAR -> spawn(player.getWorld(), new PolarBearPet(player, Boolean.parseBoolean(data[0]), data[1]));
     }
   }
 
