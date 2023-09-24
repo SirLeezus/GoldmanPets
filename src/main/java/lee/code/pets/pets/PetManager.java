@@ -87,6 +87,7 @@ public class PetManager  {
       case STRAY -> spawn(player.getWorld(), new StrayPet(player, data[0]));
       case VINDICATOR -> spawn(player.getWorld(), new VindicatorPet(player, data[0]));
       case WITHER_SKELETON -> spawn(player.getWorld(), new WitherSkeletonPet(player, data[0]));
+      case ZOMBIE_VILLAGER -> spawn(player.getWorld(), new ZombieVillagerPet(player, Boolean.parseBoolean(data[0]), data[1], data[2], data[3], data[4]));
     }
   }
 
