@@ -32,6 +32,7 @@ public class CatPet extends Cat {
     setVariant(CatUtil.valueOf(variant).getCatVariant());
     setTame(true);
     setCollarColor(DyeColor.valueOf(collarColor));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

@@ -27,6 +27,7 @@ public class PolarBearPet extends PolarBear {
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
     setBaby(baby);
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

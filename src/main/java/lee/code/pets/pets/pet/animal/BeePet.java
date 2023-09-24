@@ -30,6 +30,7 @@ public class BeePet extends Animal {
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDFlying(this, player.getUniqueId());
     setBaby(baby);
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

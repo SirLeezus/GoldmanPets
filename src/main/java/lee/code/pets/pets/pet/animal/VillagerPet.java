@@ -32,6 +32,7 @@ public class VillagerPet extends Villager {
     setVillagerData(getVillagerData().setProfession(VillagerProfessionUtil.valueOf(profession).getVillagerProfession()));
     setVillagerData(getVillagerData().setType(VillagerTypeUtil.valueOf(type).getVillagerType()));
     setVillagerData(getVillagerData().setLevel(Integer.parseInt(level)));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

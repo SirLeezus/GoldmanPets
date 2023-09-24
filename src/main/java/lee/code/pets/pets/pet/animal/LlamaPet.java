@@ -33,6 +33,7 @@ public class LlamaPet extends Llama {
     setVariant(Variant.valueOf(variant));
     setChest(chest);
     inventory.setItem(1, CraftItemStack.asNMSCopy(new ItemStack(Material.valueOf(carpet))));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

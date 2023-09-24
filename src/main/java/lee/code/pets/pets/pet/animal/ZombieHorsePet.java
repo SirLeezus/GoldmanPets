@@ -32,6 +32,7 @@ public class ZombieHorsePet extends ZombieHorse {
     moveControl = new ControllerWASD(this, player.getUniqueId());
     if (saddle) equipSaddle(SoundSource.MASTER, CraftItemStack.asNMSCopy(new ItemStack(Material.SADDLE)));
     setBaby(baby);
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

@@ -35,6 +35,7 @@ public class HorsePet extends Horse {
     if (saddle) equipSaddle(SoundSource.MASTER, CraftItemStack.asNMSCopy(new ItemStack(Material.SADDLE)));
     setBaby(baby);
     setVariantAndMarkings(Variant.valueOf(variant), Markings.valueOf(markings));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

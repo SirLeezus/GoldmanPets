@@ -28,6 +28,7 @@ public class GoatPet extends Goat {
     moveControl = new ControllerWASD(this, player.getUniqueId());
     setBaby(baby);
     if (hasHorns) addHorns();
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

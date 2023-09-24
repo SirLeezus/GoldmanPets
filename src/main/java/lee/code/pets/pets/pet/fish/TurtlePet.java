@@ -27,6 +27,7 @@ public class TurtlePet extends Turtle {
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false);
     setBaby(baby);
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

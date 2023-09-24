@@ -28,6 +28,7 @@ public class FrogPet extends Frog {
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false);
     setVariant(FrogUtil.valueOf(variant).getFrogVariant());
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

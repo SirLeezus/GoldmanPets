@@ -1,23 +1,23 @@
-package lee.code.pets.pets.pet.animal;
+package lee.code.pets.pets.pet.monster;
 
 import lee.code.pets.pets.controllers.ControllerWASD;
+import lee.code.pets.pets.controllers.ControllerWASDFlying;
+import lee.code.pets.pets.goals.FollowOwnerFlyingGoal;
 import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.SnowGolem;
+import net.minecraft.world.entity.monster.Silverfish;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-public class SnowGolemPet extends SnowGolem {
+public class SilverFishPet extends Silverfish {
 
-  //TODO CANCEL SNOW ON GROUND WHEN MOVING
-
-  public SnowGolemPet(Player player, String name, boolean pumpkin) {
-    super(EntityType.SNOW_GOLEM, ((CraftWorld) player.getLocation().getWorld()).getHandle());
+  public SilverFishPet(Player player, String name) {
+    super(EntityType.SILVERFISH, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
@@ -27,7 +27,6 @@ public class SnowGolemPet extends SnowGolem {
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    setPumpkin(pumpkin);
     setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();

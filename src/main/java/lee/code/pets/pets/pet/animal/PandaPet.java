@@ -29,6 +29,7 @@ public class PandaPet extends Panda {
     setBaby(baby);
     setMainGene(Gene.valueOf(mainGene));
     setHiddenGene(Gene.valueOf(hiddenGene));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

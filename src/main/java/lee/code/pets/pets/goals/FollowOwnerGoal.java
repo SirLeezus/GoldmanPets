@@ -1,14 +1,10 @@
 package lee.code.pets.pets.goals;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 
 import java.util.EnumSet;
-
-import net.minecraft.world.level.block.LeavesBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class FollowOwnerGoal extends Goal {
@@ -43,15 +39,6 @@ public class FollowOwnerGoal extends Goal {
     this.xOffset = ownerPos.x + xOffset;
     this.zOffset = ownerPos.z + zOffset;
     return true;
-  }
-
-  @Override
-  public void tick() {
-    final BlockPos frontPos = mob.blockPosition().relative(mob.getDirection());
-    final BlockState frontBlockState = mob.level().getBlockState(frontPos);
-    if (frontBlockState.isSolidRender(mob.level(), frontPos) || frontBlockState.getBlock() instanceof LeavesBlock) {
-      mob.getJumpControl().jump();
-    }
   }
 
   @Override

@@ -28,6 +28,7 @@ public class AxolotlPet extends Axolotl {
     moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false);
     setBaby(baby);
     setVariant(Variant.valueOf(variant));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

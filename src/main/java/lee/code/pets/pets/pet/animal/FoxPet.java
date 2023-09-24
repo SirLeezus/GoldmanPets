@@ -31,6 +31,7 @@ public class FoxPet extends Animal {
     moveControl = new ControllerWASD(this, player.getUniqueId());
     setBaby(baby);
     //setVariant(Type.SNOW);
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

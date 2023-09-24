@@ -29,6 +29,7 @@ public class SheepPet extends Sheep {
     moveControl = new ControllerWASD(this, player.getUniqueId());
     setBaby(baby);
     setColor(DyeColor.valueOf(color));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

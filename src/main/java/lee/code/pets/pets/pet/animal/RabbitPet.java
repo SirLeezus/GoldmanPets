@@ -28,6 +28,7 @@ public class RabbitPet extends Rabbit {
     moveControl = new ControllerWASD(this, player.getUniqueId());
     setBaby(baby);
     setVariant(Variant.valueOf(variant));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

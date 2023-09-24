@@ -30,6 +30,7 @@ public class WolfPet extends Wolf {
     setBaby(baby);
     setTame(true);
     setCollarColor(DyeColor.valueOf(collarColor));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

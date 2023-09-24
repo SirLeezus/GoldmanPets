@@ -30,6 +30,7 @@ public class DonkeyPet extends Donkey {
     moveControl = new ControllerWASD(this, player.getUniqueId());
     setBaby(baby);
     setChest(chest);
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

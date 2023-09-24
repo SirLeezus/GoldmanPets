@@ -26,6 +26,7 @@ public class ParrotPet extends Parrot {
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDFlying(this, player.getUniqueId());
     setVariant(Variant.valueOf(variant));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

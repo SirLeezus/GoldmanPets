@@ -28,6 +28,7 @@ public class MushroomCowPet extends MushroomCow {
     moveControl = new ControllerWASD(this, player.getUniqueId());
     setBaby(baby);
     setVariant(MushroomType.valueOf(type));
+    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }
