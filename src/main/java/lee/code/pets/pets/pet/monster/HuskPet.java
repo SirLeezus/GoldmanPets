@@ -13,7 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class HuskPet extends Husk {
-  //TODO CHECK IF AGE LOCKED
   public HuskPet(Player player, boolean baby, String name) {
     super(EntityType.HUSK, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
