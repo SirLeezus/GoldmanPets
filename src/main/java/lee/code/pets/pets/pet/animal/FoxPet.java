@@ -5,17 +5,22 @@ import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Fox;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-public class FoxPet extends Animal {
-
-  //TODO FIX setting fox type
+public class FoxPet extends Animal implements VariantHolder<Fox.Type> {
+  private static final EntityDataAccessor<Integer> DATA_TYPE_ID = SynchedEntityData.defineId(FoxPet.class, EntityDataSerializers.INT);
 
   public FoxPet(Player player, boolean baby, String name, String type) {
     super(EntityType.FOX, ((CraftWorld) player.getLocation().getWorld()).getHandle());
@@ -30,7 +35,7 @@ public class FoxPet extends Animal {
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
     setBaby(baby);
-    //setVariant(Type.SNOW);
+    setVariant(Fox.Type.valueOf(type));
     setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
@@ -42,16 +47,37 @@ public class FoxPet extends Animal {
   }
 
   @Override
-  public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
-    return null;
-  }
-
-  @Override
   public void load(CompoundTag compoundTag) {
   }
 
   @Override
   public boolean save(CompoundTag compoundTag) {
     return false;
+  }
+
+  @Override
+  protected void defineSynchedData() {
+    super.defineSynchedData();
+    entityData.define(DATA_TYPE_ID, 0);
+  }
+
+  @Override
+  public void setVariant(Fox.Type variant) {
+    entityData.set(DATA_TYPE_ID, variant.getId());
+  }
+
+  @Override
+  public Fox.Type getVariant() {
+    return Fox.Type.byId(entityData.get(DATA_TYPE_ID));
+  }
+
+  @Override
+  protected SoundEvent getAmbientSound() {
+    return SoundEvents.FOX_AMBIENT;
+  }
+
+  @Override
+  public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
+    return null;
   }
 }
