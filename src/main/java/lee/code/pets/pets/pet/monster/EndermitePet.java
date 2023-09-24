@@ -1,23 +1,21 @@
 package lee.code.pets.pets.pet.monster;
 
 import lee.code.pets.pets.controllers.ControllerWASD;
-import lee.code.pets.pets.controllers.ControllerWASDFlying;
-import lee.code.pets.pets.goals.FollowOwnerFlyingGoal;
 import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.monster.Silverfish;
+import net.minecraft.world.entity.monster.Endermite;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-public class SilverFishPet extends Silverfish {
+public class EndermitePet extends Endermite {
 
-  public SilverFishPet(Player player, String name) {
-    super(EntityType.SILVERFISH, ((CraftWorld) player.getLocation().getWorld()).getHandle());
+  public EndermitePet(Player player, String name) {
+    super(EntityType.ENDERMITE, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);

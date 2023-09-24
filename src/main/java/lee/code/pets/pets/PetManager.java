@@ -74,7 +74,8 @@ public class PetManager  {
       case ZOMBIFIED_PIGLIN -> spawn(player.getWorld(), new ZombifiedPiglinPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case POLAR_BEAR -> spawn(player.getWorld(), new PolarBearPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case HUSK -> spawn(player.getWorld(), new HuskPet(player, Boolean.parseBoolean(data[0]), data[1]));
-      case SILVERFISH -> spawn(player.getWorld(), new SilverFishPet(player, data[0]));
+      case SILVERFISH -> spawn(player.getWorld(), new SilverfishPet(player, data[0]));
+      case ENDERMITE -> spawn(player.getWorld(), new EndermitePet(player, data[0]));
     }
   }
 
