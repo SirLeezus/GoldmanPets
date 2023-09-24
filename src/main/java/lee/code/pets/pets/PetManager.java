@@ -5,6 +5,7 @@ import lee.code.pets.pets.pet.animal.CatPet;
 import lee.code.pets.pets.pet.fish.*;
 import lee.code.pets.pets.pet.monster.*;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.Stray;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.entity.EntityType;
@@ -84,6 +85,7 @@ public class PetManager  {
       case HOGLIN -> spawn(player.getWorld(), new HoglinPet(player, Boolean.parseBoolean(data[0]), data[1]));
       case PIGLIN_BRUTE -> spawn(player.getWorld(), new PiglinBrutePet(player, Boolean.parseBoolean(data[0]), data[1]));
       case SHULKER -> spawn(player.getWorld(), new ShulkerPet(player, data[0], data[1]));
+      case STRAY -> spawn(player.getWorld(), new StrayPet(player, data[0]));
     }
   }
 
