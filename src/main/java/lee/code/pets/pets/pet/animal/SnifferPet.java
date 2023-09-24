@@ -24,6 +24,7 @@ public class SnifferPet extends Animal {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     collides = false;
+    ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
@@ -38,16 +39,8 @@ public class SnifferPet extends Animal {
   }
 
   @Override
-  public void ageUp(int age) {
-  }
-
-  @Override
   public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
     return null;
-  }
-
-  @Override
-  public void ageUp(int age, boolean overGrow) {
   }
 
   @Override

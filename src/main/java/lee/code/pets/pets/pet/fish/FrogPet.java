@@ -23,6 +23,7 @@ public class FrogPet extends Frog {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     collides = false;
+    ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false);
@@ -34,14 +35,6 @@ public class FrogPet extends Frog {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerWaterGoal(this, 0.4f, 5, 20, true));
-  }
-
-  @Override
-  public void ageUp(int age) {
-  }
-
-  @Override
-  public void ageUp(int age, boolean overGrow) {
   }
 
   @Override

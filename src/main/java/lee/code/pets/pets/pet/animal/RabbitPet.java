@@ -22,6 +22,7 @@ public class RabbitPet extends Rabbit {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     collides = false;
+    ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
@@ -34,14 +35,6 @@ public class RabbitPet extends Rabbit {
   @Override
   public void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerGoal(this, 1));
-  }
-
-  @Override
-  public void ageUp(int age) {
-  }
-
-  @Override
-  public void ageUp(int age, boolean overGrow) {
   }
 
   @Override

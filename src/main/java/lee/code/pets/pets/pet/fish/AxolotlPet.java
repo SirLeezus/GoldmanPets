@@ -22,6 +22,7 @@ public class AxolotlPet extends Axolotl {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     collides = false;
+    ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false);

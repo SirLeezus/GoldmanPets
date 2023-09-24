@@ -25,6 +25,7 @@ public class FoxPet extends Animal {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     collides = false;
+    ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
@@ -37,14 +38,6 @@ public class FoxPet extends Animal {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
-  }
-
-  @Override
-  public void ageUp(int age) {
-  }
-
-  @Override
-  public void ageUp(int age, boolean overGrow) {
   }
 
   @Override
