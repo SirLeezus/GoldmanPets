@@ -90,6 +90,7 @@ public class PetManager  {
       case ZOMBIE_VILLAGER -> spawn(player.getWorld(), new ZombieVillagerPet(player, Boolean.parseBoolean(data[0]), data[1], data[2], data[3], data[4]));
       case EVOKER -> spawn(player.getWorld(), new EvokerPet(player, data[0]));
       case ILLUSIONER -> spawn(player.getWorld(), new IllusionerPet(player, data[0]));
+      case TRADER_LLAMA -> spawn(player.getWorld(), new TraderLlamaPet(player, Boolean.parseBoolean(data[0]), Boolean.parseBoolean(data[1]), data[2], data[3], data[4]));
     }
   }
 
