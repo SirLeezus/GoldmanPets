@@ -79,6 +79,7 @@ public class PetManager  {
       case PILLAGER -> spawn(player.getWorld(), new PillagerPet(player, data[0]));
       case ELDER_GUARDIAN -> spawn(player.getWorld(), new ElderGuardianPet(player, data[0]));
       case GUARDIAN -> spawn(player.getWorld(), new GuardianPet(player, data[0]));
+      case VEX -> spawn(player.getWorld(), new VexPet(player, data[0]));
     }
   }
 
