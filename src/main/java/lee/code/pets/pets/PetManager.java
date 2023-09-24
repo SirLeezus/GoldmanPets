@@ -77,6 +77,8 @@ public class PetManager  {
       case SILVERFISH -> spawn(player.getWorld(), new SilverfishPet(player, data[0]));
       case ENDERMITE -> spawn(player.getWorld(), new EndermitePet(player, data[0]));
       case PILLAGER -> spawn(player.getWorld(), new PillagerPet(player, data[0]));
+      case ELDER_GUARDIAN -> spawn(player.getWorld(), new ElderGuardianPet(player, data[0]));
+      case GUARDIAN -> spawn(player.getWorld(), new GuardianPet(player, data[0]));
     }
   }
 
