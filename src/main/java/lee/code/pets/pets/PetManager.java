@@ -81,6 +81,7 @@ public class PetManager  {
       case GUARDIAN -> spawn(player.getWorld(), new GuardianPet(player, data[0]));
       case VEX -> spawn(player.getWorld(), new VexPet(player, data[0]));
       case DROWNED -> spawn(player.getWorld(), new DrownedPet(player, Boolean.parseBoolean(data[0]), data[1]));
+      case HOGLIN -> spawn(player.getWorld(), new HoglinPet(player, Boolean.parseBoolean(data[0]), data[1]));
     }
   }
 
