@@ -90,6 +90,14 @@ public enum PetItem {
 
   @Getter private final String skin;
 
+  public ItemStack getHead() {
+    final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+    final ItemMeta headMeta = head.getItemMeta();
+    ItemUtil.applyHeadSkin(headMeta, skin);
+    head.setItemMeta(headMeta);
+    return head;
+  }
+
   public ItemStack getHead(String name) {
     final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
     final ItemMeta headMeta = head.getItemMeta();

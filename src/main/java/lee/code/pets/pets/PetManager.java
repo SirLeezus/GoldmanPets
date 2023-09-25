@@ -154,7 +154,7 @@ public class PetManager  {
   }
 
   public void removeActivePet(Player player) {
-    removePet(player, getActivePetID(player.getUniqueId()));
+    if (hasActivePet(player.getUniqueId())) removePet(player, getActivePetID(player.getUniqueId()));
   }
 
   public void removePet(Player player, int id) {

@@ -53,7 +53,7 @@ public class PetMenu extends MenuPaginatedGUI {
         if (e.isLeftClick()) {
           getMenuSoundManager().playClickSound(player);
           final PetManager petManager = pets.getPetManager();
-          if (petManager.hasActivePet(player.getUniqueId())) petManager.removeActivePet(player);
+          petManager.removeActivePet(player);
           petManager.spawn(player, petID, entityType, cachePets.getPetData(petID));
           getInventory().close();
         }

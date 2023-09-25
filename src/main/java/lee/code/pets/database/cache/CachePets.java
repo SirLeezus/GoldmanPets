@@ -37,6 +37,12 @@ public class CachePets extends DatabaseHandler {
     createPetDatabase(petTable);
   }
 
+  public void updatePetData(int id, String data) {
+    final PetTable petTable = getPetTable(id);
+    petTable.setData(data);
+    updatePetDatabase(petTable);
+  }
+
   public String[] getPetData(int id) {
     return getPetTable(id).getData().split(",");
   }

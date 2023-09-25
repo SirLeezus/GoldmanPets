@@ -9,7 +9,8 @@ import net.kyori.adventure.text.Component;
 public enum Lang {
   PREFIX("&d&lPets &6➔ "),
   MENU_PETS_TITLE("&5&lPets"),
-  MENU_PET_ITEM_LORE("&6» &dRight-Click &7- &eEdit pet options!\n&6» &dLeft-Click &7- &eSpawn this pet!"),
+  MENU_PET_ITEM_LORE("&6» &dRight-Click &7- &eEdit pet!\n&6» &dLeft-Click &7- &eSpawn pet!"),
+  MENU_SPAWN_PET_ITEM_TITLE("&a&lSpawn Pet!"),
   CAPTURE_SUCCESSFUL("&aYou successfully captured a &3{0}&a!"),
   ERROR_NO_PERMISSION("&cYou do not have permission for this."),
   ERROR_ONE_COMMAND_AT_A_TIME("&cYou're currently processing another command, please wait for it to finish."),

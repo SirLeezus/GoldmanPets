@@ -1,13 +1,16 @@
 package lee.code.pets.menus.menu;
 
 import lee.code.pets.Pets;
+import lee.code.pets.database.cache.CachePets;
 import lee.code.pets.lang.Lang;
+import lee.code.pets.menus.menu.menudata.MenuItem;
 import lee.code.pets.menus.menu.menudata.options.Option;
 import lee.code.pets.menus.menu.menudata.options.OptionSelector;
 import lee.code.pets.menus.system.MenuButton;
 import lee.code.pets.menus.system.MenuPaginatedGUI;
 import lee.code.pets.utils.PetDataUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.DyeColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -27,7 +30,7 @@ public class PetOptionMenu extends MenuPaginatedGUI {
 
   @Override
   protected Inventory createInventory() {
-    return Bukkit.createInventory(null, 54, Lang.MENU_PETS_TITLE.getComponent(null));
+    return Bukkit.createInventory(null, 36, Lang.MENU_PETS_TITLE.getComponent(null));
   }
 
   @Override
@@ -38,17 +41,51 @@ public class PetOptionMenu extends MenuPaginatedGUI {
       addButton(slot, createOptionButton(player, Option.valueOf(option)));
       slot++;
     }
+    addInterfaceButtons(player);
     super.decorate(player);
   }
 
   private MenuButton createOptionButton(Player player, Option option) {
-    final String[] petData = pets.getCacheManager().getCachePets().getPetData(petID);
-    final ItemStack optionItem = option.createItem(PetDataUtil.getPetData(entityType, petData, option));
+    final CachePets cachePets = pets.getCacheManager().getCachePets();
+    final String[] petData = cachePets.getPetData(petID);
+    final String targetData = PetDataUtil.getPetData(entityType, petData, option);
+    final ItemStack optionItem = option.createItem(targetData);
     return new MenuButton()
       .creator(p -> optionItem)
       .consumer(e -> {
-
-        //TODO add logic for each option
+        pets.getPetManager().removeActivePet(player);
+        switch (option) {
+          case COLOR -> {
+            final String color = PetDataUtil.getNextColor(DyeColor.valueOf(targetData));
+            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, color, option));
+          }
+          case BABY -> {
+            final String isBaby = String.valueOf(!Boolean.parseBoolean(targetData));
+            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, isBaby, option));
+          }
+          case VARIANT -> {
+            final String variant = PetDataUtil.getNextVariant(entityType, targetData);
+            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, variant, option));
+          }
+        }
+        clearButtons();
+        decorate(player);
       });
+  }
+
+  private void addInterfaceButtons(Player player) {
+    addButton(30, new MenuButton()
+      .creator(p -> MenuItem.BACK_MENU.createItem())
+      .consumer(e -> {
+        getMenuSoundManager().playClickSound(player);
+        pets.getMenuManager().openMenu(new PetMenu(pets), player);
+      }));
+    addButton(32, new MenuButton()
+      .creator(p -> MenuItem.SPAWN_PET.createSpawnPetItem(entityType)).consumer(e -> {
+        getMenuSoundManager().playClickSound(player);
+        pets.getPetManager().removeActivePet(player);
+        pets.getPetManager().spawn(player, petID, entityType, pets.getCacheManager().getCachePets().getPetData(petID));
+        getInventory().close();
+      }));
   }
 }

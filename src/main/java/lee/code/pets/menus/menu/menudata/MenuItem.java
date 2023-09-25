@@ -1,17 +1,21 @@
 package lee.code.pets.menus.menu.menudata;
 
+import lee.code.pets.lang.Lang;
 import lee.code.pets.utils.ItemUtil;
 import lombok.AllArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 @AllArgsConstructor
 public enum MenuItem {
   FILLER_GLASS(Material.BLACK_STAINED_GLASS_PANE, "", null, false, false, null),
   NEXT_PAGE(Material.PAPER, "&e&lNext Page ->", null, false, false, null),
   PREVIOUS_PAGE(Material.PAPER, "&e&l<- Prev Page", null, false, false, null),
-
+  BACK_MENU(Material.BARRIER, "&c&l<-- Back", null, false, false, null),
+  SPAWN_PET(Material.BARRIER, "&a&lSpawn Pet", null, false, false, null),
   ;
 
   private final Material material;
@@ -26,5 +30,13 @@ public enum MenuItem {
     if (hideItemFlags) ItemUtil.hideItemFlags(item);
     if (enchantItem) ItemUtil.enchantItem(item, Enchantment.ARROW_INFINITE, 1);
     return item;
+  }
+
+  public ItemStack createSpawnPetItem(EntityType entityType) {
+    final ItemStack head = PetItem.valueOf(entityType.name()).getHead();
+    final ItemMeta itemMeta = head.getItemMeta();
+    itemMeta.displayName(Lang.MENU_SPAWN_PET_ITEM_TITLE.getComponent(null));
+    head.setItemMeta(itemMeta);
+    return head;
   }
 }
