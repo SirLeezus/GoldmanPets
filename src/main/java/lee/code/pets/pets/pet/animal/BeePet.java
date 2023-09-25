@@ -16,6 +16,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class BeePet extends Animal {
 
+  //FIX MAD AND STINGER OPTIONS
   public BeePet(Player player, boolean baby, String name) {
     super(EntityType.BEE, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());

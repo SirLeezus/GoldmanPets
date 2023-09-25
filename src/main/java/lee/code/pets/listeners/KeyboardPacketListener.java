@@ -8,6 +8,7 @@ import lee.code.pets.Pets;
 import lee.code.pets.utils.MobUtil;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Phantom;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -21,6 +22,7 @@ public class KeyboardPacketListener extends PacketAdapter {
     final Player player = e.getPlayer();
     final Entity vehicle = player.getVehicle();
     if (vehicle == null) return;
+    if (!vehicle.getType().equals(EntityType.RAVAGER)) return;
     final PacketContainer packet = e.getPacket();
     final float sideways = packet.getFloat().read(0);
     final float forward = packet.getFloat().read(1);
@@ -76,6 +78,7 @@ public class KeyboardPacketListener extends PacketAdapter {
     if (jump && (MobUtil.canFly(vehicle) || (MobUtil.canSwim(vehicle) && vehicle.isInWater()) || vehicle.isOnGround())) velocity.setY(0.5D);
 
     // Check if each component of this Vector is finite
+    vehicle.setRotation(yaw, pitch);
     velocity.checkFinite();
     vehicle.setVelocity(velocity);
   }
