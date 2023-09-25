@@ -15,7 +15,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class ZombieVillagerPet extends ZombieVillager {
-  //TODO check if age locked
 
   public ZombieVillagerPet(Player player, boolean baby, String name, String profession, String type, String level) {
     super(EntityType.ZOMBIE_VILLAGER, ((CraftWorld) player.getLocation().getWorld()).getHandle());

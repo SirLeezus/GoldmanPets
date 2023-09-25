@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class ZombiePet extends Zombie {
-  //TODO CHECK IF AGE LOCKED
+
   public ZombiePet(Player player, boolean baby, String name) {
     super(EntityType.ZOMBIE, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
