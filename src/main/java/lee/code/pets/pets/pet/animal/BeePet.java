@@ -6,6 +6,8 @@ import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
@@ -16,7 +18,6 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class BeePet extends Animal {
 
-  //FIX MAD AND STINGER OPTIONS
   public BeePet(Player player, boolean baby, String name) {
     super(EntityType.BEE, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
@@ -38,11 +39,12 @@ public class BeePet extends Animal {
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.4, 5, 10));
+    goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.3, 5, 10));
   }
 
-  public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
-    return null;
+  @Override
+  protected SoundEvent getAmbientSound() {
+    return SoundEvents.BEE_POLLINATE;
   }
 
   @Override
@@ -52,5 +54,10 @@ public class BeePet extends Animal {
   @Override
   public boolean save(CompoundTag compoundTag) {
     return false;
+  }
+
+  @Override
+  public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
+    return null;
   }
 }
