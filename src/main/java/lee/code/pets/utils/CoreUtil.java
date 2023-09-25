@@ -11,6 +11,7 @@ public class CoreUtil {
     final LegacyComponentSerializer serializer = LegacyComponentSerializer.legacyAmpersand();
     return (Component.empty().decoration(TextDecoration.ITALIC, false)).append(serializer.deserialize(text));
   }
+
   public static String serializeColorComponentJson(String text) {
     final GsonComponentSerializer serializer = GsonComponentSerializer.gson();
     final Component component = parseColorComponent(text);
