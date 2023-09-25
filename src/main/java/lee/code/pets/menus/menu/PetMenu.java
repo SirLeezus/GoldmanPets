@@ -6,6 +6,7 @@ import lee.code.pets.lang.Lang;
 import lee.code.pets.menus.menu.menudata.PetItem;
 import lee.code.pets.menus.system.MenuButton;
 import lee.code.pets.menus.system.MenuPaginatedGUI;
+import lee.code.pets.pets.PetManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -49,8 +50,17 @@ public class PetMenu extends MenuPaginatedGUI {
     final ItemStack item = PetItem.valueOf(entityType.name()).getHead(cachePets.getPetName(petID));
     return new MenuButton().creator(p -> item)
       .consumer(e -> {
-        getMenuSoundManager().playClickSound(player);
-        pets.getMenuManager().openMenu(new PetOptionMenu(pets, entityType, petID), player);
+        if (e.isLeftClick()) {
+          getMenuSoundManager().playClickSound(player);
+          final PetManager petManager = pets.getPetManager();
+          if (petManager.hasActivePet(player.getUniqueId())) petManager.removeActivePet(player);
+          petManager.spawn(player, petID, entityType, cachePets.getPetData(petID));
+          getInventory().close();
+        }
+        if (e.isRightClick()) {
+          getMenuSoundManager().playClickSound(player);
+          pets.getMenuManager().openMenu(new PetOptionMenu(pets, entityType, petID), player);
+        }
       });
   }
 }

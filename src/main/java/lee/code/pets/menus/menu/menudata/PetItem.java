@@ -1,5 +1,6 @@
 package lee.code.pets.menus.menu.menudata;
 
+import lee.code.pets.lang.Lang;
 import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.ItemUtil;
 import lombok.AllArgsConstructor;
@@ -93,7 +94,7 @@ public enum PetItem {
     final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
     final ItemMeta headMeta = head.getItemMeta();
     ItemUtil.applyHeadSkin(headMeta, skin);
-    ItemUtil.setItemLore(headMeta, "&6» &eClick to edit pet options!");
+    ItemUtil.setItemLore(headMeta, Lang.MENU_PET_ITEM_LORE.getString());
     headMeta.displayName(CoreUtil.parseColorComponent(name));
     head.setItemMeta(headMeta);
     return head;

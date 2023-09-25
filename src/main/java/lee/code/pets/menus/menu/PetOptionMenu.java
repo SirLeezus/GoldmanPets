@@ -35,18 +35,19 @@ public class PetOptionMenu extends MenuPaginatedGUI {
     addFillerGlass();
     int slot = 10;
     for (String option : OptionSelector.valueOf(entityType.name()).getOptions()) {
-      addButton(slot, createOptionButton(Option.valueOf(option)));
+      addButton(slot, createOptionButton(player, Option.valueOf(option)));
       slot++;
     }
     super.decorate(player);
   }
 
-  private MenuButton createOptionButton(Option option) {
+  private MenuButton createOptionButton(Player player, Option option) {
     final String[] petData = pets.getCacheManager().getCachePets().getPetData(petID);
     final ItemStack optionItem = option.createItem(PetDataUtil.getPetData(entityType, petData, option));
     return new MenuButton()
       .creator(p -> optionItem)
       .consumer(e -> {
+
         //TODO add logic for each option
       });
   }

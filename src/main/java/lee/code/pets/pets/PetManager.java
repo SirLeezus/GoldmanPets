@@ -153,6 +153,10 @@ public class PetManager  {
     return petTracker.containsValue(entity.getUniqueId());
   }
 
+  public void removeActivePet(Player player) {
+    removePet(player, getActivePetID(player.getUniqueId()));
+  }
+
   public void removePet(Player player, int id) {
     final org.bukkit.entity.Entity entity = player.getWorld().getEntity(getActivePetUUID(id));
     if (entity != null) entity.getScheduler().run(pets, task -> entity.remove(), null);
