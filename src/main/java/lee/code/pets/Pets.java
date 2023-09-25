@@ -5,7 +5,7 @@ import com.comphenix.protocol.ProtocolManager;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import lee.code.pets.commands.CommandManager;
 import lee.code.pets.commands.TabCompletion;
-import lee.code.pets.listeners.MobInteractListener;
+import lee.code.pets.listeners.PetInteractListener;
 import lee.code.pets.pets.PetManager;
 import lombok.Getter;
 import me.lucko.commodore.CommodoreProvider;
@@ -23,7 +23,7 @@ public class Pets extends JavaPlugin {
   public void onEnable() {
     this.commandManager = new CommandManager(this);
     this.protocolManager = ProtocolLibrary.getProtocolManager();
-    this.petManager = new PetManager();
+    this.petManager = new PetManager(this);
     registerCommands();
     registerPacketListeners();
     registerListeners();
@@ -39,7 +39,7 @@ public class Pets extends JavaPlugin {
   }
 
   private void registerListeners() {
-    getServer().getPluginManager().registerEvents(new MobInteractListener(), this);
+    getServer().getPluginManager().registerEvents(new PetInteractListener(this), this);
   }
 
   private void registerCommands() {
