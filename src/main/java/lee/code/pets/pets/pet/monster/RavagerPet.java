@@ -17,18 +17,18 @@ public class RavagerPet extends Mob {
 
   // Move controller won't work, I think it's something client side...
 
-  public RavagerPet(Player player, String name) {
+  public RavagerPet(Player player, String[] data) {
     super(EntityType.RAVAGER, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
+    setMaxUpStep(1.0F);
     collides = false;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     //moveControl = new ControllerWASD(this, player.getUniqueId());
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

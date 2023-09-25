@@ -16,7 +16,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class VexPet extends Mob {
 
-  public VexPet(Player player, String name) {
+  public VexPet(Player player, String[] data) {
     super(EntityType.VEX, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
@@ -24,11 +24,11 @@ public class VexPet extends Mob {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     setNoGravity(true);
+    setMaxUpStep(1.0F);
     collides = false;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDFlying(this, player.getUniqueId());
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

@@ -14,20 +14,20 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class SnifferPet extends Sniffer {
 
-  public SnifferPet(Player player, boolean baby, String name) {
+  public SnifferPet(Player player, String[] data) {
     super(EntityType.SNIFFER, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
+    setMaxUpStep(1.0F);
     collides = false;
     ageLocked = true;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
+    setBaby(Boolean.parseBoolean(data[2]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    setBaby(baby);
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

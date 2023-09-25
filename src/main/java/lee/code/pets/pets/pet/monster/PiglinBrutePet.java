@@ -16,7 +16,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 public class PiglinBrutePet extends PiglinBrute {
   private final LivingEntity target;
 
-  public PiglinBrutePet(Player player, boolean baby, String name) {
+  public PiglinBrutePet(Player player, String[] data) {
     super(EntityType.PIGLIN_BRUTE, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
@@ -24,13 +24,13 @@ public class PiglinBrutePet extends PiglinBrute {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     setImmuneToZombification(true);
+    setMaxUpStep(1.0F);
     collides = false;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
     target = ((CraftPlayer) player).getHandle();
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
+    setBaby(Boolean.parseBoolean(data[2]));
     setTarget(target, EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    setBaby(baby);
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

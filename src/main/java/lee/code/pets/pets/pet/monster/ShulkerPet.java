@@ -17,7 +17,7 @@ import java.util.Optional;
 
 public class ShulkerPet extends Shulker {
 
-  public ShulkerPet(Player player, String name, String color) {
+  public ShulkerPet(Player player, String[] data) {
     super(EntityType.SHULKER, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
@@ -25,11 +25,11 @@ public class ShulkerPet extends Shulker {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     setNoGravity(true);
-    collides = false;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
-    setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     setMaxUpStep(1.0F);
-    setVariant(Optional.of(DyeColor.valueOf(color)));
+    collides = false;
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
+    setVariant(Optional.of(DyeColor.valueOf(data[2])));
+    setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

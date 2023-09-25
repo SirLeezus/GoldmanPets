@@ -14,7 +14,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class PufferFishPet extends Pufferfish {
 
-  public PufferFishPet(Player player, String name) {
+  public PufferFishPet(Player player, String[] data) {
     super(EntityType.PUFFERFISH, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
@@ -22,11 +22,11 @@ public class PufferFishPet extends Pufferfish {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     setPuffState(5);
+    setMaxUpStep(1.0F);
     collides = false;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDWater(this, player.getUniqueId(), false, true);
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

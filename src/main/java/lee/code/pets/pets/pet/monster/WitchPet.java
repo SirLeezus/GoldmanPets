@@ -16,18 +16,18 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class WitchPet extends Mob {
 
-  public WitchPet(Player player, String name) {
+  public WitchPet(Player player, String[] data) {
     super(EntityType.WITCH, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
+    setMaxUpStep(1.0F);
     collides = false;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

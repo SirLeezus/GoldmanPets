@@ -14,22 +14,22 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class PandaPet extends Panda {
 
-  public PandaPet(Player player, boolean baby, String name, String mainGene, String hiddenGene) {
+  public PandaPet(Player player, String[] data) {
     super(EntityType.PANDA, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
+    setMaxUpStep(1.0F);
     collides = false;
     ageLocked = true;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
+    setBaby(Boolean.parseBoolean(data[2]));
+    setMainGene(Gene.valueOf(data[3]));
+    setHiddenGene(Gene.valueOf(data[4]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    setBaby(baby);
-    setMainGene(Gene.valueOf(mainGene));
-    setHiddenGene(Gene.valueOf(hiddenGene));
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

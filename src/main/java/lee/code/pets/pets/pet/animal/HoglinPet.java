@@ -18,7 +18,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class HoglinPet extends Hoglin {
 
-  public HoglinPet(Player player, boolean baby, String name) {
+  public HoglinPet(Player player, String[] data) {
     super(EntityType.HOGLIN, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
@@ -26,13 +26,13 @@ public class HoglinPet extends Hoglin {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     setImmuneToZombification(true);
+    setMaxUpStep(1.0F);
     collides = false;
     ageLocked = true;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
+    setBaby(Boolean.parseBoolean(data[2]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    setBaby(baby);
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

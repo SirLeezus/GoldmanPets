@@ -20,22 +20,22 @@ import org.bukkit.inventory.ItemStack;
 
 public class HorsePet extends Horse {
 
-  public HorsePet(Player player, boolean baby, boolean saddle, String name, String variant, String markings) {
+  public HorsePet(Player player, String[] data) {
     super(EntityType.HORSE, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
+    setMaxUpStep(1.0F);
     collides = false;
     ageLocked = true;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
+    setBaby(Boolean.getBoolean(data[2]));
+    if (Boolean.getBoolean(data[3])) equipSaddle(SoundSource.MASTER, CraftItemStack.asNMSCopy(new ItemStack(Material.SADDLE)));
+    setVariantAndMarkings(Variant.valueOf(data[4]), Markings.valueOf(data[5]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    if (saddle) equipSaddle(SoundSource.MASTER, CraftItemStack.asNMSCopy(new ItemStack(Material.SADDLE)));
-    setBaby(baby);
-    setVariantAndMarkings(Variant.valueOf(variant), Markings.valueOf(markings));
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

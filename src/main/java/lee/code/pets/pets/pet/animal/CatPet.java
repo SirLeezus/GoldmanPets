@@ -16,23 +16,23 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class CatPet extends Cat {
 
-  public CatPet(Player player, boolean baby, String name, String variant, String collarColor) {
+  public CatPet(Player player, String[] data) {
     super(EntityType.CAT, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
+    setTame(true);
+    setMaxUpStep(1.0F);
     collides = false;
     ageLocked = true;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
+    setBaby(Boolean.parseBoolean(data[2]));
+    setVariant(CatUtil.valueOf(data[3]).getCatVariant());
+    setCollarColor(DyeColor.valueOf(data[4]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    setBaby(baby);
-    setVariant(CatUtil.valueOf(variant).getCatVariant());
-    setTame(true);
-    setCollarColor(DyeColor.valueOf(collarColor));
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

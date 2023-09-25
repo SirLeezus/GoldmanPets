@@ -14,7 +14,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class SpiderPet extends Spider {
 
-  public SpiderPet(Player player, String name) {
+  public SpiderPet(Player player, String[] data) {
     super(EntityType.SPIDER, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
@@ -22,7 +22,7 @@ public class SpiderPet extends Spider {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     collides = false;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
     targetSelector.getAvailableGoals().clear();

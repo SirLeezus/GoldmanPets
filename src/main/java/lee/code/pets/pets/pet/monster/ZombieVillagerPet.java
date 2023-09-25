@@ -16,7 +16,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class ZombieVillagerPet extends ZombieVillager {
 
-  public ZombieVillagerPet(Player player, boolean baby, String name, String profession, String type, String level) {
+  public ZombieVillagerPet(Player player, String[] data) {
     super(EntityType.ZOMBIE_VILLAGER, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
     setInvulnerable(true);
@@ -24,15 +24,15 @@ public class ZombieVillagerPet extends ZombieVillager {
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
     setShouldBurnInDay(false);
+    setMaxUpStep(1.0F);
     collides = false;
-    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(name)));
+    setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
+    setBaby(Boolean.parseBoolean(data[2]));
+    setVillagerData(getVillagerData().setProfession(VillagerProfessionUtil.valueOf(data[3]).getVillagerProfession()));
+    setVillagerData(getVillagerData().setType(VillagerTypeUtil.valueOf(data[4]).getVillagerType()));
+    setVillagerData(getVillagerData().setLevel(Integer.parseInt(data[5])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
-    setBaby(baby);
-    setVillagerData(getVillagerData().setProfession(VillagerProfessionUtil.valueOf(profession).getVillagerProfession()));
-    setVillagerData(getVillagerData().setType(VillagerTypeUtil.valueOf(type).getVillagerType()));
-    setVillagerData(getVillagerData().setLevel(Integer.parseInt(level)));
-    setMaxUpStep(1.0F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }
