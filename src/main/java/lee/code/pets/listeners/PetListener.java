@@ -7,11 +7,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
-public class PetInteractListener implements Listener {
+import java.util.UUID;
+
+public class PetListener implements Listener {
   private final Pets pets;
 
-  public PetInteractListener(Pets pets) {
+  public PetListener(Pets pets) {
     this.pets = pets;
   }
 
@@ -34,5 +37,14 @@ public class PetInteractListener implements Listener {
   public void onPetDamage(EntityDamageEvent e) {
     if (!pets.getPetManager().isPet(e.getEntity())) return;
     e.setCancelled(true);
+  }
+
+  @EventHandler
+  public void onTeleportWithPetActive(PlayerTeleportEvent e) {
+    final PetManager petManager = pets.getPetManager();
+    final UUID uuid = e.getPlayer().getUniqueId();
+    if (!petManager.hasActivePet(uuid)) return;
+    petManager.removePet(e.getPlayer(), petManager.getActivePetID(uuid));
+    System.out.println("Removed mob!");
   }
 }
