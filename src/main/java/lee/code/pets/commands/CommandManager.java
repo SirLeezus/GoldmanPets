@@ -4,6 +4,7 @@ import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import lee.code.pets.Pets;
 import lee.code.pets.commands.cmds.TestCMD;
 import lee.code.pets.lang.Lang;
+import lee.code.pets.menus.menu.PetMenu;
 import lombok.Getter;
 import lombok.NonNull;
 import org.bukkit.Bukkit;
@@ -67,6 +68,10 @@ public class CommandManager implements CommandExecutor {
           return true;
         }
       }
+    }
+    if (sender instanceof Player player) {
+      pets.getMenuManager().openMenu(new PetMenu(pets), player);
+      return true;
     }
     performAsync(sender, getSubCommand("help"), args);
     return true;

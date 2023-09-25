@@ -1,7 +1,12 @@
 package lee.code.pets.listeners;
 
 import lee.code.pets.Pets;
+import lee.code.pets.lang.Lang;
 import lee.code.pets.pets.PetManager;
+import lee.code.pets.utils.CoreUtil;
+import lee.code.pets.utils.PetDataUtil;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -9,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
 
@@ -31,6 +37,8 @@ public class PetListener implements Listener {
     if (!petManager.isPet(e.getRightClicked())) return;
     e.setCancelled(true);
     //TODO CHECK IF OWNER
+    final ItemStack handItem = e.getPlayer().getInventory().getItemInMainHand();
+    if (handItem.getType().equals(Material.LEAD)) return;
     e.getRightClicked().addPassenger(e.getPlayer());
   }
 
@@ -54,5 +62,16 @@ public class PetListener implements Listener {
     final UUID uuid = e.getPlayer().getUniqueId();
     if (!petManager.hasActivePet(uuid)) return;
     petManager.removePet(e.getPlayer(), petManager.getActivePetID(uuid));
+  }
+
+  @EventHandler
+  public void onCaptureEntity(PlayerInteractEntityEvent e) {
+    final PetManager petManager = pets.getPetManager();
+    if (petManager.isPet(e.getRightClicked())) return;
+    final ItemStack handItem = e.getPlayer().getInventory().getItemInMainHand();
+    if (!handItem.getType().equals(Material.LEAD)) return;
+    e.setCancelled(true);
+    petManager.capturePet(e.getPlayer(), e.getRightClicked());
+    e.getPlayer().sendMessage(Lang.PREFIX.getComponent(null).append(Lang.CAPTURE_SUCCESSFUL.getComponent(new String[]{CoreUtil.capitalize(e.getRightClicked().getType().name())})));
   }
 }

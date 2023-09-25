@@ -9,6 +9,7 @@ import net.kyori.adventure.text.Component;
 public enum Lang {
   PREFIX("&e&lTowns &6➔ "),
   MENU_PETS_TITLE("&5&lPets"),
+  CAPTURE_SUCCESSFUL("&aYou successfully captured a &3{0}&a!"),
   ERROR_NO_PERMISSION("&cYou do not have permission for this."),
   ERROR_ONE_COMMAND_AT_A_TIME("&cYou're currently processing another command, please wait for it to finish."),
 

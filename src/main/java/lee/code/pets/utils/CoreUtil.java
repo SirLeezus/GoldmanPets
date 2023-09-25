@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.apache.commons.lang3.text.WordUtils;
 
 public class CoreUtil {
 
@@ -16,5 +17,11 @@ public class CoreUtil {
     final GsonComponentSerializer serializer = GsonComponentSerializer.gson();
     final Component component = parseColorComponent(text);
     return serializer.serialize(component);
+  }
+
+  @SuppressWarnings("deprecation")
+  public static String capitalize(String message) {
+    final String format = message.toLowerCase().replaceAll("_", " ");
+    return WordUtils.capitalize(format);
   }
 }

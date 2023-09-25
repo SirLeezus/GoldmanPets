@@ -1,7 +1,8 @@
 package lee.code.pets.utils;
 
 import lee.code.pets.menus.menu.menudata.options.Option;
-import org.bukkit.entity.EntityType;
+import org.bukkit.DyeColor;
+import org.bukkit.entity.*;
 
 public class PetDataUtil {
 
@@ -23,8 +24,30 @@ public class PetDataUtil {
       case PARROT -> {
         switch (option) {
           case NAME -> {return data[1];}
-          case COLOR -> {return data[2];}
+          case VARIANT -> {return data[2];}
         }
+      }
+    }
+    return null;
+  }
+
+  public static String serializePetData(Entity entity) {
+    final EntityType entityType = entity.getType();
+    final String petName = "&6" + CoreUtil.capitalize(entityType.name()) + " Pet";
+    final boolean isBaby = entity instanceof Ageable ageable && !ageable.isAdult();
+    final String sep = ",";
+    final String startingData = entityType.name() + sep + petName;
+    switch (entityType) {
+      case COW -> {
+        return startingData + sep + isBaby;
+      }
+      case SHEEP -> {
+        final DyeColor color = entity instanceof Sheep sheep ? sheep.getColor() : DyeColor.WHITE;
+        return startingData + sep + isBaby + sep + color;
+      }
+      case PARROT -> {
+        final Parrot.Variant variant = entity instanceof Parrot parrot ? parrot.getVariant() : Parrot.Variant.RED;
+        return startingData + sep + variant;
       }
     }
     return null;

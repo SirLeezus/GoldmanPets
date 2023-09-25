@@ -1,26 +1,15 @@
 package lee.code.pets.menus.menu.menudata.options;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
 public enum OptionSelector {
-  COW,
-  SHEEP,
-  PARROT,
+  COW(new String[] {Option.NAME.name(), Option.BABY.name()}),
+  SHEEP(new String[] {Option.NAME.name(), Option.BABY.name(), Option.COLOR.name()}),
+  PARROT(new String[] {Option.NAME.name(), Option.VARIANT.name()}),
 
   ;
 
-  public String[] getOptions() {
-    switch (this) {
-      case COW -> {
-        return new String[] {Option.NAME.name(), Option.BABY.name()};
-      }
-      case SHEEP -> {
-        return new String[] {Option.NAME.name(), Option.BABY.name(), Option.COLOR.name()};
-      }
-      case PARROT -> {
-        return new String[] {Option.NAME.name(), Option.COLOR.name(), Option.VARIANT.name()};
-      }
-      default -> {
-        return new String[]{};
-      }
-    }
-  }
+  @Getter private final String[] options;
 }

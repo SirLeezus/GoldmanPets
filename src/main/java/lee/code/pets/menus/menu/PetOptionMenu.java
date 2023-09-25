@@ -32,9 +32,11 @@ public class PetOptionMenu extends MenuPaginatedGUI {
 
   @Override
   public void decorate(Player player) {
-    addBorderGlass();
+    addFillerGlass();
+    int slot = 10;
     for (String option : OptionSelector.valueOf(entityType.name()).getOptions()) {
-      addButton(1, createOptionButton(Option.valueOf(option)));
+      addButton(slot, createOptionButton(Option.valueOf(option)));
+      slot++;
     }
     super.decorate(player);
   }
@@ -45,7 +47,7 @@ public class PetOptionMenu extends MenuPaginatedGUI {
     return new MenuButton()
       .creator(p -> optionItem)
       .consumer(e -> {
-
+        //TODO add logic for each option
       });
   }
 }

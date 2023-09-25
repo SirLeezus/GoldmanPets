@@ -5,6 +5,7 @@ import lee.code.pets.pets.pet.animal.*;
 import lee.code.pets.pets.pet.animal.CatPet;
 import lee.code.pets.pets.pet.fish.*;
 import lee.code.pets.pets.pet.monster.*;
+import lee.code.pets.utils.PetDataUtil;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftEntity;
@@ -156,5 +157,10 @@ public class PetManager  {
     final org.bukkit.entity.Entity entity = player.getWorld().getEntity(getActivePetUUID(id));
     if (entity != null) entity.getScheduler().run(pets, task -> entity.remove(), null);
     removeFromPetTracker(id, player.getUniqueId());
+  }
+
+  public void capturePet(Player player, org.bukkit.entity.Entity entity) {
+    pets.getCacheManager().getCachePets().createNewPet(player.getUniqueId(), PetDataUtil.serializePetData(entity));
+    entity.getScheduler().run(pets, task -> entity.remove(), null);
   }
 }

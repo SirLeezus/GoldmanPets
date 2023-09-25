@@ -18,6 +18,6 @@ public enum Option {
   private final String name;
 
   public ItemStack createItem(String lore) {
-    return ItemUtil.createItem(material, name, lore, 0, null);
+    return ItemUtil.createItem(material, name, "&6" + lore, 0, null);
   }
 }
