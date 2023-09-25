@@ -17,7 +17,7 @@ public class CachePets extends DatabaseHandler {
 
   public CachePets(DatabaseManager databaseManager) {
     super(databaseManager);
-    this.playerPetData = new PlayerPetData(this);
+    this.playerPetData = new PlayerPetData();
   }
 
   public PetTable getPetTable(int id) {

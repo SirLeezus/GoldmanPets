@@ -8,6 +8,8 @@ import lee.code.pets.commands.TabCompletion;
 import lee.code.pets.database.CacheManager;
 import lee.code.pets.database.DatabaseManager;
 import lee.code.pets.listeners.PetListener;
+import lee.code.pets.menus.system.MenuListener;
+import lee.code.pets.menus.system.MenuManager;
 import lee.code.pets.pets.PetManager;
 import lombok.Getter;
 import me.lucko.commodore.CommodoreProvider;
@@ -21,6 +23,7 @@ public class Pets extends JavaPlugin {
   @Getter private PetManager petManager;
   @Getter private ProtocolManager protocolManager;
   @Getter private CacheManager cacheManager;
+  @Getter private MenuManager menuManager;
   private DatabaseManager databaseManager;
 
   @Override
@@ -28,6 +31,7 @@ public class Pets extends JavaPlugin {
     this.databaseManager = new DatabaseManager(this);
     this.cacheManager = new CacheManager(this, databaseManager);
     this.commandManager = new CommandManager(this);
+    this.menuManager = new MenuManager();
     this.protocolManager = ProtocolLibrary.getProtocolManager();
     this.petManager = new PetManager(this);
     databaseManager.initialize(false);
@@ -47,6 +51,7 @@ public class Pets extends JavaPlugin {
   }
 
   private void registerListeners() {
+    getServer().getPluginManager().registerEvents(new MenuListener(menuManager), this);
     getServer().getPluginManager().registerEvents(new PetListener(this), this);
   }
 

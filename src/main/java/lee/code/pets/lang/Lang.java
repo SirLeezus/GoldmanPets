@@ -8,6 +8,7 @@ import net.kyori.adventure.text.Component;
 @AllArgsConstructor
 public enum Lang {
   PREFIX("&e&lTowns &6➔ "),
+  MENU_PETS_TITLE("&5&lPets"),
   ERROR_NO_PERMISSION("&cYou do not have permission for this."),
   ERROR_ONE_COMMAND_AT_A_TIME("&cYou're currently processing another command, please wait for it to finish."),
 
