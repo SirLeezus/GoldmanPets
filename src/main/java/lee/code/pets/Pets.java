@@ -5,6 +5,8 @@ import com.comphenix.protocol.ProtocolManager;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import lee.code.pets.commands.CommandManager;
 import lee.code.pets.commands.TabCompletion;
+import lee.code.pets.database.CacheManager;
+import lee.code.pets.database.DatabaseManager;
 import lee.code.pets.listeners.PetListener;
 import lee.code.pets.pets.PetManager;
 import lombok.Getter;
@@ -18,20 +20,26 @@ public class Pets extends JavaPlugin {
   @Getter private CommandManager commandManager;
   @Getter private PetManager petManager;
   @Getter private ProtocolManager protocolManager;
+  @Getter private CacheManager cacheManager;
+  private DatabaseManager databaseManager;
 
   @Override
   public void onEnable() {
+    this.databaseManager = new DatabaseManager(this);
+    this.cacheManager = new CacheManager(this, databaseManager);
     this.commandManager = new CommandManager(this);
     this.protocolManager = ProtocolLibrary.getProtocolManager();
     this.petManager = new PetManager(this);
+    databaseManager.initialize(false);
     registerCommands();
     registerPacketListeners();
     registerListeners();
+
   }
 
   @Override
   public void onDisable() {
-
+    databaseManager.closeConnection();
   }
 
   private void registerPacketListeners() {

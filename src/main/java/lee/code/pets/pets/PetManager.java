@@ -149,7 +149,7 @@ public class PetManager  {
   }
 
   public boolean isPet(org.bukkit.entity.Entity entity) {
-    return getPetID(entity) != 0;
+    return petTracker.containsValue(entity.getUniqueId());
   }
 
   public void removePet(Player player, int id) {
