@@ -24,7 +24,7 @@ public class FollowOwnerFlyingDragonGoal extends Goal {
   @Override
   public boolean canUse() {
     if (!mob.getPassengers().isEmpty() || mob.getTarget() == null) return false;
-    double distanceToOwner = mob.distanceTo(mob.getTarget());
+    final double distanceToOwner = mob.distanceTo(mob.getTarget());
     return distanceToOwner >= minDistance;
   }
 
@@ -45,7 +45,7 @@ public class FollowOwnerFlyingDragonGoal extends Goal {
     final double dz = ownerPos.z - mob.getZ();
 
     // Calculate yaw angle (in degrees) from dragon to player's location
-    double targetYaw = Math.toDegrees(Math.atan2(-dx, dz));
+    final double targetYaw = Math.toDegrees(Math.atan2(-dx, dz));
 
     final double distanceToOwner = Math.sqrt(dx * dx + dy * dy + dz * dz);
 

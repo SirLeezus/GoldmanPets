@@ -33,7 +33,7 @@ public class ControllerWASDWater extends ControllerWASD {
     final Vec3 riddenInput = getRiddenInput(rider);
 
     float forward = (float) riddenInput.z * 0.5F;
-    float strafe = (float) riddenInput.x * 0.25F;
+    final float strafe = (float) riddenInput.x * 0.25F;
     if (forward <= 0.0F) forward *= 0.5F;
 
     final float yaw = rider.getBukkitYaw();

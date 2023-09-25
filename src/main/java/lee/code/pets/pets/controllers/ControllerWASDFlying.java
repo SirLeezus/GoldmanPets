@@ -25,26 +25,26 @@ public class ControllerWASDFlying extends ControllerWASD {
     final Vec3 riddenInput = getRiddenInput(rider);
 
     float forward = (float) riddenInput.z * 0.5F;
-    float strafe = (float) riddenInput.x * 0.25F;
+    final float strafe = (float) riddenInput.x * 0.25F;
     if (forward <= 0.0F) forward *= 0.5F;
 
     final float yaw = rider.getBukkitYaw();
     final float pitch = rider.getXRot();
 
     // Calculate the direction based on yaw and pitch
-    double motionX = forward * -Math.sin(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
+    final double motionX = forward * -Math.sin(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
     double motionY = forward * -Math.sin(Math.toRadians(pitch));
-    double motionZ = forward * Math.cos(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
+    final double motionZ = forward * Math.cos(Math.toRadians(yaw)) * Math.cos(Math.toRadians(pitch));
 
     // Add upward motion when jumping
     if (rider.jumping) {
-      motionY += 0.5D;
+      motionY += 0.3D;
     }
 
     // Set the mob's motion
     mob.setDeltaMovement(new Vec3(motionX, motionY, motionZ));
     mob.setYRot(yaw);
-    mob.setSpeed(0.2f);
+    mob.setSpeed(0.2F);
     mob.setZza(forward);
     mob.setXxa(0.0F);
   }

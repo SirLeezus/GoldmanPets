@@ -5,7 +5,6 @@ import com.comphenix.protocol.ProtocolManager;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import lee.code.pets.commands.CommandManager;
 import lee.code.pets.commands.TabCompletion;
-import lee.code.pets.listeners.KeyboardPacketListener;
 import lee.code.pets.listeners.MobInteractListener;
 import lee.code.pets.pets.PetManager;
 import lombok.Getter;

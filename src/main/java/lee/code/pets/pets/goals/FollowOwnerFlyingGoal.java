@@ -23,7 +23,7 @@ public class FollowOwnerFlyingGoal extends Goal {
   @Override
   public boolean canUse() {
     if (!mob.getPassengers().isEmpty() || mob.getTarget() == null) return false;
-    double distanceToOwner = mob.distanceTo(mob.getTarget());
+    final double distanceToOwner = mob.distanceTo(mob.getTarget());
     return distanceToOwner >= minDistance;
   }
 
