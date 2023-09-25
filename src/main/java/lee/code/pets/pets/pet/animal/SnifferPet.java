@@ -5,16 +5,14 @@ import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.sniffer.Sniffer;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-public class SnifferPet extends Animal {
+public class SnifferPet extends Sniffer {
 
   public SnifferPet(Player player, boolean baby, String name) {
     super(EntityType.SNIFFER, ((CraftWorld) player.getLocation().getWorld()).getHandle());
@@ -37,11 +35,6 @@ public class SnifferPet extends Animal {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerGoal(this, 5));
-  }
-
-  @Override
-  public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
-    return null;
   }
 
   @Override
