@@ -5,6 +5,8 @@ import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
@@ -33,6 +35,11 @@ public class EndermanPet extends Mob {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
+  }
+
+  @Override
+  protected SoundEvent getAmbientSound() {
+    return SoundEvents.ENDERMAN_AMBIENT;
   }
 
   @Override

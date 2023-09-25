@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class DrownedPet extends Drowned {
-  //TODO CHECK IF AGE LOCKED
+
   public DrownedPet(Player player, boolean baby, String name) {
     super(EntityType.DROWNED, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());

@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class ZoglinPet extends Zoglin {
-  //TODO IF AGE LOCKED
+
   public ZoglinPet(Player player, boolean baby, String name) {
     super(EntityType.ZOGLIN, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());

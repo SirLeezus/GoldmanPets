@@ -48,6 +48,6 @@ public class ElderGuardianPet extends Monster {
 
   @Override
   protected SoundEvent getAmbientSound() {
-    return this.isInWaterOrBubble() ? SoundEvents.ELDER_GUARDIAN_AMBIENT : SoundEvents.ELDER_GUARDIAN_AMBIENT_LAND;
+    return isInWaterOrBubble() ? SoundEvents.ELDER_GUARDIAN_AMBIENT : SoundEvents.ELDER_GUARDIAN_AMBIENT_LAND;
   }
 }

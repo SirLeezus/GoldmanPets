@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class SquidPet extends Squid {
-  //TODO Fix body movement when riding and maybe following
+  // Fix body movement when riding and maybe following
   public SquidPet(Player player, String name) {
     super(EntityType.SQUID, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());

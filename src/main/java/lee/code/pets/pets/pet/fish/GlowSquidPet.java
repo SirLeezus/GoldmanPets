@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class GlowSquidPet extends GlowSquid {
-  //TODO Fix body movement when riding and maybe following
+  // Fix body movement when riding and maybe following
   public GlowSquidPet(Player player, String name) {
     super(EntityType.GLOW_SQUID, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
