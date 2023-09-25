@@ -18,7 +18,7 @@ public class PetMenu extends MenuPaginatedGUI {
 
   @Override
   protected Inventory createInventory() {
-    return Bukkit.createInventory(null, 54, Lang.MENU_PETS_TITLE.getComponent(null));;
+    return Bukkit.createInventory(null, 54, Lang.MENU_PETS_TITLE.getComponent(null));
   }
 
   @Override
