@@ -12,6 +12,7 @@ import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.PetDataUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -53,7 +54,15 @@ public class PetOptionMenu extends MenuPaginatedGUI {
     final String[] petData = cachePets.getPetData(petID);
     final String targetData = PetDataUtil.getPetData(entityType, petData, option);
     final String cappedData = option.equals(Option.NAME) ? targetData : CoreUtil.capitalize(targetData);
-    final ItemStack optionItem = option.createItem(cappedData);
+    final ItemStack optionItem = switch (option) {
+      case COLOR -> option.createColorItem(targetData, cappedData);
+      case BABY -> {
+        final ItemStack item = option.createItem(cappedData);
+        if (Boolean.parseBoolean(targetData)) item.setType(Material.NETHER_STAR);
+        yield item;
+      }
+      default -> option.createItem(cappedData);
+    };
     return new MenuButton()
       .creator(p -> optionItem)
       .consumer(e -> {

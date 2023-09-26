@@ -8,9 +8,9 @@ import org.bukkit.inventory.ItemStack;
 @AllArgsConstructor
 public enum Option {
   NAME(Material.NAME_TAG, "&e&lName"),
-  BABY(Material.BONE_MEAL, "&e&lBaby"),
+  BABY(Material.END_CRYSTAL, "&e&lBaby"),
   COLOR(Material.RED_DYE, "&e&lDye Color"),
-  VARIANT(Material.COMPASS, "&e&lVariant"),
+  VARIANT(Material.TURTLE_EGG, "&e&lVariant"),
   SADDLE(Material.SADDLE, "&e&lSaddle"),
   CHEST(Material.CHEST, "&e&lChest"),
   HORNS(Material.GOAT_HORN, "&e&lHorns")
@@ -24,5 +24,9 @@ public enum Option {
     final ItemStack itemStack =  ItemUtil.createItem(material, name, "&6" + lore, 0, null);
     ItemUtil.hideItemFlags(itemStack);
     return itemStack;
+  }
+
+  public ItemStack createColorItem(String color, String lore) {
+    return ItemUtil.createItem(Material.valueOf(color + "_DYE"), name, "&6" + lore, 0, null);
   }
 }
