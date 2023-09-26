@@ -4,9 +4,7 @@ import lee.code.pets.Pets;
 import lee.code.pets.lang.Lang;
 import lee.code.pets.pets.PetManager;
 import lee.code.pets.utils.CoreUtil;
-import lee.code.pets.utils.PetDataUtil;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -39,7 +37,20 @@ public class PetListener implements Listener {
     //TODO CHECK IF OWNER
     final ItemStack handItem = e.getPlayer().getInventory().getItemInMainHand();
     if (handItem.getType().equals(Material.LEAD)) return;
+    if (pets.getDelayManager().isOnDelayOrSchedule(e.getPlayer().getUniqueId(), 500)) return;
     e.getRightClicked().addPassenger(e.getPlayer());
+  }
+
+  @EventHandler
+  public void onCaptureEntity(PlayerInteractEntityEvent e) {
+    final PetManager petManager = pets.getPetManager();
+    if (petManager.isPet(e.getRightClicked())) return;
+    final ItemStack handItem = e.getPlayer().getInventory().getItemInMainHand();
+    if (!handItem.getType().equals(Material.LEAD)) return;
+    e.setCancelled(true);
+    if (pets.getDelayManager().isOnDelayOrSchedule(e.getPlayer().getUniqueId(), 500)) return;
+    petManager.capturePet(e.getPlayer(), e.getRightClicked());
+    e.getPlayer().sendMessage(Lang.PREFIX.getComponent(null).append(Lang.CAPTURE_SUCCESSFUL.getComponent(new String[]{CoreUtil.capitalize(e.getRightClicked().getType().name())})));
   }
 
   @EventHandler
@@ -62,16 +73,5 @@ public class PetListener implements Listener {
     final UUID uuid = e.getPlayer().getUniqueId();
     if (!petManager.hasActivePet(uuid)) return;
     petManager.removePet(e.getPlayer(), petManager.getActivePetID(uuid));
-  }
-
-  @EventHandler
-  public void onCaptureEntity(PlayerInteractEntityEvent e) {
-    final PetManager petManager = pets.getPetManager();
-    if (petManager.isPet(e.getRightClicked())) return;
-    final ItemStack handItem = e.getPlayer().getInventory().getItemInMainHand();
-    if (!handItem.getType().equals(Material.LEAD)) return;
-    e.setCancelled(true);
-    petManager.capturePet(e.getPlayer(), e.getRightClicked());
-    e.getPlayer().sendMessage(Lang.PREFIX.getComponent(null).append(Lang.CAPTURE_SUCCESSFUL.getComponent(new String[]{CoreUtil.capitalize(e.getRightClicked().getType().name())})));
   }
 }

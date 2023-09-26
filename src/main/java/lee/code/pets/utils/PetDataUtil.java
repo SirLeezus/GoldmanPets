@@ -12,10 +12,20 @@ public class PetDataUtil {
 
   public static String getPetData(EntityType entityType, String[] data, Option option) {
     switch (entityType) {
-      case COW -> {
+      case ALLAY, BAT -> {
+        return data[1];
+      }
+      case COW, BEE -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
+        }
+      }
+      case CAMEL -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case BABY -> {return data[2];}
+          case SADDLE -> {return data[3];}
         }
       }
       case SHEEP -> {
@@ -42,8 +52,15 @@ public class PetDataUtil {
     final String sep = ",";
     final String startingData = entityType.name() + sep + petName;
     switch (entityType) {
-      case COW -> {
+      case ALLAY, BAT -> {
+        return startingData;
+      }
+      case COW, BEE -> {
         return startingData + sep + isBaby;
+      }
+      case CAMEL -> {
+        final boolean hasSaddle = entity instanceof Camel camel && camel.getInventory().getSaddle() != null;
+        return startingData + sep + isBaby + sep + hasSaddle;
       }
       case SHEEP -> {
         DyeColor color = entity instanceof Sheep sheep ? sheep.getColor() : DyeColor.WHITE;
@@ -61,10 +78,20 @@ public class PetDataUtil {
   public static String addNewPetData(EntityType entityType, String[] data, String newData, Option option) {
     final String sep = ",";
     switch (entityType) {
-      case COW -> {
+      case ALLAY, BAT -> {
+        return data[0] + sep + newData;
+      }
+      case COW, BEE -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
+        }
+      }
+      case CAMEL -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}
+          case SADDLE -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData;}
         }
       }
       case SHEEP -> {

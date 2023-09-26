@@ -8,6 +8,10 @@ public enum OptionSelector {
   COW(new String[] {Option.NAME.name(), Option.BABY.name()}),
   SHEEP(new String[] {Option.NAME.name(), Option.BABY.name(), Option.COLOR.name()}),
   PARROT(new String[] {Option.NAME.name(), Option.VARIANT.name()}),
+  ALLAY(new String[] {Option.NAME.name()}),
+  BAT(new String[] {Option.NAME.name()}),
+  BEE(new String[] {Option.NAME.name(), Option.BABY.name()}),
+  CAMEL(new String[] {Option.NAME.name(), Option.BABY.name(), Option.SADDLE.name()}),
 
   ;
 

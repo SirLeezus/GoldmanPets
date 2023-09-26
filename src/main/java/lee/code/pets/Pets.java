@@ -24,6 +24,7 @@ public class Pets extends JavaPlugin {
   @Getter private ProtocolManager protocolManager;
   @Getter private CacheManager cacheManager;
   @Getter private MenuManager menuManager;
+  @Getter private DelayManager delayManager;
   private DatabaseManager databaseManager;
 
   @Override
@@ -34,6 +35,7 @@ public class Pets extends JavaPlugin {
     this.menuManager = new MenuManager();
     this.protocolManager = ProtocolLibrary.getProtocolManager();
     this.petManager = new PetManager(this);
+    this.delayManager = new DelayManager(this);
     databaseManager.initialize(false);
     registerCommands();
     registerPacketListeners();
