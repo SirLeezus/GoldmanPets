@@ -75,6 +75,14 @@ public class PetDataUtil {
           case COLOR -> {return data[4];}
         }
       }
+      case PANDA -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case BABY -> {return data[2];}
+          case MAIN_GENE -> {return data[3];}
+          case HIDDEN_GENE -> {return data[4];}
+        }
+      }
       case HORSE -> {
         switch (option) {
           case NAME -> {return data[1];}
@@ -146,6 +154,11 @@ public class PetDataUtil {
         final DyeColor color = entity instanceof Cat cat ? cat.getCollarColor() : DyeColor.RED;
         return startingData + sep + isBaby + sep + catType.name() + sep + color.name();
       }
+      case PANDA -> {
+        final Panda.Gene mainGene = entity instanceof Panda panda ? panda.getMainGene() : Panda.Gene.NORMAL;
+        final Panda.Gene hiddenGene = entity instanceof Panda panda ? panda.getHiddenGene() : Panda.Gene.NORMAL;
+        return startingData + sep + isBaby + sep + mainGene.name() + sep + hiddenGene.name();
+      }
       case HORSE -> {
         final HorseVariantUtil horseVariant = HorseVariantUtil.getVariant(entity);
         final HorseMarkingUtil horseMarking = HorseMarkingUtil.getMarking(entity);
@@ -197,6 +210,14 @@ public class PetDataUtil {
           case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4];}
           case VARIANT -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4];}
           case COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData;}
+        }
+      }
+      case PANDA -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4];}
+          case MAIN_GENE -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4];}
+          case HIDDEN_GENE -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData;}
         }
       }
       case CAMEL -> {
@@ -299,5 +320,12 @@ public class PetDataUtil {
     final ArrayList<HorseMarkingUtil> variants = new ArrayList<>(List.of(HorseMarkingUtil.values()));
     final HorseMarkingUtil nextVariant = horseMarking.ordinal() + 1 < variants.size() ? variants.get(horseMarking.ordinal() + 1) : variants.get(0);
     return nextVariant.name();
+  }
+
+  public static String getNextPandaGene(String gene) {
+    final Panda.Gene pandaGene = Panda.Gene.valueOf(gene);
+    final ArrayList<Panda.Gene> variants = new ArrayList<>(List.of(Panda.Gene.values()));
+    final Panda.Gene nextGene = pandaGene.ordinal() + 1 < variants.size() ? variants.get(pandaGene.ordinal() + 1) : variants.get(0);
+    return nextGene.name();
   }
 }

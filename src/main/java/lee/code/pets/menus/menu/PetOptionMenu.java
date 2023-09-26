@@ -82,6 +82,10 @@ public class PetOptionMenu extends MenuPaginatedGUI {
             final String petOption = String.valueOf(!Boolean.parseBoolean(targetData));
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, petOption, option));
           }
+          case MAIN_GENE, HIDDEN_GENE -> {
+            final String gene = PetDataUtil.getNextPandaGene(targetData);
+            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, gene, option));
+          }
         }
         clearButtons();
         decorate(player);

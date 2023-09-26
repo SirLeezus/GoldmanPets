@@ -22,7 +22,8 @@ public enum OptionSelector {
   IRON_GOLEM(new String[] {Option.NAME.name()}),
   LLAMA(new String[] {Option.NAME.name(), Option.BABY.name(), Option.CHEST.name(), Option.VARIANT.name(), Option.SADDLE.name(), Option.COLOR.name()}),
   MUSHROOM_COW(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name()}),
-  OCELOT(new String[] {Option.NAME.name(), Option.BABY.name()})
+  OCELOT(new String[] {Option.NAME.name(), Option.BABY.name()}),
+  PANDA(new String[] {Option.NAME.name(), Option.BABY.name(), Option.MAIN_GENE.name(), Option.HIDDEN_GENE.name()})
   ;
 
   @Getter private final String[] options;

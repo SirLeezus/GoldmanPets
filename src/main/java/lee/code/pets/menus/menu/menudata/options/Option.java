@@ -14,7 +14,9 @@ public enum Option {
   SADDLE(Material.SADDLE, "&e&lSaddle"),
   CHEST(Material.CHEST, "&e&lChest"),
   HORNS(Material.GOAT_HORN, "&e&lHorns"),
-  MARKING(Material.HORSE_SPAWN_EGG, "&e&lMarking")
+  MARKING(Material.HORSE_SPAWN_EGG, "&e&lMarking"),
+  MAIN_GENE(Material.BAMBOO_BLOCK, "&e&lMain Gene"),
+  HIDDEN_GENE(Material.STRIPPED_BAMBOO_BLOCK, "&e&lHidden Gene")
 
   ;
 
