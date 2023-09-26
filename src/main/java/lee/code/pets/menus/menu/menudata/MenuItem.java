@@ -1,6 +1,7 @@
 package lee.code.pets.menus.menu.menudata;
 
 import lee.code.pets.lang.Lang;
+import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.ItemUtil;
 import lombok.AllArgsConstructor;
 import org.bukkit.Material;
@@ -15,7 +16,7 @@ public enum MenuItem {
   NEXT_PAGE(Material.PAPER, "&e&lNext Page ->", null, false, false, null),
   PREVIOUS_PAGE(Material.PAPER, "&e&l<- Prev Page", null, false, false, null),
   BACK_MENU(Material.BARRIER, "&c&l<-- Back", null, false, false, null),
-  SPAWN_PET(Material.BARRIER, "&a&lSpawn Pet", null, false, false, null),
+  SPAWN_PET(Material.PLAYER_HEAD, "&a&lSpawn Pet", null, false, false, null),
   ;
 
   private final Material material;
@@ -35,7 +36,7 @@ public enum MenuItem {
   public ItemStack createSpawnPetItem(EntityType entityType) {
     final ItemStack head = PetItem.valueOf(entityType.name()).getHead();
     final ItemMeta itemMeta = head.getItemMeta();
-    itemMeta.displayName(Lang.MENU_SPAWN_PET_ITEM_TITLE.getComponent(null));
+    itemMeta.displayName(CoreUtil.parseColorComponent(name));
     head.setItemMeta(itemMeta);
     return head;
   }
