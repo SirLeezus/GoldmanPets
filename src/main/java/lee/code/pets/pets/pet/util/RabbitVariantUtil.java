@@ -13,7 +13,8 @@ public enum RabbitVariantUtil {
   GOLD(Rabbit.Variant.GOLD),
   BLACK(Rabbit.Variant.BLACK),
   SALT(Rabbit.Variant.SALT),
-  WHITE_SPLOTCHED(Rabbit.Variant.WHITE_SPLOTCHED)
+  WHITE_SPLOTCHED(Rabbit.Variant.WHITE_SPLOTCHED),
+  EVIL(Rabbit.Variant.EVIL)
   ;
   @Getter private final Rabbit.Variant rabbitVariant;
 
