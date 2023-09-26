@@ -6,13 +6,17 @@ import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.horse.Donkey;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_20_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class DonkeyPet extends Donkey {
 
@@ -29,6 +33,7 @@ public class DonkeyPet extends Donkey {
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setBaby(Boolean.parseBoolean(data[2]));
     setChest(Boolean.parseBoolean(data[3]));
+    if (Boolean.parseBoolean(data[4])) equipSaddle(SoundSource.MASTER, CraftItemStack.asNMSCopy(new ItemStack(Material.SADDLE)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
     targetSelector.getAvailableGoals().clear();

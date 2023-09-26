@@ -16,10 +16,16 @@ public class PetDataUtil {
       case ALLAY, BAT -> {
         return data[1];
       }
-      case COW, BEE -> {
+      case COW, BEE, CHICKEN -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
+        }
+      }
+      case PARROT -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case VARIANT -> {return data[2];}
         }
       }
       case CAMEL -> {
@@ -29,14 +35,6 @@ public class PetDataUtil {
           case SADDLE -> {return data[3];}
         }
       }
-      case CAT -> {
-        switch (option) {
-          case NAME -> {return data[1];}
-          case BABY -> {return data[2];}
-          case VARIANT -> {return data[3];}
-          case COLOR -> {return data[4];}
-        }
-      }
       case SHEEP -> {
         switch (option) {
           case NAME -> {return data[1];}
@@ -44,10 +42,27 @@ public class PetDataUtil {
           case COLOR -> {return data[3];}
         }
       }
-      case PARROT -> {
+      case FOX -> {
         switch (option) {
           case NAME -> {return data[1];}
-          case VARIANT -> {return data[2];}
+          case BABY -> {return data[2];}
+          case VARIANT -> {return data[3];}
+        }
+      }
+      case DONKEY -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case BABY -> {return data[2];}
+          case CHEST -> {return data[3];}
+          case SADDLE -> {return data[4];}
+        }
+      }
+      case CAT -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case BABY -> {return data[2];}
+          case VARIANT -> {return data[3];}
+          case COLOR -> {return data[4];}
         }
       }
     }
@@ -64,7 +79,11 @@ public class PetDataUtil {
       case ALLAY, BAT -> {
         return startingData;
       }
-      case COW, BEE -> {
+      case FOX -> {
+        final Fox.Type foxType = entity instanceof Fox fox ? fox.getFoxType() : Fox.Type.RED;
+        return startingData + sep + isBaby + sep + foxType.name();
+      }
+      case COW, BEE, CHICKEN -> {
         return startingData + sep + isBaby;
       }
       case CAMEL -> {
@@ -80,10 +99,15 @@ public class PetDataUtil {
         final ParrotUtil variant = ParrotUtil.getVariant(entity);
         return startingData + sep + variant.name();
       }
+      case DONKEY -> {
+        final boolean hasChest = entity instanceof Donkey donkey && donkey.isCarryingChest();
+        final boolean hasSaddle = entity instanceof Donkey donkey && donkey.getInventory().getSaddle() != null;
+        return startingData + sep + isBaby + sep + hasChest + sep + hasSaddle;
+      }
       case CAT -> {
         final Cat.Type catType = entity instanceof Cat cat ? cat.getCatType() : Cat.Type.ALL_BLACK;
         final DyeColor color = entity instanceof Cat cat ? cat.getCollarColor() : DyeColor.RED;
-        return startingData + sep + isBaby + sep + catType + sep + color.name();
+        return startingData + sep + isBaby + sep + catType.name() + sep + color.name();
       }
     }
     return null;
@@ -95,10 +119,25 @@ public class PetDataUtil {
       case ALLAY, BAT -> {
         return data[0] + sep + newData;
       }
-      case COW, BEE -> {
+      case COW, BEE, CHICKEN -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
+        }
+      }
+      case FOX -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}
+          case VARIANT -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData;}
+        }
+      }
+      case DONKEY -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4];}
+          case CHEST -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4];}
+          case SADDLE -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData;}
         }
       }
       case CAT -> {
@@ -151,6 +190,11 @@ public class PetDataUtil {
         final ArrayList<CatUtil> variants = new ArrayList<>(List.of(CatUtil.values()));
         final CatUtil nextVariant = catVariant.ordinal() + 1 < variants.size() ? variants.get(catVariant.ordinal() + 1) : variants.get(0);
         return nextVariant.name();
+      }
+      case FOX -> {
+        final Fox.Type foxType = Fox.Type.valueOf(variant);
+        if (foxType.equals(Fox.Type.RED)) return Fox.Type.SNOW.name();
+        else return Fox.Type.RED.name();
       }
     }
     return null;

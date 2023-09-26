@@ -59,13 +59,13 @@ public class PetOptionMenu extends MenuPaginatedGUI {
             final String color = PetDataUtil.getNextColor(DyeColor.valueOf(targetData));
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, color, option));
           }
-          case BABY, SADDLE -> {
-            final String petOption = String.valueOf(!Boolean.parseBoolean(targetData));
-            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, petOption, option));
-          }
           case VARIANT -> {
             final String variant = PetDataUtil.getNextVariant(entityType, targetData);
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, variant, option));
+          }
+          case BABY, SADDLE, CHEST -> {
+            final String petOption = String.valueOf(!Boolean.parseBoolean(targetData));
+            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, petOption, option));
           }
         }
         clearButtons();

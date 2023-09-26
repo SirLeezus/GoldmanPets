@@ -1,6 +1,5 @@
 package lee.code.pets.menus.menu.menudata;
 
-import lee.code.pets.lang.Lang;
 import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.ItemUtil;
 import lombok.AllArgsConstructor;

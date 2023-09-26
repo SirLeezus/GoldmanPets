@@ -11,7 +11,8 @@ public enum Option {
   BABY(Material.BONE_MEAL, "&e&lBaby"),
   COLOR(Material.RED_DYE, "&e&lDye Color"),
   VARIANT(Material.COMPASS, "&e&lVariant"),
-  SADDLE(Material.SADDLE, "&e&lSaddle")
+  SADDLE(Material.SADDLE, "&e&lSaddle"),
+  CHEST(Material.CHEST, "&e&lChest")
 
   ;
 
