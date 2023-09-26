@@ -16,7 +16,10 @@ public enum Option {
   HORNS(Material.GOAT_HORN, "&e&lHorns"),
   MARKING(Material.HORSE_SPAWN_EGG, "&e&lMarking"),
   MAIN_GENE(Material.BAMBOO_BLOCK, "&e&lMain Gene"),
-  HIDDEN_GENE(Material.STRIPPED_BAMBOO_BLOCK, "&e&lHidden Gene")
+  HIDDEN_GENE(Material.STRIPPED_BAMBOO_BLOCK, "&e&lHidden Gene"),
+  ANGRY(Material.BEE_NEST, "&e&lAngry"),
+  NECTAR(Material.BEEHIVE, "&e&lNectar"),
+  STUNG(Material.HONEYCOMB, "&e&lStung")
 
   ;
 

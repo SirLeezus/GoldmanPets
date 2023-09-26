@@ -16,7 +16,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM -> {
         return data[1];
       }
-      case COW, BEE, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -72,6 +72,15 @@ public class PetDataUtil {
           case COLOR -> {return data[4];}
         }
       }
+      case BEE -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case BABY -> {return data[2];}
+          case ANGRY -> {return data[3];}
+          case NECTAR -> {return data[4];}
+          case STUNG -> {return data[5];}
+        }
+      }
       case PANDA -> {
         switch (option) {
           case NAME -> {return data[1];}
@@ -113,8 +122,14 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM -> {
         return startingData;
       }
-      case COW, BEE, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR -> {
         return startingData + sep + isBaby;
+      }
+      case BEE -> {
+        final boolean isMad = entity instanceof Bee bee && bee.getAnger() > 0;
+        final boolean hasNectar = entity instanceof Bee bee && bee.hasNectar();
+        final boolean hasStung = entity instanceof Bee bee && bee.hasStung();
+        return startingData + sep + isBaby + sep + isMad + sep + hasNectar + sep + hasStung;
       }
       case FOX -> {
         final Fox.Type foxType = entity instanceof Fox fox ? fox.getFoxType() : Fox.Type.RED;
@@ -184,7 +199,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM -> {
         return data[0] + sep + newData;
       }
-      case COW, BEE, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
@@ -211,6 +226,15 @@ public class PetDataUtil {
           case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4];}
           case VARIANT -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4];}
           case COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData;}
+        }
+      }
+      case BEE -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4] + sep + data[5];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4] + sep + data[5];}
+          case ANGRY -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4] + sep + data[5];}
+          case NECTAR -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData + sep + data[5];}
+          case STUNG -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + data[4] + sep + newData;}
         }
       }
       case PANDA -> {

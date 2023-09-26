@@ -78,7 +78,7 @@ public class PetOptionMenu extends MenuPaginatedGUI {
             final String marking = PetDataUtil.getNextHorseMarking(targetData);
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, marking, option));
           }
-          case BABY, SADDLE, CHEST, HORNS -> {
+          case BABY, SADDLE, CHEST, HORNS, ANGRY, STUNG, NECTAR -> {
             final String petOption = String.valueOf(!Boolean.parseBoolean(targetData));
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, petOption, option));
           }
