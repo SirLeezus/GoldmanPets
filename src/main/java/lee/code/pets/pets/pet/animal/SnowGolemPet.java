@@ -30,7 +30,7 @@ public class SnowGolemPet extends Mob {
     setMaxUpStep(1.0F);
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
-    setPumpkin(Boolean.getBoolean(data[2]));
+    setPumpkin(Boolean.parseBoolean(data[2]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
     targetSelector.getAvailableGoals().clear();

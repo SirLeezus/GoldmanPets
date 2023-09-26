@@ -31,8 +31,8 @@ public class HorsePet extends Horse {
     collides = false;
     ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
-    setBaby(Boolean.getBoolean(data[2]));
-    if (Boolean.getBoolean(data[3])) equipSaddle(SoundSource.MASTER, CraftItemStack.asNMSCopy(new ItemStack(Material.SADDLE)));
+    setBaby(Boolean.parseBoolean(data[2]));
+    if (Boolean.parseBoolean(data[3])) equipSaddle(SoundSource.MASTER, CraftItemStack.asNMSCopy(new ItemStack(Material.SADDLE)));
     setVariantAndMarkings(Variant.valueOf(data[4]), Markings.valueOf(data[5]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
