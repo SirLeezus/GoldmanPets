@@ -20,6 +20,7 @@ public enum OptionSelector {
   HOGLIN(new String[] {Option.NAME.name(), Option.BABY.name()}),
   HORSE(new String[] {Option.NAME.name(), Option.BABY.name(), Option.SADDLE.name(), Option.VARIANT.name(), Option.MARKING.name()}),
   IRON_GOLEM(new String[] {Option.NAME.name()}),
+  LLAMA(new String[] {Option.NAME.name(), Option.BABY.name(), Option.CHEST.name(), Option.VARIANT.name(), Option.SADDLE.name(), Option.COLOR.name()}),
 
   ;
 

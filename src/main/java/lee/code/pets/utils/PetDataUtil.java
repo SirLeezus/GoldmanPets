@@ -6,7 +6,9 @@ import lee.code.pets.pets.pet.util.HorseMarkingUtil;
 import lee.code.pets.pets.pet.util.HorseVariantUtil;
 import lee.code.pets.pets.pet.util.ParrotVariantUtil;
 import org.bukkit.DyeColor;
+import org.bukkit.Material;
 import org.bukkit.entity.*;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +85,16 @@ public class PetDataUtil {
           case MARKING -> {return data[5];}
         }
       }
+      case LLAMA -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case BABY -> {return data[2];}
+          case CHEST -> {return data[3];}
+          case VARIANT -> {return data[4];}
+          case SADDLE -> {return data[5];}
+          case COLOR -> {return data[6];}
+        }
+      }
     }
     return null;
   }
@@ -136,6 +148,14 @@ public class PetDataUtil {
         final HorseMarkingUtil horseMarking = HorseMarkingUtil.getMarking(entity);
         final boolean hasSaddle = entity instanceof Horse horse && horse.getInventory().getSaddle() != null;
         return startingData + sep + isBaby + sep + hasSaddle + sep + horseVariant.name() + sep + horseMarking.name();
+      }
+      case LLAMA -> {
+        final Llama.Color llamaVariant = entity instanceof Llama llama ? llama.getColor() : Llama.Color.WHITE;
+        final boolean hasChest = entity instanceof Llama llama && llama.isCarryingChest();
+        final ItemStack saddleItem = entity instanceof Llama llama ? llama.getInventory().getSaddle() : null;
+        final boolean hasSaddle = saddleItem != null;
+        final DyeColor color = saddleItem == null ? DyeColor.WHITE : DyeColor.valueOf(saddleItem.getType().name().substring(0, saddleItem.getType().name().indexOf('_')));
+        return startingData + sep + isBaby + sep + hasChest + sep + llamaVariant + sep + hasSaddle + sep + color.name();
       }
     }
     return null;
@@ -212,6 +232,16 @@ public class PetDataUtil {
           case MARKING -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + data[4] + sep + newData;}
         }
       }
+      case LLAMA -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4] + sep + data[5] + sep + data[6];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4] + sep + data[5] + sep + data[6];}
+          case CHEST -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4] + sep + data[5] + sep + data[6];}
+          case VARIANT -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData + sep + data[5] + sep + data[6];}
+          case SADDLE -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + data[4] + sep + newData + sep + data[6];}
+          case COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + data[4] + sep + data[5] + sep + newData;}
+        }
+      }
     }
     return null;
   }
@@ -244,6 +274,12 @@ public class PetDataUtil {
         final HorseVariantUtil horseVariant = HorseVariantUtil.valueOf(variant);
         final ArrayList<HorseVariantUtil> variants = new ArrayList<>(List.of(HorseVariantUtil.values()));
         final HorseVariantUtil nextVariant = horseVariant.ordinal() + 1 < variants.size() ? variants.get(horseVariant.ordinal() + 1) : variants.get(0);
+        return nextVariant.name();
+      }
+      case LLAMA -> {
+        final Llama.Color llamaVariant = Llama.Color.valueOf(variant);
+        final ArrayList<Llama.Color> variants = new ArrayList<>(List.of(Llama.Color.values()));
+        final Llama.Color nextVariant = llamaVariant.ordinal() + 1 < variants.size() ? variants.get(llamaVariant.ordinal() + 1) : variants.get(0);
         return nextVariant.name();
       }
     }
