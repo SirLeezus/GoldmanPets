@@ -19,7 +19,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM -> {
         return data[1];
       }
-      case COW, BEE, CHICKEN, HOGLIN -> {
+      case COW, BEE, CHICKEN, HOGLIN, OCELOT -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -108,7 +108,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM -> {
         return startingData;
       }
-      case COW, BEE, CHICKEN, HOGLIN -> {
+      case COW, BEE, CHICKEN, HOGLIN, OCELOT -> {
         return startingData + sep + isBaby;
       }
       case FOX -> {
@@ -170,7 +170,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM -> {
         return data[0] + sep + newData;
       }
-      case COW, BEE, CHICKEN, HOGLIN -> {
+      case COW, BEE, CHICKEN, HOGLIN, OCELOT -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
