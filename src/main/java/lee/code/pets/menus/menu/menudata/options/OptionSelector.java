@@ -25,7 +25,8 @@ public enum OptionSelector {
   OCELOT(new String[] {Option.NAME.name(), Option.BABY.name()}),
   PANDA(new String[] {Option.NAME.name(), Option.BABY.name(), Option.MAIN_GENE.name(), Option.HIDDEN_GENE.name()}),
   PIG(new String[] {Option.NAME.name(), Option.BABY.name()}),
-  POLAR_BEAR(new String[] {Option.NAME.name(), Option.BABY.name()})
+  POLAR_BEAR(new String[] {Option.NAME.name(), Option.BABY.name()}),
+  RABBIT(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name()})
   ;
 
   @Getter private final String[] options;

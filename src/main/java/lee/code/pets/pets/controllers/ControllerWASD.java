@@ -17,11 +17,6 @@ public class ControllerWASD extends MoveControl {
   }
 
   @Override
-  public boolean hasWanted() {
-    return rider != null;
-  }
-
-  @Override
   public void tick() {
     if (mob.getPassengers().isEmpty()) {
       super.tick();

@@ -1,10 +1,7 @@
 package lee.code.pets.utils;
 
 import lee.code.pets.menus.menu.menudata.options.Option;
-import lee.code.pets.pets.pet.util.CatVariantUtil;
-import lee.code.pets.pets.pet.util.HorseMarkingUtil;
-import lee.code.pets.pets.pet.util.HorseVariantUtil;
-import lee.code.pets.pets.pet.util.ParrotVariantUtil;
+import lee.code.pets.pets.pet.util.*;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
@@ -52,7 +49,7 @@ public class PetDataUtil {
           case HORNS -> {return data[3];}
         }
       }
-      case FOX, MUSHROOM_COW -> {
+      case FOX, MUSHROOM_COW, RABBIT -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -154,6 +151,10 @@ public class PetDataUtil {
         final DyeColor color = entity instanceof Cat cat ? cat.getCollarColor() : DyeColor.RED;
         return startingData + sep + isBaby + sep + catType.name() + sep + color.name();
       }
+      case RABBIT -> {
+        final RabbitVariantUtil rabbitVariant = RabbitVariantUtil.getVariant(entity);
+        return startingData + sep + isBaby + sep + rabbitVariant.name();
+      }
       case PANDA -> {
         final Panda.Gene mainGene = entity instanceof Panda panda ? panda.getMainGene() : Panda.Gene.NORMAL;
         final Panda.Gene hiddenGene = entity instanceof Panda panda ? panda.getHiddenGene() : Panda.Gene.NORMAL;
@@ -189,7 +190,7 @@ public class PetDataUtil {
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
         }
       }
-      case FOX, MUSHROOM_COW -> {
+      case FOX, MUSHROOM_COW, RABBIT -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}
@@ -310,6 +311,12 @@ public class PetDataUtil {
         final MushroomCow.Variant cowVariant = MushroomCow.Variant.valueOf(variant);
         if (cowVariant.equals(MushroomCow.Variant.RED)) return MushroomCow.Variant.BROWN.name();
         else return MushroomCow.Variant.RED.name();
+      }
+      case RABBIT -> {
+        final RabbitVariantUtil rabbitVariant = RabbitVariantUtil.valueOf(variant);
+        final ArrayList<RabbitVariantUtil> variants = new ArrayList<>(List.of(RabbitVariantUtil.values()));
+        final RabbitVariantUtil nextVariant = rabbitVariant.ordinal() + 1 < variants.size() ? variants.get(rabbitVariant.ordinal() + 1) : variants.get(0);
+        return nextVariant.name();
       }
     }
     return null;
