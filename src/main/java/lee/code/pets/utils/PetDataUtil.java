@@ -15,7 +15,7 @@ public class PetDataUtil {
 
   public static String getPetData(EntityType entityType, String[] data, Option option) {
     switch (entityType) {
-      case ALLAY, BAT -> {
+      case ALLAY, BAT, IRON_GOLEM -> {
         return data[1];
       }
       case COW, BEE, CHICKEN, HOGLIN -> {
@@ -94,7 +94,7 @@ public class PetDataUtil {
     final String sep = ",";
     final String startingData = entityType.name() + sep + petName;
     switch (entityType) {
-      case ALLAY, BAT -> {
+      case ALLAY, BAT, IRON_GOLEM -> {
         return startingData;
       }
       case COW, BEE, CHICKEN, HOGLIN -> {
@@ -144,7 +144,7 @@ public class PetDataUtil {
   public static String addNewPetData(EntityType entityType, String[] data, String newData, Option option) {
     final String sep = ",";
     switch (entityType) {
-      case ALLAY, BAT -> {
+      case ALLAY, BAT, IRON_GOLEM -> {
         return data[0] + sep + newData;
       }
       case COW, BEE, CHICKEN, HOGLIN -> {
