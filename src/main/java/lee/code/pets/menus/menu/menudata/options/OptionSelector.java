@@ -12,6 +12,7 @@ public enum OptionSelector {
   BAT(new String[] {Option.NAME.name()}),
   BEE(new String[] {Option.NAME.name(), Option.BABY.name()}),
   CAMEL(new String[] {Option.NAME.name(), Option.BABY.name(), Option.SADDLE.name()}),
+  CAT(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name(), Option.COLOR.name()}),
 
   ;
 
