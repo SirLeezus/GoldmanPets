@@ -18,8 +18,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.logging.Level;
-
 public class PetOptionMenu extends MenuPaginatedGUI {
   private final Pets pets;
   private final EntityType entityType;
@@ -75,6 +73,10 @@ public class PetOptionMenu extends MenuPaginatedGUI {
           case VARIANT -> {
             final String variant = PetDataUtil.getNextVariant(entityType, targetData);
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, variant, option));
+          }
+          case MARKING -> {
+            final String marking = PetDataUtil.getNextHorseMarking(targetData);
+            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, marking, option));
           }
           case BABY, SADDLE, CHEST, HORNS -> {
             final String petOption = String.valueOf(!Boolean.parseBoolean(targetData));

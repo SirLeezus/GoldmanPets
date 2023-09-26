@@ -1,8 +1,10 @@
 package lee.code.pets.utils;
 
 import lee.code.pets.menus.menu.menudata.options.Option;
-import lee.code.pets.pets.pet.util.CatUtil;
-import lee.code.pets.pets.pet.util.ParrotUtil;
+import lee.code.pets.pets.pet.util.CatVariantUtil;
+import lee.code.pets.pets.pet.util.HorseMarkingUtil;
+import lee.code.pets.pets.pet.util.HorseVariantUtil;
+import lee.code.pets.pets.pet.util.ParrotVariantUtil;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.*;
 
@@ -16,7 +18,7 @@ public class PetDataUtil {
       case ALLAY, BAT -> {
         return data[1];
       }
-      case COW, BEE, CHICKEN -> {
+      case COW, BEE, CHICKEN, HOGLIN -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -72,6 +74,15 @@ public class PetDataUtil {
           case COLOR -> {return data[4];}
         }
       }
+      case HORSE -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case BABY -> {return data[2];}
+          case SADDLE -> {return data[3];}
+          case VARIANT -> {return data[4];}
+          case MARKING -> {return data[5];}
+        }
+      }
     }
     return null;
   }
@@ -86,12 +97,12 @@ public class PetDataUtil {
       case ALLAY, BAT -> {
         return startingData;
       }
+      case COW, BEE, CHICKEN, HOGLIN -> {
+        return startingData + sep + isBaby;
+      }
       case FOX -> {
         final Fox.Type foxType = entity instanceof Fox fox ? fox.getFoxType() : Fox.Type.RED;
         return startingData + sep + isBaby + sep + foxType.name();
-      }
-      case COW, BEE, CHICKEN -> {
-        return startingData + sep + isBaby;
       }
       case CAMEL -> {
         final boolean hasSaddle = entity instanceof Camel camel && camel.getInventory().getSaddle() != null;
@@ -107,7 +118,7 @@ public class PetDataUtil {
         return startingData + sep + isBaby + sep + hasHorns;
       }
       case PARROT -> {
-        final ParrotUtil variant = ParrotUtil.getVariant(entity);
+        final ParrotVariantUtil variant = ParrotVariantUtil.getVariant(entity);
         return startingData + sep + variant.name();
       }
       case DONKEY -> {
@@ -120,6 +131,12 @@ public class PetDataUtil {
         final DyeColor color = entity instanceof Cat cat ? cat.getCollarColor() : DyeColor.RED;
         return startingData + sep + isBaby + sep + catType.name() + sep + color.name();
       }
+      case HORSE -> {
+        final HorseVariantUtil horseVariant = HorseVariantUtil.getVariant(entity);
+        final HorseMarkingUtil horseMarking = HorseMarkingUtil.getMarking(entity);
+        final boolean hasSaddle = entity instanceof Horse horse && horse.getInventory().getSaddle() != null;
+        return startingData + sep + isBaby + sep + hasSaddle + sep + horseVariant.name() + sep + horseMarking.name();
+      }
     }
     return null;
   }
@@ -130,7 +147,7 @@ public class PetDataUtil {
       case ALLAY, BAT -> {
         return data[0] + sep + newData;
       }
-      case COW, BEE, CHICKEN -> {
+      case COW, BEE, CHICKEN, HOGLIN -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
@@ -186,6 +203,15 @@ public class PetDataUtil {
           case HORNS -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData;}
         }
       }
+      case HORSE -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4] + sep + data[5];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4] + sep + data[5];}
+          case SADDLE -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4] + sep + data[5];}
+          case VARIANT -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData + sep + data[5];}
+          case MARKING -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + data[4] + sep + newData;}
+        }
+      }
     }
     return null;
   }
@@ -198,15 +224,15 @@ public class PetDataUtil {
   public static String getNextVariant(EntityType entityType, String variant) {
     switch (entityType) {
       case PARROT -> {
-        final ParrotUtil parrotVariant = ParrotUtil.valueOf(variant);
-        final ArrayList<ParrotUtil> variants = new ArrayList<>(List.of(ParrotUtil.values()));
-        final ParrotUtil nextVariant = parrotVariant.ordinal() + 1 < variants.size() ? variants.get(parrotVariant.ordinal() + 1) : variants.get(0);
+        final ParrotVariantUtil parrotVariant = ParrotVariantUtil.valueOf(variant);
+        final ArrayList<ParrotVariantUtil> variants = new ArrayList<>(List.of(ParrotVariantUtil.values()));
+        final ParrotVariantUtil nextVariant = parrotVariant.ordinal() + 1 < variants.size() ? variants.get(parrotVariant.ordinal() + 1) : variants.get(0);
         return nextVariant.name();
       }
       case CAT -> {
-        final CatUtil catVariant = CatUtil.valueOf(variant);
-        final ArrayList<CatUtil> variants = new ArrayList<>(List.of(CatUtil.values()));
-        final CatUtil nextVariant = catVariant.ordinal() + 1 < variants.size() ? variants.get(catVariant.ordinal() + 1) : variants.get(0);
+        final CatVariantUtil catVariant = CatVariantUtil.valueOf(variant);
+        final ArrayList<CatVariantUtil> variants = new ArrayList<>(List.of(CatVariantUtil.values()));
+        final CatVariantUtil nextVariant = catVariant.ordinal() + 1 < variants.size() ? variants.get(catVariant.ordinal() + 1) : variants.get(0);
         return nextVariant.name();
       }
       case FOX -> {
@@ -214,7 +240,20 @@ public class PetDataUtil {
         if (foxType.equals(Fox.Type.RED)) return Fox.Type.SNOW.name();
         else return Fox.Type.RED.name();
       }
+      case HORSE -> {
+        final HorseVariantUtil horseVariant = HorseVariantUtil.valueOf(variant);
+        final ArrayList<HorseVariantUtil> variants = new ArrayList<>(List.of(HorseVariantUtil.values()));
+        final HorseVariantUtil nextVariant = horseVariant.ordinal() + 1 < variants.size() ? variants.get(horseVariant.ordinal() + 1) : variants.get(0);
+        return nextVariant.name();
+      }
     }
     return null;
+  }
+
+  public static String getNextHorseMarking(String marking) {
+    final HorseMarkingUtil horseMarking = HorseMarkingUtil.valueOf(marking);
+    final ArrayList<HorseMarkingUtil> variants = new ArrayList<>(List.of(HorseMarkingUtil.values()));
+    final HorseMarkingUtil nextVariant = horseMarking.ordinal() + 1 < variants.size() ? variants.get(horseMarking.ordinal() + 1) : variants.get(0);
+    return nextVariant.name();
   }
 }

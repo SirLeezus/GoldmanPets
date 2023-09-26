@@ -2,7 +2,7 @@ package lee.code.pets.pets.pet.animal;
 
 import lee.code.pets.pets.controllers.ControllerWASD;
 import lee.code.pets.pets.goals.FollowOwnerGoal;
-import lee.code.pets.pets.pet.util.CatUtil;
+import lee.code.pets.pets.pet.util.CatVariantUtil;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -29,7 +29,7 @@ public class CatPet extends Cat {
     ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setBaby(Boolean.parseBoolean(data[2]));
-    setVariant(CatUtil.valueOf(data[3]).getCatVariant());
+    setVariant(CatVariantUtil.valueOf(data[3]).getCatVariant());
     setCollarColor(DyeColor.valueOf(data[4]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());

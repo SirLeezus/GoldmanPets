@@ -2,7 +2,7 @@ package lee.code.pets.pets.pet.fish;
 
 import lee.code.pets.pets.controllers.ControllerWASDWater;
 import lee.code.pets.pets.goals.FollowOwnerWaterGoal;
-import lee.code.pets.pets.pet.util.FrogUtil;
+import lee.code.pets.pets.pet.util.FrogVariantUtil;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -26,7 +26,7 @@ public class FrogPet extends Frog {
     collides = false;
     ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
-    setVariant(FrogUtil.valueOf(data[2]).getFrogVariant());
+    setVariant(FrogVariantUtil.valueOf(data[2]).getFrogVariant());
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false);
     targetSelector.getAvailableGoals().clear();

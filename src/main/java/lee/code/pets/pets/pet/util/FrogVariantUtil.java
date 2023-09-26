@@ -5,7 +5,7 @@ import lombok.Getter;
 import net.minecraft.world.entity.animal.FrogVariant;
 
 @AllArgsConstructor
-public enum FrogUtil {
+public enum FrogVariantUtil {
   COLD(FrogVariant.COLD),
   WARM(FrogVariant.WARM),
   TEMPERATE(FrogVariant.TEMPERATE)

@@ -13,7 +13,8 @@ public enum Option {
   VARIANT(Material.TURTLE_EGG, "&e&lVariant"),
   SADDLE(Material.SADDLE, "&e&lSaddle"),
   CHEST(Material.CHEST, "&e&lChest"),
-  HORNS(Material.GOAT_HORN, "&e&lHorns")
+  HORNS(Material.GOAT_HORN, "&e&lHorns"),
+  MARKING(Material.HORSE_SPAWN_EGG, "&e&lMarking")
 
   ;
 

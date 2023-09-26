@@ -17,6 +17,8 @@ public enum OptionSelector {
   DONKEY(new String[] {Option.NAME.name(), Option.BABY.name(), Option.CHEST.name(), Option.SADDLE.name()}),
   FOX(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name()}),
   GOAT(new String[] {Option.NAME.name(), Option.BABY.name(), Option.HORNS.name()}),
+  HOGLIN(new String[] {Option.NAME.name(), Option.BABY.name()}),
+  HORSE(new String[] {Option.NAME.name(), Option.BABY.name(), Option.SADDLE.name(), Option.VARIANT.name(), Option.MARKING.name()}),
 
   ;
 

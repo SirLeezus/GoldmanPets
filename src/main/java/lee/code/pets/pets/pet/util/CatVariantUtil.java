@@ -6,7 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.animal.CatVariant;
 
 @AllArgsConstructor
-public enum CatUtil {
+public enum CatVariantUtil {
   WHITE(BuiltInRegistries.CAT_VARIANT.getOrThrow(CatVariant.WHITE)),
   JELLIE(BuiltInRegistries.CAT_VARIANT.getOrThrow(CatVariant.JELLIE)),
   BLACK(BuiltInRegistries.CAT_VARIANT.getOrThrow(CatVariant.BLACK)),
