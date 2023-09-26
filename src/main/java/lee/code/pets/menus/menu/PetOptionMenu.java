@@ -51,8 +51,8 @@ public class PetOptionMenu extends MenuPaginatedGUI {
   private MenuButton createOptionButton(Player player, Option option) {
     final CachePets cachePets = pets.getCacheManager().getCachePets();
     final String[] petData = cachePets.getPetData(petID);
-    final String rawData = PetDataUtil.getPetData(entityType, petData, option);
-    final String cappedData = option.equals(Option.NAME) ? rawData : CoreUtil.capitalize(rawData);
+    final String targetData = PetDataUtil.getPetData(entityType, petData, option);
+    final String cappedData = option.equals(Option.NAME) ? targetData : CoreUtil.capitalize(targetData);
     final ItemStack optionItem = option.createItem(cappedData);
     return new MenuButton()
       .creator(p -> optionItem)
@@ -60,15 +60,15 @@ public class PetOptionMenu extends MenuPaginatedGUI {
         pets.getPetManager().removeActivePet(player);
         switch (option) {
           case COLOR -> {
-            final String color = PetDataUtil.getNextColor(DyeColor.valueOf(rawData));
+            final String color = PetDataUtil.getNextColor(DyeColor.valueOf(targetData));
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, color, option));
           }
           case VARIANT -> {
-            final String variant = PetDataUtil.getNextVariant(entityType, rawData);
+            final String variant = PetDataUtil.getNextVariant(entityType, targetData);
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, variant, option));
           }
           case BABY, SADDLE, CHEST, HORNS -> {
-            final String petOption = String.valueOf(!Boolean.parseBoolean(rawData));
+            final String petOption = String.valueOf(!Boolean.parseBoolean(targetData));
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, petOption, option));
           }
         }
