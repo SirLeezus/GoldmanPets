@@ -12,7 +12,8 @@ public enum Option {
   COLOR(Material.RED_DYE, "&e&lDye Color"),
   VARIANT(Material.COMPASS, "&e&lVariant"),
   SADDLE(Material.SADDLE, "&e&lSaddle"),
-  CHEST(Material.CHEST, "&e&lChest")
+  CHEST(Material.CHEST, "&e&lChest"),
+  HORNS(Material.GOAT_HORN, "&e&lHorns")
 
   ;
 
@@ -20,6 +21,8 @@ public enum Option {
   private final String name;
 
   public ItemStack createItem(String lore) {
-    return ItemUtil.createItem(material, name, "&6" + lore, 0, null);
+    final ItemStack itemStack =  ItemUtil.createItem(material, name, "&6" + lore, 0, null);
+    ItemUtil.hideItemFlags(itemStack);
+    return itemStack;
   }
 }

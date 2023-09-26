@@ -42,6 +42,13 @@ public class PetDataUtil {
           case COLOR -> {return data[3];}
         }
       }
+      case GOAT -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case BABY -> {return data[2];}
+          case HORNS -> {return data[3];}
+        }
+      }
       case FOX -> {
         switch (option) {
           case NAME -> {return data[1];}
@@ -94,6 +101,10 @@ public class PetDataUtil {
         DyeColor color = entity instanceof Sheep sheep ? sheep.getColor() : DyeColor.WHITE;
         if (color == null) color = DyeColor.WHITE;
         return startingData + sep + isBaby + sep + color.name();
+      }
+      case GOAT -> {
+        final boolean hasHorns = entity instanceof Goat goat && goat.hasLeftHorn() | goat.hasRightHorn();
+        return startingData + sep + isBaby + sep + hasHorns;
       }
       case PARROT -> {
         final ParrotUtil variant = ParrotUtil.getVariant(entity);
@@ -166,6 +177,13 @@ public class PetDataUtil {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case VARIANT -> {return data[0] + sep + data[1] + sep + newData;}
+        }
+      }
+      case GOAT -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}
+          case HORNS -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData;}
         }
       }
     }

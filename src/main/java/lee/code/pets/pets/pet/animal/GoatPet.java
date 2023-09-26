@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class GoatPet extends Goat {
+  //TODO look into riding movement, something seems off
 
   public GoatPet(Player player, String[] data) {
     super(EntityType.GOAT, ((CraftWorld) player.getLocation().getWorld()).getHandle());
@@ -27,6 +28,7 @@ public class GoatPet extends Goat {
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setBaby(Boolean.parseBoolean(data[2]));
     if (Boolean.parseBoolean(data[3])) addHorns();
+    else removeHorns();
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId());
     targetSelector.getAvailableGoals().clear();
@@ -35,7 +37,7 @@ public class GoatPet extends Goat {
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
+    goalSelector.addGoal(0, new FollowOwnerGoal(this, 3));
   }
 
   @Override

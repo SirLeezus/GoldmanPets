@@ -5,6 +5,8 @@ import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.apache.commons.lang3.text.WordUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CoreUtil {
 
@@ -20,7 +22,7 @@ public class CoreUtil {
   }
 
   @SuppressWarnings("deprecation")
-  public static String capitalize(String message) {
+  public static  String capitalize(String message) {
     final String format = message.toLowerCase().replaceAll("_", " ");
     return WordUtils.capitalize(format);
   }

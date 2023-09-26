@@ -8,6 +8,7 @@ import lee.code.pets.menus.menu.menudata.options.Option;
 import lee.code.pets.menus.menu.menudata.options.OptionSelector;
 import lee.code.pets.menus.system.MenuButton;
 import lee.code.pets.menus.system.MenuPaginatedGUI;
+import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.PetDataUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
@@ -15,6 +16,8 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.logging.Level;
 
 public class PetOptionMenu extends MenuPaginatedGUI {
   private final Pets pets;
@@ -48,23 +51,24 @@ public class PetOptionMenu extends MenuPaginatedGUI {
   private MenuButton createOptionButton(Player player, Option option) {
     final CachePets cachePets = pets.getCacheManager().getCachePets();
     final String[] petData = cachePets.getPetData(petID);
-    final String targetData = PetDataUtil.getPetData(entityType, petData, option);
-    final ItemStack optionItem = option.createItem(targetData);
+    final String rawData = PetDataUtil.getPetData(entityType, petData, option);
+    final String cappedData = option.equals(Option.NAME) ? rawData : CoreUtil.capitalize(rawData);
+    final ItemStack optionItem = option.createItem(cappedData);
     return new MenuButton()
       .creator(p -> optionItem)
       .consumer(e -> {
         pets.getPetManager().removeActivePet(player);
         switch (option) {
           case COLOR -> {
-            final String color = PetDataUtil.getNextColor(DyeColor.valueOf(targetData));
+            final String color = PetDataUtil.getNextColor(DyeColor.valueOf(rawData));
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, color, option));
           }
           case VARIANT -> {
-            final String variant = PetDataUtil.getNextVariant(entityType, targetData);
+            final String variant = PetDataUtil.getNextVariant(entityType, rawData);
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, variant, option));
           }
-          case BABY, SADDLE, CHEST -> {
-            final String petOption = String.valueOf(!Boolean.parseBoolean(targetData));
+          case BABY, SADDLE, CHEST, HORNS -> {
+            final String petOption = String.valueOf(!Boolean.parseBoolean(rawData));
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, petOption, option));
           }
         }
