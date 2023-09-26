@@ -23,7 +23,9 @@ public enum OptionSelector {
   LLAMA(new String[] {Option.NAME.name(), Option.BABY.name(), Option.CHEST.name(), Option.VARIANT.name(), Option.SADDLE.name(), Option.COLOR.name()}),
   MUSHROOM_COW(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name()}),
   OCELOT(new String[] {Option.NAME.name(), Option.BABY.name()}),
-  PANDA(new String[] {Option.NAME.name(), Option.BABY.name(), Option.MAIN_GENE.name(), Option.HIDDEN_GENE.name()})
+  PANDA(new String[] {Option.NAME.name(), Option.BABY.name(), Option.MAIN_GENE.name(), Option.HIDDEN_GENE.name()}),
+  PIG(new String[] {Option.NAME.name(), Option.BABY.name()}),
+  POLAR_BEAR(new String[] {Option.NAME.name(), Option.BABY.name()})
   ;
 
   @Getter private final String[] options;

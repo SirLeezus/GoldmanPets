@@ -56,7 +56,7 @@ public class ControllerWASD extends MoveControl {
 
     // Set the mob's motion
     mob.setYRot(yaw);
-    mob.setSpeed(0.2F);
+    mob.setSpeed(0.4F);
     mob.setZza(forward);
     mob.setXxa(0.0F);
     if (rider.jumping) jump();
