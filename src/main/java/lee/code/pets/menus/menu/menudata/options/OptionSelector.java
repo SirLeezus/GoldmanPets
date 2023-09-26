@@ -21,7 +21,7 @@ public enum OptionSelector {
   HORSE(new String[] {Option.NAME.name(), Option.BABY.name(), Option.SADDLE.name(), Option.VARIANT.name(), Option.MARKING.name()}),
   IRON_GOLEM(new String[] {Option.NAME.name()}),
   LLAMA(new String[] {Option.NAME.name(), Option.BABY.name(), Option.CHEST.name(), Option.VARIANT.name(), Option.SADDLE.name(), Option.COLOR.name()}),
-
+  MUSHROOM_COW(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name()})
   ;
 
   @Getter private final String[] options;

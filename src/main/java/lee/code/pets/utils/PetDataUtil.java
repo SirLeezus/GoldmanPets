@@ -6,7 +6,6 @@ import lee.code.pets.pets.pet.util.HorseMarkingUtil;
 import lee.code.pets.pets.pet.util.HorseVariantUtil;
 import lee.code.pets.pets.pet.util.ParrotVariantUtil;
 import org.bukkit.DyeColor;
-import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 
@@ -53,7 +52,7 @@ public class PetDataUtil {
           case HORNS -> {return data[3];}
         }
       }
-      case FOX -> {
+      case FOX, MUSHROOM_COW -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -129,6 +128,10 @@ public class PetDataUtil {
         final boolean hasHorns = entity instanceof Goat goat && goat.hasLeftHorn() | goat.hasRightHorn();
         return startingData + sep + isBaby + sep + hasHorns;
       }
+      case MUSHROOM_COW -> {
+        final MushroomCow.Variant cowVariant = entity instanceof MushroomCow mushroomCow ? mushroomCow.getVariant() : MushroomCow.Variant.RED;
+        return startingData + sep + isBaby + sep + cowVariant;
+      }
       case PARROT -> {
         final ParrotVariantUtil variant = ParrotVariantUtil.getVariant(entity);
         return startingData + sep + variant.name();
@@ -173,7 +176,7 @@ public class PetDataUtil {
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
         }
       }
-      case FOX -> {
+      case FOX, MUSHROOM_COW -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}
@@ -281,6 +284,11 @@ public class PetDataUtil {
         final ArrayList<Llama.Color> variants = new ArrayList<>(List.of(Llama.Color.values()));
         final Llama.Color nextVariant = llamaVariant.ordinal() + 1 < variants.size() ? variants.get(llamaVariant.ordinal() + 1) : variants.get(0);
         return nextVariant.name();
+      }
+      case MUSHROOM_COW -> {
+        final MushroomCow.Variant cowVariant = MushroomCow.Variant.valueOf(variant);
+        if (cowVariant.equals(MushroomCow.Variant.RED)) return MushroomCow.Variant.BROWN.name();
+        else return MushroomCow.Variant.RED.name();
       }
     }
     return null;

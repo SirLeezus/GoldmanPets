@@ -1,6 +1,5 @@
 package lee.code.pets.database.cache.data;
 
-import lee.code.pets.database.cache.CachePets;
 import lee.code.pets.database.tables.PetTable;
 
 import java.util.HashMap;
