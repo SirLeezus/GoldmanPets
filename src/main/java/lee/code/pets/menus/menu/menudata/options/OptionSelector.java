@@ -38,6 +38,7 @@ public enum OptionSelector {
   ZOGLIN(new String[] {Option.NAME.name(), Option.BABY.name()}),
   ZOMBIE_HORSE(new String[] {Option.NAME.name(), Option.BABY.name(), Option.SADDLE.name()}),
   AXOLOTL(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name()}),
+  COD(new String[] {Option.NAME.name()}),
   ;
 
   @Getter private final String[] options;
