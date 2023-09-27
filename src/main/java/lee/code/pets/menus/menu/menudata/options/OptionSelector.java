@@ -56,7 +56,10 @@ public enum OptionSelector {
   DROWNED(new String[] {Option.NAME.name(), Option.BABY.name()}),
   ENDERMAN(new String[] {Option.NAME.name()}),
   EVOKER(new String[] {Option.NAME.name()}),
-  GHAST(new String[] {Option.NAME.name()})
+  GHAST(new String[] {Option.NAME.name()}),
+  HUSK(new String[] {Option.NAME.name(), Option.BABY.name()}),
+  ILLUSIONER(new String[] {Option.NAME.name()}),
+  MAGMA_CUBE(new String[] {Option.NAME.name(), Option.SIZE.name()})
   ;
 
   @Getter private final String[] options;

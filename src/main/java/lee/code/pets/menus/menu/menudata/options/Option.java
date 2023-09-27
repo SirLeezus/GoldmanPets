@@ -27,7 +27,8 @@ public enum Option {
   PROFESSION(Material.ANVIL, "&e&lProfession"),
   LEVEL(Material.EXPERIENCE_BOTTLE, "&e&lLevel"),
   COLLAR(Material.LEAD, "&e&lCollar"),
-  POWERED(Material.TNT, "&e&lPowered")
+  POWERED(Material.TNT, "&e&lPowered"),
+  SIZE(Material.BONE_MEAL, "&e&lSize")
 
   ;
 

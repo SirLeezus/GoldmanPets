@@ -13,13 +13,19 @@ public class PetDataUtil {
 
   public static String getPetData(EntityType entityType, String[] data, Option option) {
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER -> {
         return data[1];
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
+        }
+      }
+      case MAGMA_CUBE -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case SIZE -> {return data[2];}
         }
       }
       case PARROT, FROG -> {
@@ -157,10 +163,10 @@ public class PetDataUtil {
     final String sep = ",";
     final String startingData = entityType.name() + sep + petName;
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER -> {
         return startingData;
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK -> {
         return startingData + sep + isBaby;
       }
       case BEE -> {
@@ -178,6 +184,10 @@ public class PetDataUtil {
       case FROG -> {
         final Frog.Variant frogVariant = entity instanceof Frog frog ? frog.getVariant() : Frog.Variant.WARM;
         return startingData + sep + frogVariant;
+      }
+      case MAGMA_CUBE -> {
+        final int size = entity instanceof MagmaCube magmaCube ? magmaCube.getSize() : 1;
+        return startingData + sep + size;
       }
       case FOX -> {
         final Fox.Type foxType = entity instanceof Fox fox ? fox.getFoxType() : Fox.Type.RED;
@@ -280,10 +290,10 @@ public class PetDataUtil {
   public static String addNewPetData(EntityType entityType, String[] data, String newData, Option option) {
     final String sep = ",";
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER -> {
         return data[0] + sep + newData;
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
@@ -294,6 +304,12 @@ public class PetDataUtil {
           case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}
           case VARIANT -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData;}
+        }
+      }
+      case MAGMA_CUBE -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2];}
+          case SIZE -> {return data[0] + sep + data[1] + sep + newData;}
         }
       }
       case SNOWMAN -> {
@@ -517,5 +533,10 @@ public class PetDataUtil {
   public static String getNextVillagerLevel(String level) {
     final int curLevel = Integer.parseInt(level);
     return String.valueOf(curLevel + 1 > 5 ? 1 : curLevel + 1);
+  }
+
+  public static String getNextSize(String size) {
+    final int curSize = Integer.parseInt(size);
+    return String.valueOf(curSize + 1 > 5 ? 1 : curSize + 1);
   }
 }

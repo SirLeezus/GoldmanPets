@@ -98,6 +98,10 @@ public class PetOptionMenu extends MenuPaginatedGUI {
             final String level = PetDataUtil.getNextVillagerLevel(targetData);
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, level, option));
           }
+          case SIZE -> {
+            final String size = PetDataUtil.getNextSize(targetData);
+            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, size, option));
+          }
         }
         clearButtons();
         decorate(player);
