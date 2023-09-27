@@ -16,7 +16,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER -> {
         return data[1];
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -160,7 +160,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER -> {
         return startingData;
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED -> {
         return startingData + sep + isBaby;
       }
       case BEE -> {
@@ -283,7 +283,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER -> {
         return data[0] + sep + newData;
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
