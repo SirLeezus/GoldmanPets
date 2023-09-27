@@ -46,6 +46,7 @@ public enum OptionSelector {
   GUARDIAN(new String[] {Option.NAME.name()}),
   PUFFERFISH(new String[] {Option.NAME.name()}),
   SALMON(new String[] {Option.NAME.name()}),
+  SQUID(new String[] {Option.NAME.name()}),
   ;
 
   @Getter private final String[] options;
