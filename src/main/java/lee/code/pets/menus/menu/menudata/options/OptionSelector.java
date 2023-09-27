@@ -60,7 +60,8 @@ public enum OptionSelector {
   HUSK(new String[] {Option.NAME.name(), Option.BABY.name()}),
   ILLUSIONER(new String[] {Option.NAME.name()}),
   MAGMA_CUBE(new String[] {Option.NAME.name(), Option.SIZE.name()}),
-  SLIME(new String[] {Option.NAME.name(), Option.SIZE.name()})
+  SLIME(new String[] {Option.NAME.name(), Option.SIZE.name()}),
+  PHANTOM(new String[] {Option.NAME.name()}),
   ;
 
   @Getter private final String[] options;
