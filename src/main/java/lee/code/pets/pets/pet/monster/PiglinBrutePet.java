@@ -28,7 +28,6 @@ public class PiglinBrutePet extends PiglinBrute {
     collides = false;
     target = ((CraftPlayer) player).getHandle();
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
-    setBaby(Boolean.parseBoolean(data[2]));
     setTarget(target, EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();
