@@ -2,6 +2,8 @@ package lee.code.pets.utils;
 
 import lee.code.pets.menus.menu.menudata.options.Option;
 import lee.code.pets.pets.pet.util.*;
+import net.minecraft.world.entity.npc.VillagerProfession;
+import net.minecraft.world.entity.npc.VillagerType;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
@@ -114,6 +116,15 @@ public class PetDataUtil {
           case COLOR -> {return data[6];}
         }
       }
+      case VILLAGER -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case BABY -> {return data[2];}
+          case TYPE -> {return data[3];}
+          case PROFESSION -> {return data[4];}
+          case LEVEL -> {return data[5];}
+        }
+      }
     }
     return null;
   }
@@ -206,6 +217,12 @@ public class PetDataUtil {
       case SNOWMAN -> {
         final boolean hasPumpkin = entity instanceof Snowman snowman && !snowman.isDerp();
         return startingData + sep + hasPumpkin;
+      }
+      case VILLAGER -> {
+        final VillagerTypeUtil type = VillagerTypeUtil.getType(entity);
+        final VillagerProfessionUtil profession = VillagerProfessionUtil.getProfession(entity);
+        final int level = entity instanceof Villager villager ? villager.getVillagerLevel() : 1;
+        return startingData + sep + isBaby + sep + type.name() + sep + profession.name() + sep + level;
       }
     }
     return null;
@@ -315,6 +332,15 @@ public class PetDataUtil {
           case COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + data[4] + sep + data[5] + sep + newData;}
         }
       }
+      case VILLAGER -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4] + sep + data[5];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4] + sep + data[5];}
+          case TYPE -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4] + sep + data[5];}
+          case PROFESSION -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData + sep + data[5];}
+          case LEVEL -> {return data[0] + sep + data[1]+ sep + data[2] + sep + data[3] + sep + data[4] + sep + newData;}
+        }
+      }
     }
     return null;
   }
@@ -382,5 +408,24 @@ public class PetDataUtil {
     final ArrayList<Panda.Gene> variants = new ArrayList<>(List.of(Panda.Gene.values()));
     final Panda.Gene nextGene = pandaGene.ordinal() + 1 < variants.size() ? variants.get(pandaGene.ordinal() + 1) : variants.get(0);
     return nextGene.name();
+  }
+
+  public static String getNextVillagerType(String type) {
+    final VillagerTypeUtil villagerType = VillagerTypeUtil.valueOf(type);
+    final ArrayList<VillagerTypeUtil> types = new ArrayList<>(List.of(VillagerTypeUtil.values()));
+    final VillagerTypeUtil nextType = villagerType.ordinal() + 1 < types.size() ? types.get(villagerType.ordinal() + 1) : types.get(0);
+    return nextType.name();
+  }
+
+  public static String getNextVillagerProfession(String profession) {
+    final VillagerProfessionUtil villagerProfession = VillagerProfessionUtil.valueOf(profession);
+    final ArrayList<VillagerProfessionUtil> professions = new ArrayList<>(List.of(VillagerProfessionUtil.values()));
+    final VillagerProfessionUtil nextProfession = villagerProfession.ordinal() + 1 < professions.size() ? professions.get(villagerProfession.ordinal() + 1) : professions.get(0);
+    return nextProfession.name();
+  }
+
+  public static String getNextVillagerLevel(String level) {
+    final int curLevel = Integer.parseInt(level);
+    return String.valueOf(curLevel + 1 > 5 ? 1 : curLevel + 1);
   }
 }

@@ -28,8 +28,8 @@ public class VillagerPet extends Villager {
     ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setBaby(Boolean.parseBoolean(data[2]));
-    setVillagerData(getVillagerData().setProfession(VillagerProfessionUtil.valueOf(data[3]).getVillagerProfession()));
-    setVillagerData(getVillagerData().setType(VillagerTypeUtil.valueOf(data[4]).getVillagerType()));
+    setVillagerData(getVillagerData().setType(VillagerTypeUtil.valueOf(data[3]).getVillagerType()));
+    setVillagerData(getVillagerData().setProfession(VillagerProfessionUtil.valueOf(data[4]).getVillagerProfession()));
     setVillagerData(getVillagerData().setLevel(Integer.parseInt(data[5])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);

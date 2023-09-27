@@ -86,6 +86,18 @@ public class PetOptionMenu extends MenuPaginatedGUI {
             final String gene = PetDataUtil.getNextPandaGene(targetData);
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, gene, option));
           }
+          case TYPE -> {
+            final String type = PetDataUtil.getNextVillagerType(targetData);
+            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, type, option));
+          }
+          case PROFESSION -> {
+            final String profession = PetDataUtil.getNextVillagerProfession(targetData);
+            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, profession, option));
+          }
+          case LEVEL -> {
+            final String level = PetDataUtil.getNextVillagerLevel(targetData);
+            cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, level, option));
+          }
         }
         clearButtons();
         decorate(player);

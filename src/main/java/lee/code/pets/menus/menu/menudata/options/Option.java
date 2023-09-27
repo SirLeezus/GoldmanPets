@@ -20,7 +20,10 @@ public enum Option {
   ANGRY(Material.BEE_NEST, "&e&lAngry"),
   NECTAR(Material.BEEHIVE, "&e&lNectar"),
   STUNG(Material.HONEYCOMB, "&e&lStung"),
-  PUMPKIN(Material.CARVED_PUMPKIN, "&e&lPumpkin")
+  PUMPKIN(Material.CARVED_PUMPKIN, "&e&lPumpkin"),
+  TYPE(Material.GRASS_BLOCK, "&e&lType"),
+  PROFESSION(Material.ANVIL, "&e&lProfession"),
+  LEVEL(Material.EXPERIENCE_BOTTLE, "&e&lLevel")
 
   ;
 
