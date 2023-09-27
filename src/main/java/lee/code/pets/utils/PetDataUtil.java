@@ -22,7 +22,7 @@ public class PetDataUtil {
           case BABY -> {return data[2];}
         }
       }
-      case MAGMA_CUBE -> {
+      case MAGMA_CUBE, SLIME -> {
         switch (option) {
           case NAME -> {return data[1];}
           case SIZE -> {return data[2];}
@@ -189,6 +189,10 @@ public class PetDataUtil {
         final int size = entity instanceof MagmaCube magmaCube ? magmaCube.getSize() : 1;
         return startingData + sep + size;
       }
+      case SLIME -> {
+        final int size = entity instanceof Slime slime ? slime.getSize() : 1;
+        return startingData + sep + size;
+      }
       case FOX -> {
         final Fox.Type foxType = entity instanceof Fox fox ? fox.getFoxType() : Fox.Type.RED;
         return startingData + sep + isBaby + sep + foxType.name();
@@ -306,7 +310,7 @@ public class PetDataUtil {
           case VARIANT -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData;}
         }
       }
-      case MAGMA_CUBE -> {
+      case MAGMA_CUBE, SLIME -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case SIZE -> {return data[0] + sep + data[1] + sep + newData;}

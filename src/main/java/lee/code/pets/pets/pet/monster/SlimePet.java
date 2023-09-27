@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class SlimePet extends Slime {
+  private int jumpCooldown = 0;
 
   public SlimePet(Player player, String[] data) {
     super(EntityType.SLIME, ((CraftWorld) player.getLocation().getWorld()).getHandle());
@@ -33,7 +34,7 @@ public class SlimePet extends Slime {
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerGoal(this, 0.7));
+    goalSelector.addGoal(0, new FollowOwnerGoal(this, 1));
   }
 
   @Override
@@ -43,5 +44,16 @@ public class SlimePet extends Slime {
   @Override
   public boolean save(CompoundTag compoundTag) {
     return false;
+  }
+
+  @Override
+  public void tick() {
+    super.tick();
+    if (jumpCooldown >= 25 && onGround()) {
+      getJumpControl().jump();
+      jumpCooldown = 0;
+    } else {
+      jumpCooldown++;
+    }
   }
 }
