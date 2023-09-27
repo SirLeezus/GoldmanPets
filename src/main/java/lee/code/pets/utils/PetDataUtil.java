@@ -40,6 +40,13 @@ public class PetDataUtil {
           case PUMPKIN -> {return data[2];}
         }
       }
+      case SHULKER -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case DYE -> {return data[2];}
+          case COLOR -> {return data[3];}
+        }
+      }
       case CREEPER -> {
         switch (option) {
           case NAME -> {return data[1];}
@@ -287,6 +294,11 @@ public class PetDataUtil {
         final Axolotl.Variant variant = entity instanceof Axolotl axolotl ? axolotl.getVariant() : Axolotl.Variant.LUCY;
         return startingData + sep + isBaby + sep + variant;
       }
+      case SHULKER -> {
+        final DyeColor color = DyeColor.PURPLE;
+        final boolean shouldDye = false;
+        return startingData + sep + shouldDye + sep + color;
+      }
     }
     return null;
   }
@@ -314,6 +326,13 @@ public class PetDataUtil {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case SIZE -> {return data[0] + sep + data[1] + sep + newData;}
+        }
+      }
+      case SHULKER -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
+          case DYE -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}
+          case COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData;}
         }
       }
       case SNOWMAN -> {

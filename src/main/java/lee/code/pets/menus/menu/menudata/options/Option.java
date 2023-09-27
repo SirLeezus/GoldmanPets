@@ -28,7 +28,8 @@ public enum Option {
   LEVEL(Material.EXPERIENCE_BOTTLE, "&e&lLevel"),
   COLLAR(Material.LEAD, "&e&lCollar"),
   POWERED(Material.TNT, "&e&lPowered"),
-  SIZE(Material.BONE_MEAL, "&e&lSize")
+  SIZE(Material.BONE_MEAL, "&e&lSize"),
+  DYE(Material.FIREWORK_STAR, "&e&lDye")
 
   ;
 

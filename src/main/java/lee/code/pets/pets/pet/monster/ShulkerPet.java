@@ -28,7 +28,7 @@ public class ShulkerPet extends Shulker {
     setMaxUpStep(1.0F);
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
-    setVariant(Optional.of(DyeColor.valueOf(data[2])));
+    if (Boolean.parseBoolean(data[2])) setVariant(Optional.of(DyeColor.valueOf(data[3])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();

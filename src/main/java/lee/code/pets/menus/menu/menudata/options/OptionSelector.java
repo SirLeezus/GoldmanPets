@@ -66,6 +66,7 @@ public enum OptionSelector {
   PIGLIN(new String[] {Option.NAME.name(), Option.BABY.name()}),
   PILLAGER(new String[] {Option.NAME.name()}),
   RAVAGER(new String[] {Option.NAME.name()}),
+  SHULKER(new String[] {Option.NAME.name(), Option.DYE.name(), Option.COLOR.name()}),
   ;
 
   @Getter private final String[] options;
