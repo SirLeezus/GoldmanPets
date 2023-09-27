@@ -28,7 +28,7 @@ public class AxolotlPet extends Axolotl {
     setBaby(Boolean.parseBoolean(data[2]));
     setVariant(Variant.valueOf(data[3]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false);
+    moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false, 0.2F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

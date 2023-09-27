@@ -10,10 +10,12 @@ import java.util.UUID;
 public class ControllerWASD extends MoveControl {
   protected final UUID owner;
   protected Player rider;
+  protected float speed;
 
-  public ControllerWASD(Mob mob, UUID owner) {
+  public ControllerWASD(Mob mob, UUID owner, float speed) {
     super(mob);
     this.owner = owner;
+    this.speed = speed;
   }
 
   @Override
@@ -51,7 +53,7 @@ public class ControllerWASD extends MoveControl {
 
     // Set the mob's motion
     mob.setYRot(yaw);
-    mob.setSpeed(0.4F);
+    mob.setSpeed(speed);
     mob.setZza(forward);
     mob.setXxa(0.0F);
     if (rider.jumping) jump();

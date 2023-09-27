@@ -27,7 +27,7 @@ public class EndermanPet extends Mob {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASD(this, player.getUniqueId());
+    moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

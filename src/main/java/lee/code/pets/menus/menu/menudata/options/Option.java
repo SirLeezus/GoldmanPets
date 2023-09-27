@@ -19,7 +19,8 @@ public enum Option {
   HIDDEN_GENE(Material.STRIPPED_BAMBOO_BLOCK, "&e&lHidden Gene"),
   ANGRY(Material.BEE_NEST, "&e&lAngry"),
   NECTAR(Material.BEEHIVE, "&e&lNectar"),
-  STUNG(Material.HONEYCOMB, "&e&lStung")
+  STUNG(Material.HONEYCOMB, "&e&lStung"),
+  PUMPKIN(Material.CARVED_PUMPKIN, "&e&lPumpkin")
 
   ;
 

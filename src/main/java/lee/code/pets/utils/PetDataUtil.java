@@ -1,7 +1,6 @@
 package lee.code.pets.utils;
 
 import lee.code.pets.menus.menu.menudata.options.Option;
-import lee.code.pets.pets.pet.animal.SkeletonHorsePet;
 import lee.code.pets.pets.pet.util.*;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.*;
@@ -17,7 +16,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM -> {
         return data[1];
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -27,6 +26,12 @@ public class PetDataUtil {
         switch (option) {
           case NAME -> {return data[1];}
           case VARIANT -> {return data[2];}
+        }
+      }
+      case SNOWMAN -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case PUMPKIN -> {return data[2];}
         }
       }
       case CAMEL, SKELETON_HORSE -> {
@@ -123,7 +128,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM -> {
         return startingData;
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER -> {
         return startingData + sep + isBaby;
       }
       case BEE -> {
@@ -194,6 +199,10 @@ public class PetDataUtil {
         final boolean hasSaddle = entity instanceof SkeletonHorse skeletonHorse && skeletonHorse.getInventory().getSaddle() != null;
         return startingData + sep + isBaby + sep + hasSaddle;
       }
+      case SNOWMAN -> {
+        final boolean hasPumpkin = entity instanceof Snowman snowman && !snowman.isDerp();
+        return startingData + sep + hasPumpkin;
+      }
     }
     return null;
   }
@@ -204,7 +213,7 @@ public class PetDataUtil {
       case ALLAY, BAT, IRON_GOLEM -> {
         return data[0] + sep + newData;
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
@@ -215,6 +224,12 @@ public class PetDataUtil {
           case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}
           case VARIANT -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData;}
+        }
+      }
+      case SNOWMAN -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2];}
+          case PUMPKIN -> {return data[0] + sep + data[1] + sep + newData;}
         }
       }
       case DONKEY -> {

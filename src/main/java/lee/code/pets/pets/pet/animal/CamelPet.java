@@ -32,7 +32,7 @@ public class CamelPet extends Camel {
     setBaby(Boolean.parseBoolean(data[2]));
     if (Boolean.parseBoolean(data[3])) equipSaddle(SoundSource.MASTER, CraftItemStack.asNMSCopy(new ItemStack(Material.SADDLE)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASD(this, player.getUniqueId());
+    moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

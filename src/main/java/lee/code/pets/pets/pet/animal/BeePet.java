@@ -47,7 +47,7 @@ public class BeePet extends Animal implements NeutralMob {
     setHasNectar(Boolean.parseBoolean(data[4]));
     setHasStung(Boolean.parseBoolean(data[5]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDFlying(this, player.getUniqueId());
+    moveControl = new ControllerWASDFlying(this, player.getUniqueId(), 0.2F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

@@ -29,7 +29,7 @@ public class PandaPet extends Panda {
     setMainGene(Gene.valueOf(data[3]));
     setHiddenGene(Gene.valueOf(data[4]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASD(this, player.getUniqueId());
+    moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

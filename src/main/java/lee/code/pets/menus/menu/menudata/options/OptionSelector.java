@@ -28,6 +28,8 @@ public enum OptionSelector {
   POLAR_BEAR(new String[] {Option.NAME.name(), Option.BABY.name()}),
   RABBIT(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name()}),
   SKELETON_HORSE(new String[] {Option.NAME.name(), Option.BABY.name(), Option.SADDLE.name()}),
+  SNIFFER(new String[] {Option.NAME.name(), Option.BABY.name()}),
+  SNOWMAN(new String[] {Option.NAME.name(), Option.PUMPKIN.name()}),
   ;
 
   @Getter private final String[] options;

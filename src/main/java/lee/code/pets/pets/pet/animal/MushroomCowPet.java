@@ -28,7 +28,7 @@ public class MushroomCowPet extends MushroomCow {
     setBaby(Boolean.parseBoolean(data[2]));
     setVariant(MushroomType.valueOf(data[3]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASD(this, player.getUniqueId());
+    moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

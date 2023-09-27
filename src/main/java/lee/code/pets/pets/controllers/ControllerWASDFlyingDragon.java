@@ -8,8 +8,8 @@ import java.util.UUID;
 
 public class ControllerWASDFlyingDragon extends ControllerWASD {
 
-  public ControllerWASDFlyingDragon(Mob mob, UUID owner) {
-    super(mob, owner);
+  public ControllerWASDFlyingDragon(Mob mob, UUID owner, float speed) {
+    super(mob, owner, speed);
   }
 
   @Override
@@ -44,7 +44,7 @@ public class ControllerWASDFlyingDragon extends ControllerWASD {
     // Set the mob's motion
     mob.setDeltaMovement(new Vec3(motionX, motionY, motionZ));
     mob.setYRot(yaw + 180.0f);
-    mob.setSpeed(0.2f);
+    mob.setSpeed(speed);
     mob.setZza(forward);
     mob.setXxa(0.0F);
   }

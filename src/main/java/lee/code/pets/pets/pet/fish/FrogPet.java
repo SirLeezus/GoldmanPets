@@ -28,7 +28,7 @@ public class FrogPet extends Frog {
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setVariant(FrogVariantUtil.valueOf(data[2]).getFrogVariant());
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false);
+    moveControl = new ControllerWASDWater(this, player.getUniqueId(), true, false, 0.2F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

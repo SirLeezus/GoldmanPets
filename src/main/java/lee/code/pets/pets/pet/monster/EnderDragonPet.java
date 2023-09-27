@@ -26,7 +26,7 @@ public class EnderDragonPet extends Mob {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDFlyingDragon(this, player.getUniqueId());
+    moveControl = new ControllerWASDFlyingDragon(this, player.getUniqueId(), 0.2F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

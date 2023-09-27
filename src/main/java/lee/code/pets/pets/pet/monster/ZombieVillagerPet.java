@@ -32,7 +32,7 @@ public class ZombieVillagerPet extends ZombieVillager {
     setVillagerData(getVillagerData().setType(VillagerTypeUtil.valueOf(data[4]).getVillagerType()));
     setVillagerData(getVillagerData().setLevel(Integer.parseInt(data[5])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASD(this, player.getUniqueId());
+    moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

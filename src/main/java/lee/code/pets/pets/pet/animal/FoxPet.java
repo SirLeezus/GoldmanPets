@@ -36,7 +36,7 @@ public class FoxPet extends Animal implements VariantHolder<Fox.Type> {
     setBaby(Boolean.parseBoolean(data[2]));
     setVariant(Fox.Type.valueOf(data[3]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASD(this, player.getUniqueId());
+    moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

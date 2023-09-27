@@ -14,8 +14,8 @@ public class ControllerWASDWater extends ControllerWASD {
   private final boolean landSupport;
   private final boolean jumpOnLand;
 
-  public ControllerWASDWater(Mob mob, UUID owner, boolean landSupport, boolean jumpOnLand) {
-    super(mob, owner);
+  public ControllerWASDWater(Mob mob, UUID owner, boolean landSupport, boolean jumpOnLand, float speed) {
+    super(mob, owner, speed);
     this.landSupport = landSupport;
     this.jumpOnLand = jumpOnLand;
   }
@@ -70,7 +70,7 @@ public class ControllerWASDWater extends ControllerWASD {
     // Set the mob's motion
     mob.setDeltaMovement(new Vec3(motionX, motionY, motionZ));
     mob.setYRot(yaw);
-    mob.setSpeed(0.2f);
+    mob.setSpeed(speed);
     mob.setZza(forward);
     mob.setXxa(0.0F);
   }

@@ -46,7 +46,7 @@ public class RabbitPet extends Animal implements VariantHolder<Rabbit.Variant> {
     setBaby(Boolean.parseBoolean(data[2]));
     setVariant(Rabbit.Variant.valueOf(data[3]));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASDRabbit(this, player.getUniqueId());
+    moveControl = new ControllerWASDRabbit(this, player.getUniqueId(), 0.4F);
     jumpControl = new RabbitJumpControl(this);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
@@ -200,8 +200,8 @@ public class RabbitPet extends Animal implements VariantHolder<Rabbit.Variant> {
   private class ControllerWASDRabbit extends ControllerWASD {
     private double nextJumpSpeed;
 
-    public ControllerWASDRabbit(Mob mob, UUID owner) {
-      super(mob, owner);
+    public ControllerWASDRabbit(Mob mob, UUID owner, float speed) {
+      super(mob, owner, speed);
     }
 
     @Override
