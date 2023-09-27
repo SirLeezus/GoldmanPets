@@ -33,7 +33,7 @@ public class PhantomPet extends Phantom {
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.4, 5, 20));
+    goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.3, 5, 20));
   }
 
   @Override
