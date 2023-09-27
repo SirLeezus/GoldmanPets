@@ -52,6 +52,7 @@ public enum OptionSelector {
   TURTLE(new String[] {Option.NAME.name(), Option.BABY.name()}),
   BLAZE(new String[] {Option.NAME.name()}),
   CAVE_SPIDER(new String[] {Option.NAME.name()}),
+  CREEPER(new String[] {Option.NAME.name(), Option.POWERED.name()}),
   ;
 
   @Getter private final String[] options;

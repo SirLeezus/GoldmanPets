@@ -34,6 +34,12 @@ public class PetDataUtil {
           case PUMPKIN -> {return data[2];}
         }
       }
+      case CREEPER -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case POWERED -> {return data[2];}
+        }
+      }
       case CAMEL, SKELETON_HORSE, STRIDER, ZOMBIE_HORSE -> {
         switch (option) {
           case NAME -> {return data[1];}
@@ -247,6 +253,10 @@ public class PetDataUtil {
         final boolean hasPumpkin = entity instanceof Snowman snowman && !snowman.isDerp();
         return startingData + sep + hasPumpkin;
       }
+      case CREEPER -> {
+        final boolean charged = entity instanceof Creeper creeper && creeper.isPowered();
+        return startingData + sep + charged;
+      }
       case VILLAGER -> {
         final VillagerTypeUtil type = VillagerTypeUtil.getType(entity);
         final VillagerProfessionUtil profession = VillagerProfessionUtil.getProfession(entity);
@@ -290,6 +300,12 @@ public class PetDataUtil {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case PUMPKIN -> {return data[0] + sep + data[1] + sep + newData;}
+        }
+      }
+      case CREEPER -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2];}
+          case POWERED -> {return data[0] + sep + data[1] + sep + newData;}
         }
       }
       case TROPICAL_FISH -> {

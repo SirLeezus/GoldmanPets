@@ -26,7 +26,8 @@ public enum Option {
   TYPE(Material.GRASS_BLOCK, "&e&lType"),
   PROFESSION(Material.ANVIL, "&e&lProfession"),
   LEVEL(Material.EXPERIENCE_BOTTLE, "&e&lLevel"),
-  COLLAR(Material.LEAD, "&e&lCollar")
+  COLLAR(Material.LEAD, "&e&lCollar"),
+  POWERED(Material.TNT, "&e&lPowered")
 
   ;
 
