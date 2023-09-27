@@ -44,6 +44,7 @@ public enum OptionSelector {
   FROG(new String[] {Option.NAME.name(), Option.VARIANT.name()}),
   GLOW_SQUID(new String[] {Option.NAME.name()}),
   GUARDIAN(new String[] {Option.NAME.name()}),
+  PUFFERFISH(new String[] {Option.NAME.name()}),
   ;
 
   @Getter private final String[] options;
