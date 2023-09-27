@@ -31,9 +31,9 @@ public class TraderLlamaPet extends TraderLlama {
     setBaby(Boolean.parseBoolean(data[2]));
     setChest(Boolean.parseBoolean(data[3]));
     setVariant(Variant.valueOf(data[4]));
-    if (Boolean.parseBoolean(data[5])) inventory.setItem(1, CraftItemStack.asNMSCopy(new ItemStack(Material.valueOf(data[6]))));
+    if (Boolean.parseBoolean(data[5])) inventory.setItem(1, CraftItemStack.asNMSCopy(new ItemStack(Material.valueOf(data[6] + "_CARPET"))));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
+    moveControl = new ControllerWASD(this, player.getUniqueId(), 0.5F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }

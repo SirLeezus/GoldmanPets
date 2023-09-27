@@ -104,7 +104,7 @@ public class PetDataUtil {
           case MARKING -> {return data[5];}
         }
       }
-      case LLAMA -> {
+      case LLAMA, TRADER_LLAMA -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -191,7 +191,7 @@ public class PetDataUtil {
         final boolean hasSaddle = entity instanceof Horse horse && horse.getInventory().getSaddle() != null;
         return startingData + sep + isBaby + sep + hasSaddle + sep + horseVariant.name() + sep + horseMarking.name();
       }
-      case LLAMA -> {
+      case LLAMA, TRADER_LLAMA -> {
         final Llama.Color llamaVariant = entity instanceof Llama llama ? llama.getColor() : Llama.Color.WHITE;
         final boolean hasChest = entity instanceof Llama llama && llama.isCarryingChest();
         final ItemStack saddleItem = entity instanceof Llama llama ? llama.getInventory().getSaddle() : null;
@@ -305,7 +305,7 @@ public class PetDataUtil {
           case MARKING -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + data[4] + sep + newData;}
         }
       }
-      case LLAMA -> {
+      case LLAMA, TRADER_LLAMA -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4] + sep + data[5] + sep + data[6];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4] + sep + data[5] + sep + data[6];}
@@ -349,7 +349,7 @@ public class PetDataUtil {
         final HorseVariantUtil nextVariant = horseVariant.ordinal() + 1 < variants.size() ? variants.get(horseVariant.ordinal() + 1) : variants.get(0);
         return nextVariant.name();
       }
-      case LLAMA -> {
+      case LLAMA, TRADER_LLAMA -> {
         final Llama.Color llamaVariant = Llama.Color.valueOf(variant);
         final ArrayList<Llama.Color> variants = new ArrayList<>(List.of(Llama.Color.values()));
         final Llama.Color nextVariant = llamaVariant.ordinal() + 1 < variants.size() ? variants.get(llamaVariant.ordinal() + 1) : variants.get(0);
