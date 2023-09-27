@@ -62,6 +62,14 @@ public class PetDataUtil {
           case VARIANT -> {return data[3];}
         }
       }
+      case TROPICAL_FISH -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case VARIANT -> {return data[2];}
+          case BODY_COLOR -> {return data[3];}
+          case PATTERN_COLOR -> {return data[4];}
+        }
+      }
       case DONKEY -> {
         switch (option) {
           case NAME -> {return data[1];}
@@ -154,6 +162,12 @@ public class PetDataUtil {
         final boolean hasNectar = entity instanceof Bee bee && bee.hasNectar();
         final boolean hasStung = entity instanceof Bee bee && bee.hasStung();
         return startingData + sep + isBaby + sep + isMad + sep + hasNectar + sep + hasStung;
+      }
+      case TROPICAL_FISH -> {
+        final TropicalFish.Pattern fishVariant = entity instanceof TropicalFish tropicalFish ? tropicalFish.getPattern() : TropicalFish.Pattern.SNOOPER;
+        final DyeColor bodyColor = entity instanceof TropicalFish tropicalFish ? tropicalFish.getBodyColor() : DyeColor.BLACK;
+        final DyeColor patternColor = entity instanceof TropicalFish tropicalFish ? tropicalFish.getPatternColor() : DyeColor.YELLOW;
+        return startingData + sep + fishVariant.name() + sep + bodyColor.name() + sep + patternColor.name();
       }
       case FROG -> {
         final Frog.Variant frogVariant = entity instanceof Frog frog ? frog.getVariant() : Frog.Variant.WARM;
@@ -276,6 +290,14 @@ public class PetDataUtil {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case PUMPKIN -> {return data[0] + sep + data[1] + sep + newData;}
+        }
+      }
+      case TROPICAL_FISH -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4];}
+          case VARIANT -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4];}
+          case BODY_COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4];}
+          case PATTERN_COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData;}
         }
       }
       case WOLF -> {
@@ -436,6 +458,12 @@ public class PetDataUtil {
         final Frog.Variant frogVariant = Frog.Variant.valueOf(variant);
         final ArrayList<Frog.Variant> variants = new ArrayList<>(List.of(Frog.Variant.values()));
         final Frog.Variant nextVariant = frogVariant.ordinal() + 1 < variants.size() ? variants.get(frogVariant.ordinal() + 1) : variants.get(0);
+        return nextVariant.name();
+      }
+      case TROPICAL_FISH -> {
+        final TropicalFish.Pattern fishVariant = TropicalFish.Pattern.valueOf(variant);
+        final ArrayList<TropicalFish.Pattern> variants = new ArrayList<>(List.of(TropicalFish.Pattern.values()));
+        final TropicalFish.Pattern nextVariant = fishVariant.ordinal() + 1 < variants.size() ? variants.get(fishVariant.ordinal() + 1) : variants.get(0);
         return nextVariant.name();
       }
     }

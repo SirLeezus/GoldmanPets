@@ -25,7 +25,7 @@ public class TropicalFishPet extends TropicalFish {
     setMaxUpStep(1.0F);
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
-    setPackedVariant(packVariant(Pattern.valueOf(data[2]), DyeColor.valueOf(data[2]), DyeColor.valueOf(data[3])));
+    setPackedVariant(packVariant(Pattern.valueOf(data[2]), DyeColor.valueOf(data[3]), DyeColor.valueOf(data[4])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDWater(this, player.getUniqueId(), false, true, 0.2F);
     targetSelector.getAvailableGoals().clear();

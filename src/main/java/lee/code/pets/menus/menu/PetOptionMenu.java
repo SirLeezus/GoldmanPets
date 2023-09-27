@@ -53,7 +53,7 @@ public class PetOptionMenu extends MenuPaginatedGUI {
     final String targetData = PetDataUtil.getPetData(entityType, petData, option);
     final String cappedData = option.equals(Option.NAME) ? targetData : CoreUtil.capitalize(targetData);
     final ItemStack optionItem = switch (option) {
-      case COLOR -> option.createColorItem(targetData, cappedData);
+      case COLOR, BODY_COLOR, PATTERN_COLOR -> option.createColorItem(targetData, cappedData);
       case BABY -> {
         final ItemStack item = option.createItem(cappedData);
         if (Boolean.parseBoolean(targetData)) item.setType(Material.NETHER_STAR);
@@ -66,7 +66,7 @@ public class PetOptionMenu extends MenuPaginatedGUI {
       .consumer(e -> {
         pets.getPetManager().removeActivePet(player);
         switch (option) {
-          case COLOR -> {
+          case COLOR, BODY_COLOR, PATTERN_COLOR -> {
             final String color = PetDataUtil.getNextColor(DyeColor.valueOf(targetData));
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, color, option));
           }

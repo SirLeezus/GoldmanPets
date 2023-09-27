@@ -1,5 +1,6 @@
-package lee.code.pets;
+package lee.code.pets.managers;
 
+import lee.code.pets.Pets;
 import org.bukkit.Bukkit;
 
 import java.util.UUID;

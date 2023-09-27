@@ -10,6 +10,8 @@ public enum Option {
   NAME(Material.NAME_TAG, "&e&lName"),
   BABY(Material.END_CRYSTAL, "&e&lBaby"),
   COLOR(Material.RED_DYE, "&e&lDye Color"),
+  BODY_COLOR(Material.RED_DYE, "&e&lBody Color"),
+  PATTERN_COLOR(Material.RED_DYE, "&e&lPattern Color"),
   VARIANT(Material.TURTLE_EGG, "&e&lVariant"),
   SADDLE(Material.SADDLE, "&e&lSaddle"),
   CHEST(Material.CHEST, "&e&lChest"),

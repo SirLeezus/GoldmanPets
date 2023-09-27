@@ -23,6 +23,7 @@ public class TadpolePet extends Tadpole {
     setCanPickUpLoot(false);
     setMaxUpStep(1.0F);
     collides = false;
+    ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDWater(this, player.getUniqueId(), false, true, 0.2F);
