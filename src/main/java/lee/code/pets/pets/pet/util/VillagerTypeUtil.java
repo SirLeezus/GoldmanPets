@@ -2,7 +2,6 @@ package lee.code.pets.pets.pet.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerType;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftEntity;
