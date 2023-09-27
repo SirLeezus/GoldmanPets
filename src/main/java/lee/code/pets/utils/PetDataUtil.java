@@ -2,8 +2,6 @@ package lee.code.pets.utils;
 
 import lee.code.pets.menus.menu.menudata.options.Option;
 import lee.code.pets.pets.pet.util.*;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerType;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +13,7 @@ public class PetDataUtil {
 
   public static String getPetData(EntityType entityType, String[] data, Option option) {
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER -> {
         return data[1];
       }
       case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER -> {
@@ -136,7 +134,7 @@ public class PetDataUtil {
     final String sep = ",";
     final String startingData = entityType.name() + sep + petName;
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER -> {
         return startingData;
       }
       case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER -> {
@@ -231,7 +229,7 @@ public class PetDataUtil {
   public static String addNewPetData(EntityType entityType, String[] data, String newData, Option option) {
     final String sep = ",";
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER -> {
         return data[0] + sep + newData;
       }
       case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER -> {
