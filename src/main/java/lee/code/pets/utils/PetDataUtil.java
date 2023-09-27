@@ -13,10 +13,10 @@ public class PetDataUtil {
 
   public static String getPetData(EntityType entityType, String[] data, Option option) {
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE, PILLAGER, RAVAGER -> {
         return data[1];
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK, PIGLIN -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -163,10 +163,10 @@ public class PetDataUtil {
     final String sep = ",";
     final String startingData = entityType.name() + sep + petName;
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE, PILLAGER, RAVAGER -> {
         return startingData;
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK, PIGLIN -> {
         return startingData + sep + isBaby;
       }
       case BEE -> {
@@ -294,10 +294,10 @@ public class PetDataUtil {
   public static String addNewPetData(EntityType entityType, String[] data, String newData, Option option) {
     final String sep = ",";
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE, PILLAGER, RAVAGER -> {
         return data[0] + sep + newData;
       }
-      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK -> {
+      case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK, PIGLIN -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
