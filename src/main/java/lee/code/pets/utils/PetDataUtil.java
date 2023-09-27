@@ -78,6 +78,15 @@ public class PetDataUtil {
           case COLOR -> {return data[4];}
         }
       }
+      case WOLF -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case BABY -> {return data[2];}
+          case COLLAR -> {return data[3];}
+          case COLOR -> {return data[4];}
+          case ANGRY -> {return data[5];}
+        }
+      }
       case BEE -> {
         switch (option) {
           case NAME -> {return data[1];}
@@ -222,6 +231,12 @@ public class PetDataUtil {
         final int level = entity instanceof Villager villager ? villager.getVillagerLevel() : 1;
         return startingData + sep + isBaby + sep + type.name() + sep + profession.name() + sep + level;
       }
+      case WOLF -> {
+        final boolean hasCollar = entity instanceof Wolf wolf && wolf.isTamed();
+        final DyeColor color = entity instanceof Wolf wolf ? wolf.getCollarColor() : DyeColor.RED;
+        final boolean mad = false;
+        return startingData + sep + isBaby + sep + hasCollar + sep + color.name() + sep + mad;
+      }
     }
     return null;
   }
@@ -249,6 +264,15 @@ public class PetDataUtil {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case PUMPKIN -> {return data[0] + sep + data[1] + sep + newData;}
+        }
+      }
+      case WOLF -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4] + sep + data[5];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4] + sep + data[5];}
+          case COLLAR -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4] + sep + data[5];}
+          case COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData + sep + data[5];}
+          case ANGRY -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + data[4] + sep + newData;}
         }
       }
       case DONKEY -> {

@@ -34,6 +34,7 @@ public enum OptionSelector {
   TRADER_LLAMA(new String[] {Option.NAME.name(), Option.BABY.name(), Option.CHEST.name(), Option.VARIANT.name(), Option.SADDLE.name(), Option.COLOR.name()}),
   VILLAGER(new String[] {Option.NAME.name(), Option.BABY.name(), Option.TYPE.name(), Option.PROFESSION.name(), Option.LEVEL.name()}),
   WANDERING_TRADER(new String[] {Option.NAME.name()}),
+  WOLF(new String[] {Option.NAME.name(), Option.BABY.name(), Option.COLLAR.name(), Option.COLOR.name(), Option.ANGRY.name()}),
   ;
 
   @Getter private final String[] options;

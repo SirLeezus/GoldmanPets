@@ -22,13 +22,16 @@ public class WolfPet extends Wolf {
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
-    setTame(true);
     setMaxUpStep(1.0F);
     collides = false;
     ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setBaby(Boolean.parseBoolean(data[2]));
-    setCollarColor(DyeColor.valueOf(data[3]));
+    if (Boolean.parseBoolean(data[3])) {
+      setTame(true);
+      setCollarColor(DyeColor.valueOf(data[4]));
+    }
+    if (Boolean.parseBoolean(data[5])) setRemainingPersistentAngerTime(1);
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();
@@ -47,5 +50,9 @@ public class WolfPet extends Wolf {
   @Override
   public boolean save(CompoundTag compoundTag) {
     return false;
+  }
+
+  @Override
+  public void startPersistentAngerTimer() {
   }
 }
