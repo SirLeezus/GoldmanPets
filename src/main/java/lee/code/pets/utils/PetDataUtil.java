@@ -13,7 +13,7 @@ public class PetDataUtil {
 
   public static String getPetData(EntityType entityType, String[] data, Option option) {
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN -> {
         return data[1];
       }
       case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN -> {
@@ -22,7 +22,7 @@ public class PetDataUtil {
           case BABY -> {return data[2];}
         }
       }
-      case PARROT -> {
+      case PARROT, FROG -> {
         switch (option) {
           case NAME -> {return data[1];}
           case VARIANT -> {return data[2];}
@@ -143,7 +143,7 @@ public class PetDataUtil {
     final String sep = ",";
     final String startingData = entityType.name() + sep + petName;
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN -> {
         return startingData;
       }
       case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN -> {
@@ -154,6 +154,10 @@ public class PetDataUtil {
         final boolean hasNectar = entity instanceof Bee bee && bee.hasNectar();
         final boolean hasStung = entity instanceof Bee bee && bee.hasStung();
         return startingData + sep + isBaby + sep + isMad + sep + hasNectar + sep + hasStung;
+      }
+      case FROG -> {
+        final Frog.Variant frogVariant = entity instanceof Frog frog ? frog.getVariant() : Frog.Variant.WARM;
+        return startingData + sep + frogVariant;
       }
       case FOX -> {
         final Fox.Type foxType = entity instanceof Fox fox ? fox.getFoxType() : Fox.Type.RED;
@@ -252,7 +256,7 @@ public class PetDataUtil {
   public static String addNewPetData(EntityType entityType, String[] data, String newData, Option option) {
     final String sep = ",";
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN -> {
         return data[0] + sep + newData;
       }
       case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN -> {
@@ -330,7 +334,7 @@ public class PetDataUtil {
           case COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData;}
         }
       }
-      case PARROT -> {
+      case PARROT, FROG -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case VARIANT -> {return data[0] + sep + data[1] + sep + newData;}
@@ -426,6 +430,12 @@ public class PetDataUtil {
         final Axolotl.Variant axolotlVariant = Axolotl.Variant.valueOf(variant);
         final ArrayList<Axolotl.Variant> variants = new ArrayList<>(List.of(Axolotl.Variant.values()));
         final Axolotl.Variant nextVariant = axolotlVariant.ordinal() + 1 < variants.size() ? variants.get(axolotlVariant.ordinal() + 1) : variants.get(0);
+        return nextVariant.name();
+      }
+      case FROG -> {
+        final Frog.Variant frogVariant = Frog.Variant.valueOf(variant);
+        final ArrayList<Frog.Variant> variants = new ArrayList<>(List.of(Frog.Variant.values()));
+        final Frog.Variant nextVariant = frogVariant.ordinal() + 1 < variants.size() ? variants.get(frogVariant.ordinal() + 1) : variants.get(0);
         return nextVariant.name();
       }
     }

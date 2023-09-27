@@ -40,6 +40,8 @@ public enum OptionSelector {
   AXOLOTL(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name()}),
   COD(new String[] {Option.NAME.name()}),
   DOLPHIN(new String[] {Option.NAME.name()}),
+  ELDER_GUARDIAN(new String[] {Option.NAME.name()}),
+  FROG(new String[] {Option.NAME.name(), Option.VARIANT.name()}),
   ;
 
   @Getter private final String[] options;
