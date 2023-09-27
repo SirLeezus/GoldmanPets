@@ -34,7 +34,7 @@ public class PetDataUtil {
           case PUMPKIN -> {return data[2];}
         }
       }
-      case CAMEL, SKELETON_HORSE -> {
+      case CAMEL, SKELETON_HORSE, STRIDER -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -143,6 +143,10 @@ public class PetDataUtil {
       }
       case CAMEL -> {
         final boolean hasSaddle = entity instanceof Camel camel && camel.getInventory().getSaddle() != null;
+        return startingData + sep + isBaby + sep + hasSaddle;
+      }
+      case STRIDER -> {
+        final boolean hasSaddle = entity instanceof Strider strider && strider.hasSaddle();
         return startingData + sep + isBaby + sep + hasSaddle;
       }
       case SHEEP -> {
@@ -265,7 +269,7 @@ public class PetDataUtil {
           case HIDDEN_GENE -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData;}
         }
       }
-      case CAMEL, SKELETON_HORSE -> {
+      case CAMEL, SKELETON_HORSE, STRIDER -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}

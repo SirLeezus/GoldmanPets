@@ -5,12 +5,16 @@ import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Strider;
+import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_20_R1.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class StriderPet extends Strider {
 
@@ -21,11 +25,12 @@ public class StriderPet extends Strider {
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
-    setMaxUpStep(1.0F);
+    setMaxUpStep(1.5F);
     collides = false;
     ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setBaby(Boolean.parseBoolean(data[2]));
+    if (Boolean.parseBoolean(data[3])) equipSaddle(SoundSource.MASTER, CraftItemStack.asNMSCopy(new ItemStack(Material.SADDLE)));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();

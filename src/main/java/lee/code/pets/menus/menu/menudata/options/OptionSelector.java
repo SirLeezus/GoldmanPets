@@ -30,6 +30,7 @@ public enum OptionSelector {
   SKELETON_HORSE(new String[] {Option.NAME.name(), Option.BABY.name(), Option.SADDLE.name()}),
   SNIFFER(new String[] {Option.NAME.name(), Option.BABY.name()}),
   SNOWMAN(new String[] {Option.NAME.name(), Option.PUMPKIN.name()}),
+  STRIDER(new String[] {Option.NAME.name(), Option.BABY.name(), Option.SADDLE.name()}),
   ;
 
   @Getter private final String[] options;
