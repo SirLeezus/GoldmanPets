@@ -159,12 +159,12 @@ public class PetManager  {
 
   public void removePet(Player player, int id) {
     final org.bukkit.entity.Entity entity = player.getWorld().getEntity(getActivePetUUID(id));
-    if (entity != null) entity.getScheduler().run(pets, task -> entity.remove(), null);
+    if (entity != null) entity.remove();
     removeFromPetTracker(id, player.getUniqueId());
   }
 
   public void capturePet(Player player, org.bukkit.entity.Entity entity) {
     pets.getCacheManager().getCachePets().createNewPet(player.getUniqueId(), PetDataUtil.serializePetData(entity));
-    entity.getScheduler().run(pets, task -> entity.remove(), null);
+    entity.remove();
   }
 }

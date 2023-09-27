@@ -39,7 +39,7 @@ public class SkeletonHorsePet extends SkeletonHorse {
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
+    goalSelector.addGoal(0, new FollowOwnerGoal(this, 3));
   }
 
   @Override

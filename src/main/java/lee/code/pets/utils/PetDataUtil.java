@@ -1,6 +1,7 @@
 package lee.code.pets.utils;
 
 import lee.code.pets.menus.menu.menudata.options.Option;
+import lee.code.pets.pets.pet.animal.SkeletonHorsePet;
 import lee.code.pets.pets.pet.util.*;
 import org.bukkit.DyeColor;
 import org.bukkit.entity.*;
@@ -28,7 +29,7 @@ public class PetDataUtil {
           case VARIANT -> {return data[2];}
         }
       }
-      case CAMEL -> {
+      case CAMEL, SKELETON_HORSE -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -189,6 +190,10 @@ public class PetDataUtil {
         final DyeColor color = saddleItem == null ? DyeColor.WHITE : DyeColor.valueOf(saddleItem.getType().name().substring(0, saddleItem.getType().name().indexOf('_')));
         return startingData + sep + isBaby + sep + hasChest + sep + llamaVariant + sep + hasSaddle + sep + color.name();
       }
+      case SKELETON_HORSE -> {
+        final boolean hasSaddle = entity instanceof SkeletonHorse skeletonHorse && skeletonHorse.getInventory().getSaddle() != null;
+        return startingData + sep + isBaby + sep + hasSaddle;
+      }
     }
     return null;
   }
@@ -245,7 +250,7 @@ public class PetDataUtil {
           case HIDDEN_GENE -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData;}
         }
       }
-      case CAMEL -> {
+      case CAMEL, SKELETON_HORSE -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}
