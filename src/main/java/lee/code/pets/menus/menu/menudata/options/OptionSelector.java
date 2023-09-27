@@ -43,7 +43,7 @@ public enum OptionSelector {
   ELDER_GUARDIAN(new String[] {Option.NAME.name()}),
   FROG(new String[] {Option.NAME.name(), Option.VARIANT.name()}),
   GLOW_SQUID(new String[] {Option.NAME.name()}),
-
+  GUARDIAN(new String[] {Option.NAME.name()}),
   ;
 
   @Getter private final String[] options;
