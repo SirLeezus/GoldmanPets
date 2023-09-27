@@ -55,7 +55,7 @@ public class PetDataUtil {
           case HORNS -> {return data[3];}
         }
       }
-      case FOX, MUSHROOM_COW, RABBIT -> {
+      case FOX, MUSHROOM_COW, RABBIT, AXOLOTL -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
@@ -241,6 +241,10 @@ public class PetDataUtil {
         final boolean mad = false;
         return startingData + sep + isBaby + sep + hasCollar + sep + color.name() + sep + mad;
       }
+      case AXOLOTL -> {
+        final Axolotl.Variant variant = entity instanceof Axolotl axolotl ? axolotl.getVariant() : Axolotl.Variant.LUCY;
+        return startingData + sep + isBaby + sep + variant;
+      }
     }
     return null;
   }
@@ -257,7 +261,7 @@ public class PetDataUtil {
           case BABY -> {return data[0] + sep + data[1] + sep + newData;}
         }
       }
-      case FOX, MUSHROOM_COW, RABBIT -> {
+      case FOX, MUSHROOM_COW, RABBIT, AXOLOTL -> {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3];}
           case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3];}
@@ -416,6 +420,12 @@ public class PetDataUtil {
         final RabbitVariantUtil rabbitVariant = RabbitVariantUtil.valueOf(variant);
         final ArrayList<RabbitVariantUtil> variants = new ArrayList<>(List.of(RabbitVariantUtil.values()));
         final RabbitVariantUtil nextVariant = rabbitVariant.ordinal() + 1 < variants.size() ? variants.get(rabbitVariant.ordinal() + 1) : variants.get(0);
+        return nextVariant.name();
+      }
+      case AXOLOTL -> {
+        final Axolotl.Variant axolotlVariant = Axolotl.Variant.valueOf(variant);
+        final ArrayList<Axolotl.Variant> variants = new ArrayList<>(List.of(Axolotl.Variant.values()));
+        final Axolotl.Variant nextVariant = axolotlVariant.ordinal() + 1 < variants.size() ? variants.get(axolotlVariant.ordinal() + 1) : variants.get(0);
         return nextVariant.name();
       }
     }
