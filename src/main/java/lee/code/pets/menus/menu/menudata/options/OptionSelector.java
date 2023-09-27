@@ -50,6 +50,7 @@ public enum OptionSelector {
   TADPOLE(new String[] {Option.NAME.name()}),
   TROPICAL_FISH(new String[] {Option.NAME.name(), Option.VARIANT.name(), Option.BODY_COLOR.name(), Option.PATTERN_COLOR.name()}),
   TURTLE(new String[] {Option.NAME.name(), Option.BABY.name()}),
+  BLAZE(new String[] {Option.NAME.name()}),
   ;
 
   @Getter private final String[] options;
