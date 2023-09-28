@@ -76,6 +76,9 @@ public enum OptionSelector {
   WARDEN(new String[] {Option.NAME.name()}),
   WITCH(new String[] {Option.NAME.name()}),
   WITHER(new String[] {Option.NAME.name()}),
+  WITHER_SKELETON(new String[] {Option.NAME.name()}),
+  ZOMBIE(new String[] {Option.NAME.name(), Option.BABY.name()}),
+  ZOMBIE_VILLAGER(new String[] {Option.NAME.name(), Option.BABY.name(), Option.TYPE.name(), Option.PROFESSION.name(), Option.LEVEL.name()}),
   ;
 
   @Getter private final String[] options;
