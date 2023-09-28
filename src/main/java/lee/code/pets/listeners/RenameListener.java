@@ -3,6 +3,7 @@ package lee.code.pets.listeners;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import lee.code.pets.Pets;
 import lee.code.pets.lang.Lang;
+import lee.code.pets.utils.CoreUtil;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -20,8 +21,7 @@ public class RenameListener implements Listener {
   public void onPetRename(AsyncChatEvent e) {
     if (!pets.getRenameManager().isPlayerRenaming(e.getPlayer().getUniqueId())) return;
     e.setCancelled(true);
-    final String name = PlainTextComponentSerializer.plainText().serialize(e.message()).replaceAll(",", "");
-    //TODO max length
+    final String name = CoreUtil.trimToMaxCharacters(PlainTextComponentSerializer.plainText().serialize(e.message()).replaceAll(",", ""), 20);
     pets.getRenameManager().updatePetName(e.getPlayer(), name);
   }
 
