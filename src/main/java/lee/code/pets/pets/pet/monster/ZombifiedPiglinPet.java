@@ -33,7 +33,7 @@ public class ZombifiedPiglinPet extends ZombifiedPiglin {
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerGoal(this, 1.5));
+    goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
   }
 
   @Override
