@@ -61,8 +61,15 @@ public class PetOptionMenu extends MenuGUI {
     return new MenuButton()
       .creator(p -> optionItem)
       .consumer(e -> {
+        getMenuSoundManager().playClickSound(player);
         pets.getPetManager().removeActivePet(player);
         switch (option) {
+          case NAME -> {
+            pets.getRenameManager().addPlayerRenaming(player.getUniqueId(), petID);
+            player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_RENAME_MESSAGE.getComponent(null)));
+            getInventory().close();
+            return;
+          }
           case COLOR, BODY_COLOR, PATTERN_COLOR -> {
             final String color = PetDataUtil.getNextColor(DyeColor.valueOf(targetData));
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, color, option));

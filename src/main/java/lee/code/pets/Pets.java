@@ -8,7 +8,10 @@ import lee.code.pets.commands.TabCompletion;
 import lee.code.pets.database.CacheManager;
 import lee.code.pets.database.DatabaseManager;
 import lee.code.pets.listeners.PetListener;
+import lee.code.pets.listeners.QuitListener;
+import lee.code.pets.listeners.RenameListener;
 import lee.code.pets.managers.DelayManager;
+import lee.code.pets.managers.RenameManager;
 import lee.code.pets.menus.system.MenuListener;
 import lee.code.pets.menus.system.MenuManager;
 import lee.code.pets.pets.PetManager;
@@ -26,6 +29,7 @@ public class Pets extends JavaPlugin {
   @Getter private CacheManager cacheManager;
   @Getter private MenuManager menuManager;
   @Getter private DelayManager delayManager;
+  @Getter private RenameManager renameManager;
   private DatabaseManager databaseManager;
 
   @Override
@@ -37,6 +41,7 @@ public class Pets extends JavaPlugin {
     this.protocolManager = ProtocolLibrary.getProtocolManager();
     this.petManager = new PetManager(this);
     this.delayManager = new DelayManager(this);
+    this.renameManager = new RenameManager(this);
     databaseManager.initialize(false);
     registerCommands();
     registerPacketListeners();
@@ -56,6 +61,8 @@ public class Pets extends JavaPlugin {
   private void registerListeners() {
     getServer().getPluginManager().registerEvents(new MenuListener(menuManager), this);
     getServer().getPluginManager().registerEvents(new PetListener(this), this);
+    getServer().getPluginManager().registerEvents(new RenameListener(this), this);
+    getServer().getPluginManager().registerEvents(new QuitListener(this), this);
   }
 
   private void registerCommands() {
