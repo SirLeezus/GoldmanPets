@@ -7,18 +7,19 @@ import lee.code.pets.menus.menu.menudata.MenuItem;
 import lee.code.pets.menus.menu.menudata.options.Option;
 import lee.code.pets.menus.menu.menudata.options.OptionSelector;
 import lee.code.pets.menus.system.MenuButton;
-import lee.code.pets.menus.system.MenuPaginatedGUI;
+import lee.code.pets.menus.system.MenuGUI;
 import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.PetDataUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
-import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-public class PetOptionMenu extends MenuPaginatedGUI {
+import java.util.List;
+
+public class PetOptionMenu extends MenuGUI {
   private final Pets pets;
   private final EntityType entityType;
   private final int petID;
@@ -38,9 +39,10 @@ public class PetOptionMenu extends MenuPaginatedGUI {
   @Override
   public void decorate(Player player) {
     addFillerGlass();
-    int slot = 10;
+    int slot = 0;
+    final List<Integer> slots = getOptionItemSlots();
     for (String option : OptionSelector.valueOf(entityType.name()).getOptions()) {
-      addButton(slot, createOptionButton(player, Option.valueOf(option)));
+      addButton(slots.get(slot), createOptionButton(player, Option.valueOf(option)));
       slot++;
     }
     addInterfaceButtons(player);
@@ -54,11 +56,6 @@ public class PetOptionMenu extends MenuPaginatedGUI {
     final String cappedData = option.equals(Option.NAME) ? targetData : CoreUtil.capitalize(targetData);
     final ItemStack optionItem = switch (option) {
       case COLOR, BODY_COLOR, PATTERN_COLOR -> option.createColorItem(targetData, cappedData);
-      case BABY -> {
-        final ItemStack item = option.createItem(cappedData);
-        if (Boolean.parseBoolean(targetData)) item.setType(Material.NETHER_STAR);
-        yield item;
-      }
       default -> option.createItem(cappedData);
     };
     return new MenuButton()
@@ -122,5 +119,20 @@ public class PetOptionMenu extends MenuPaginatedGUI {
         pets.getPetManager().spawn(player, petID, entityType, pets.getCacheManager().getCachePets().getPetData(petID));
         getInventory().close();
       }));
+  }
+
+  private List<Integer> getOptionItemSlots() {
+    final CachePets cachePets = pets.getCacheManager().getCachePets();
+    final String[] petData = cachePets.getPetData(petID);
+    return switch (petData.length - 1) {
+      case 1 -> List.of(13);
+      case 2 -> List.of(11, 15);
+      case 3 -> List.of(11, 13, 15);
+      case 4 -> List.of(10, 12, 14, 16);
+      case 5 -> List.of(11, 12, 13, 14, 15);
+      case 6 -> List.of(10, 11, 12, 14, 15, 16);
+      case 7 -> List.of(10, 11, 12, 13, 14, 15, 16);
+      default -> List.of(10, 11, 12, 13, 14, 15, 16, 17);
+    };
   }
 }
