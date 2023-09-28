@@ -23,7 +23,7 @@ public enum Option {
   NECTAR(Material.BEEHIVE, "&e&lNectar"),
   STUNG(Material.HONEYCOMB, "&e&lStung"),
   PUMPKIN(Material.CARVED_PUMPKIN, "&e&lPumpkin"),
-  TYPE(Material.GRASS_BLOCK, "&e&lType"),
+  TYPE(Material.BELL, "&e&lType"),
   PROFESSION(Material.ANVIL, "&e&lProfession"),
   LEVEL(Material.EXPERIENCE_BOTTLE, "&e&lLevel"),
   COLLAR(Material.LEAD, "&e&lCollar"),

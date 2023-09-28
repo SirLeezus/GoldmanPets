@@ -54,4 +54,11 @@ public class CachePets extends DatabaseHandler {
   public String getPetName(int id) {
     return getPetTable(id).getData().split(",")[1];
   }
+
+  public void deletePet(int id) {
+    final PetTable petTable = getPetTable(id);
+    deletePetDatabase(petTable);
+    playerPetData.removePlayerPet(petTable.getOwner(), id);
+    petsCache.remove(id);
+  }
 }

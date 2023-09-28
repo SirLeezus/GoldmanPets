@@ -50,6 +50,15 @@ public class PetMenu extends MenuPaginatedGUI {
     final ItemStack item = PetItem.valueOf(entityType.name()).getHead(cachePets.getPetName(petID));
     return new MenuButton().creator(p -> item)
       .consumer(e -> {
+        if (e.isShiftClick()) {
+          final String name = cachePets.getPetName(petID);
+          cachePets.deletePet(petID);
+          player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_DELETE_PET_SUCCESSFUL.getComponent(new String[]{name})));
+          clearButtons();
+          clearInventory();
+          decorate(player);
+          return;
+        }
         if (e.isLeftClick()) {
           getMenuSoundManager().playClickSound(player);
           final PetManager petManager = pets.getPetManager();

@@ -33,7 +33,7 @@ public class PetOptionMenu extends MenuGUI {
 
   @Override
   protected Inventory createInventory() {
-    return Bukkit.createInventory(null, 36, Lang.MENU_PETS_TITLE.getComponent(null));
+    return Bukkit.createInventory(null, 36, Lang.MENU_PET_OPTIONS_TITLE.getComponent(null));
   }
 
   @Override
