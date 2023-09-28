@@ -21,6 +21,7 @@ public class CaveSpiderPet extends CaveSpider {
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
+    setMaxUpStep(1.0F);
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);

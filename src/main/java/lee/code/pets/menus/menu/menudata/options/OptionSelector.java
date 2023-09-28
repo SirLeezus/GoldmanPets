@@ -67,6 +67,15 @@ public enum OptionSelector {
   PILLAGER(new String[] {Option.NAME.name()}),
   RAVAGER(new String[] {Option.NAME.name()}),
   SHULKER(new String[] {Option.NAME.name(), Option.DYE.name(), Option.COLOR.name()}),
+  SILVERFISH(new String[] {Option.NAME.name()}),
+  SKELETON(new String[] {Option.NAME.name()}),
+  SPIDER(new String[] {Option.NAME.name()}),
+  STRAY(new String[] {Option.NAME.name()}),
+  VEX(new String[] {Option.NAME.name()}),
+  VINDICATOR(new String[] {Option.NAME.name()}),
+  WARDEN(new String[] {Option.NAME.name()}),
+  WITCH(new String[] {Option.NAME.name()}),
+  WITHER(new String[] {Option.NAME.name()}),
   ;
 
   @Getter private final String[] options;
