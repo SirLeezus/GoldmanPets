@@ -44,7 +44,6 @@ public class Pets extends JavaPlugin {
     this.renameManager = new RenameManager(this);
     databaseManager.initialize(false);
     registerCommands();
-    registerPacketListeners();
     registerListeners();
 
   }
@@ -52,10 +51,6 @@ public class Pets extends JavaPlugin {
   @Override
   public void onDisable() {
     databaseManager.closeConnection();
-  }
-
-  private void registerPacketListeners() {
-    //protocolManager.addPacketListener(new KeyboardPacketListener(this));
   }
 
   private void registerListeners() {
