@@ -3,6 +3,7 @@ package lee.code.pets.menus.menu;
 import lee.code.pets.Pets;
 import lee.code.pets.database.cache.CachePets;
 import lee.code.pets.lang.Lang;
+import lee.code.pets.menus.menu.menudata.MenuItem;
 import lee.code.pets.menus.menu.menudata.PetItem;
 import lee.code.pets.menus.system.MenuButton;
 import lee.code.pets.menus.system.MenuPaginatedGUI;
@@ -41,6 +42,7 @@ public class PetMenu extends MenuPaginatedGUI {
       addButton(paginatedSlots.get(slot), createPetButton(player, targetPet));
       slot++;
     }
+    addDeactivateButton(player);
     super.decorate(player);
   }
 
@@ -65,5 +67,21 @@ public class PetMenu extends MenuPaginatedGUI {
           pets.getMenuManager().openMenu(new PetOptionMenu(pets, entityType, petID), player);
         }
       });
+  }
+
+  private void addDeactivateButton(Player player) {
+    addButton(49, new MenuButton()
+      .creator(p -> MenuItem.DEACTIVATE_PET.createItem())
+      .consumer(e -> {
+        getMenuSoundManager().playClickSound(player);
+        final PetManager petManager = pets.getPetManager();
+        if (petManager.hasActivePet(player.getUniqueId())) {
+          final String petName = pets.getCacheManager().getCachePets().getPetName(petManager.getActivePetID(player.getUniqueId()));
+          petManager.removePet(player);
+          player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_DEACTIVATE_SUCCESSFUL.getComponent(new String[]{petName})));
+        } else {
+          player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_NO_ACTIVE_PET.getComponent(null)));
+        }
+      }));
   }
 }

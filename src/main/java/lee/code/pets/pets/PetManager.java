@@ -7,13 +7,10 @@ import lee.code.pets.pets.pet.fish.*;
 import lee.code.pets.pets.pet.monster.*;
 import lee.code.pets.utils.PetDataUtil;
 import net.minecraft.world.entity.Entity;
-import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -110,7 +107,6 @@ public class PetManager  {
 
   private void spawn(Player player, int id, Entity entity) {
     final CraftEntity craftEntity = entity.getBukkitEntity();
-    storePetMetaData(craftEntity, id);
     addToPetTracker(id, craftEntity.getUniqueId(), player.getUniqueId());
     craftEntity.spawnAt(player.getLocation(), CreatureSpawnEvent.SpawnReason.CUSTOM);
   }
@@ -137,30 +133,19 @@ public class PetManager  {
     return activePetTracker.containsKey(uuid);
   }
 
-  private void storePetMetaData(CraftEntity entity, int id) {
-    final NamespacedKey key = new NamespacedKey(pets, "pet");
-    final PersistentDataContainer container = entity.getPersistentDataContainer();
-    container.set(key, PersistentDataType.INTEGER, id);
-  }
-
-  public int getPetID(org.bukkit.entity.Entity entity) {
-    final PersistentDataContainer container = entity.getPersistentDataContainer();
-    final NamespacedKey key = new NamespacedKey(pets, "pet");
-    return container.getOrDefault(key, PersistentDataType.INTEGER, 0);
-  }
-
   public boolean isPet(org.bukkit.entity.Entity entity) {
     return petTracker.containsValue(entity.getUniqueId());
   }
 
   public void removeActivePet(Player player) {
-    if (hasActivePet(player.getUniqueId())) removePet(player, getActivePetID(player.getUniqueId()));
+    if (hasActivePet(player.getUniqueId())) removePet(player);
   }
 
-  public void removePet(Player player, int id) {
-    final org.bukkit.entity.Entity entity = player.getWorld().getEntity(getActivePetUUID(id));
+  public void removePet(Player player) {
+    final int activePet = getActivePetID(player.getUniqueId());
+    final org.bukkit.entity.Entity entity = player.getWorld().getEntity(getActivePetUUID(activePet));
     if (entity != null) entity.remove();
-    removeFromPetTracker(id, player.getUniqueId());
+    removeFromPetTracker(activePet, player.getUniqueId());
   }
 
   public void capturePet(Player player, org.bukkit.entity.Entity entity) {

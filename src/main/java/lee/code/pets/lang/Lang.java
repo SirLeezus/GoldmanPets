@@ -12,6 +12,7 @@ public enum Lang {
   MENU_PET_OPTIONS_TITLE("&5&lPet Options"),
   MENU_DELETE_PET_CONFIRM_SUCCESSFUL("&aYou successfully deleted pet &f{0}&a!"),
   MENU_DELETE_PET_CANCEL_SUCCESSFUL("&aYou successfully canceled deleting pet &f{0}&a!"),
+  MENU_DEACTIVATE_SUCCESSFUL("&aYou successfully deactivated pet &f{0}&a!"),
   MENU_SPAWN_SUCCESSFUL("&aYou successfully spawned your pet &f{0}&a!"),
   MENU_RENAME_SUCCESSFUL("&aYou successfully renamed your pet to &f{0}&a!"),
   MENU_RENAME_MESSAGE("&aPlease type your new pet's name in chat&7:"),
@@ -21,6 +22,7 @@ public enum Lang {
   ERROR_RENAME_COMMAND("&cYou can't use commands until you type in a new pet name."),
   ERROR_NO_PERMISSION("&cYou do not have permission for this."),
   ERROR_ONE_COMMAND_AT_A_TIME("&cYou're currently processing another command, please wait for it to finish."),
+  ERROR_NO_ACTIVE_PET("&cYou currently don't have any pets active."),
 
   ;
   @Getter private final String string;

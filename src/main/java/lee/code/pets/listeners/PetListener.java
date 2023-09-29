@@ -61,17 +61,11 @@ public class PetListener implements Listener {
 
   @EventHandler
   public void onTeleportWithPetActive(PlayerTeleportEvent e) {
-    final PetManager petManager = pets.getPetManager();
-    final UUID uuid = e.getPlayer().getUniqueId();
-    if (!petManager.hasActivePet(uuid)) return;
-    petManager.removePet(e.getPlayer(), petManager.getActivePetID(uuid));
+    pets.getPetManager().removeActivePet(e.getPlayer());
   }
 
   @EventHandler
   public void onQuitPetActive(PlayerQuitEvent e) {
-    final PetManager petManager = pets.getPetManager();
-    final UUID uuid = e.getPlayer().getUniqueId();
-    if (!petManager.hasActivePet(uuid)) return;
-    petManager.removePet(e.getPlayer(), petManager.getActivePetID(uuid));
+    pets.getPetManager().removeActivePet(e.getPlayer());
   }
 }

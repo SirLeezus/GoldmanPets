@@ -18,6 +18,7 @@ public enum MenuItem {
   SPAWN_PET(Material.PLAYER_HEAD, "&a&lSpawn Pet", null, false, false, null),
   CONFIRM(Material.LIME_STAINED_GLASS_PANE, "&2&lConfirm Delete", null, false, false, null),
   CANCEL(Material.RED_STAINED_GLASS_PANE, "&c&lCancel Delete", null, false, false, null),
+  DEACTIVATE_PET(Material.BARRIER, "&c&lDeactivate Pet", null, false, false, null),
   ;
 
   private final Material material;
