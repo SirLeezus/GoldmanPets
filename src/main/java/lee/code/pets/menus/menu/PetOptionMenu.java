@@ -56,7 +56,12 @@ public class PetOptionMenu extends MenuGUI {
     final String cappedData = option.equals(Option.NAME) ? targetData : CoreUtil.capitalize(targetData);
     final ItemStack optionItem = switch (option) {
       case COLOR, BODY_COLOR, PATTERN_COLOR -> option.createColorItem(targetData, cappedData);
-      default -> option.createItem(cappedData);
+      case NAME -> option.createItem(cappedData, "&f");
+      case BABY, SADDLE, CHEST, HORNS, ANGRY, STUNG, NECTAR, PUMPKIN, COLLAR, POWERED, DYE -> {
+        final String loreColor = Boolean.parseBoolean(targetData) ? "&2" : "&c";
+        yield option.createItem(cappedData, loreColor);
+      }
+      default -> option.createItem(cappedData, "&6");
     };
     return new MenuButton()
       .creator(p -> optionItem)

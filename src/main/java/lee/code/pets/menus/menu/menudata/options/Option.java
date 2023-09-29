@@ -1,5 +1,6 @@
 package lee.code.pets.menus.menu.menudata.options;
 
+import lee.code.pets.enums.DyeColorChatColor;
 import lee.code.pets.utils.ItemUtil;
 import lombok.AllArgsConstructor;
 import org.bukkit.Material;
@@ -36,13 +37,13 @@ public enum Option {
   private final Material material;
   private final String name;
 
-  public ItemStack createItem(String lore) {
-    final ItemStack itemStack =  ItemUtil.createItem(material, name, "&6" + lore, 0, null);
+  public ItemStack createItem(String lore, String loreColor) {
+    final ItemStack itemStack = ItemUtil.createItem(material, name, loreColor + lore, 0, null);
     ItemUtil.hideItemFlags(itemStack);
     return itemStack;
   }
 
   public ItemStack createColorItem(String color, String lore) {
-    return ItemUtil.createItem(Material.valueOf(color + "_DYE"), name, "&6" + lore, 0, null);
+    return ItemUtil.createItem(Material.valueOf(color + "_DYE"), name, DyeColorChatColor.valueOf(color).getColor() + lore, 0, null);
   }
 }
