@@ -79,6 +79,7 @@ public class PetMenu extends MenuPaginatedGUI {
           final String petName = pets.getCacheManager().getCachePets().getPetName(petManager.getActivePetID(player.getUniqueId()));
           petManager.removePet(player);
           player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_DEACTIVATE_SUCCESSFUL.getComponent(new String[]{petName})));
+          getInventory().close();
         } else {
           player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_NO_ACTIVE_PET.getComponent(null)));
         }

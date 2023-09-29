@@ -4,7 +4,10 @@ import lee.code.pets.Pets;
 import lee.code.pets.lang.Lang;
 import lee.code.pets.pets.PetManager;
 import lee.code.pets.utils.CoreUtil;
+import org.bukkit.Effect;
 import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -48,9 +51,12 @@ public class PetListener implements Listener {
     final ItemStack handItem = e.getPlayer().getInventory().getItemInMainHand();
     if (!handItem.getType().equals(Material.LEAD)) return;
     e.setCancelled(true);
+    final Entity entity = e.getRightClicked();
     if (pets.getDelayManager().isOnDelayOrSchedule(e.getPlayer().getUniqueId(), 500)) return;
-    petManager.capturePet(e.getPlayer(), e.getRightClicked());
-    e.getPlayer().sendMessage(Lang.PREFIX.getComponent(null).append(Lang.CAPTURE_SUCCESSFUL.getComponent(new String[]{CoreUtil.capitalize(e.getRightClicked().getType().name())})));
+    entity.getWorld().playEffect(entity.getLocation(), Effect.ENDER_SIGNAL, 1);
+    entity.getWorld().playSound(entity.getBoundingBox().getCenter().toLocation(entity.getWorld()), Sound.ENTITY_ENDERMAN_TELEPORT, (float) 1, (float) 1);
+    petManager.capturePet(e.getPlayer(), entity);
+    e.getPlayer().sendMessage(Lang.PREFIX.getComponent(null).append(Lang.CAPTURE_SUCCESSFUL.getComponent(new String[]{CoreUtil.capitalize(entity.getType().name())})));
   }
 
   @EventHandler
