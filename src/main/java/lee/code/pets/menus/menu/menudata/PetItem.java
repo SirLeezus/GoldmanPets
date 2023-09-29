@@ -105,8 +105,8 @@ public enum PetItem {
     final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
     final ItemMeta headMeta = head.getItemMeta();
     ItemUtil.applyHeadSkin(headMeta, skin);
-    ItemUtil.setItemLore(headMeta, Lang.MENU_PET_ITEM_LORE.getString());
-    headMeta.displayName(CoreUtil.parseColorComponent("&f" + name));
+    ItemUtil.setItemLore(headMeta, Lang.MENU_PET_ITEM_LORE.getString(new String[]{name}));
+    headMeta.displayName(Lang.MENU_PET_ITEM_NAME.getComponent(null));
     head.setItemMeta(headMeta);
     return head;
   }
