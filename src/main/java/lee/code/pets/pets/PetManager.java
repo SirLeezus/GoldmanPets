@@ -12,13 +12,13 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PetManager  {
   private final Pets pets;
-  private final HashMap<Integer, UUID> petTracker = new HashMap<>();
-  private final HashMap<UUID, Integer> activePetTracker = new HashMap<>();
+  private final ConcurrentHashMap<Integer, UUID> petTracker = new ConcurrentHashMap<>();
+  private final ConcurrentHashMap<UUID, Integer> activePetTracker = new ConcurrentHashMap<>();
   
   public PetManager(Pets pets) {
     this.pets = pets;

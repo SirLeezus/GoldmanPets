@@ -2,26 +2,25 @@ package lee.code.pets.database.cache.data;
 
 import lee.code.pets.database.tables.PetTable;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerPetData {
-  private final HashMap<UUID, Set<Integer>> playerPetCache = new HashMap<>();
+  private final ConcurrentHashMap<UUID, Set<Integer>> playerPetCache = new ConcurrentHashMap<>();
 
   public void cachePlayerPetTable(PetTable petTable) {
     if (playerPetCache.containsKey(petTable.getOwner())) {
       playerPetCache.get(petTable.getOwner()).add(petTable.getId());
     } else {
-      final Set<Integer> pets = new HashSet<>();
+      final Set<Integer> pets = ConcurrentHashMap.newKeySet();
       pets.add(petTable.getId());
       playerPetCache.put(petTable.getOwner(), pets);
     }
   }
 
   public Set<Integer> getAllPets(UUID uuid) {
-    if (!playerPetCache.containsKey(uuid)) return new HashSet<>();
+    if (!playerPetCache.containsKey(uuid)) return ConcurrentHashMap.newKeySet();
     else return playerPetCache.get(uuid);
   }
 

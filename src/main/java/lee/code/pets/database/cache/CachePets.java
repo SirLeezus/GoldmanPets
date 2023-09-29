@@ -7,14 +7,14 @@ import lee.code.pets.database.tables.PetTable;
 import lombok.Getter;
 import org.bukkit.entity.EntityType;
 
-import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CachePets extends DatabaseHandler {
   @Getter private final AtomicInteger nextID = new AtomicInteger(0);
   @Getter private final PlayerPetData playerPetData;
-  private final HashMap<Integer, PetTable> petsCache = new HashMap<>();
+  private final ConcurrentHashMap<Integer, PetTable> petsCache = new ConcurrentHashMap<>();
 
   public CachePets(DatabaseManager databaseManager) {
     super(databaseManager);
