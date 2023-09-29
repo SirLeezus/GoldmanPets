@@ -15,6 +15,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PetMenu extends MenuPaginatedGUI {
@@ -34,6 +35,7 @@ public class PetMenu extends MenuPaginatedGUI {
   public void decorate(Player player) {
     addBorderGlass();
     final List<Integer> allPets = new ArrayList<>(pets.getCacheManager().getCachePets().getPlayerPetData().getAllPets(player.getUniqueId()));
+    Collections.sort(allPets);
     int slot = 0;
     for (int i = 0; i < maxItemsPerPage; i++) {
       index = maxItemsPerPage * page + i;

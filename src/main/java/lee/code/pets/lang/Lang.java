@@ -8,6 +8,7 @@ import net.kyori.adventure.text.Component;
 @AllArgsConstructor
 public enum Lang {
   PREFIX("&5&lPets &6➔ "),
+  LEAD_HEALTH("&6&lHealth&7: {0}"),
   MENU_PETS_TITLE("&5&lPets"),
   MENU_PET_OPTIONS_TITLE("&5&lPet Options"),
   MENU_DELETE_PET_CONFIRM_SUCCESSFUL("&aYou successfully deleted pet &f{0}&a!"),
