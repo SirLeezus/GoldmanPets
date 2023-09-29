@@ -5,6 +5,7 @@ import lee.code.pets.lang.Lang;
 import lee.code.pets.pets.PetManager;
 import lee.code.pets.utils.CoreUtil;
 import org.bukkit.Effect;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Entity;
@@ -95,7 +96,7 @@ public class PetListener implements Listener {
     if (health == null) return;
     final double threshold = health[1] * 0.3;
     CoreUtil.sendHealthProgress(e.getPlayer(), health[0], health[1]);
-    if (health[0] <= threshold) {
+    if (health[0] <= threshold || e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
       entity.getWorld().playEffect(entity.getLocation(), Effect.ENDER_SIGNAL, 1);
       entity.getWorld().playSound(entity.getBoundingBox().getCenter().toLocation(entity.getWorld()), Sound.ENTITY_ENDERMAN_TELEPORT, (float) 1, (float) 1);
       pets.getPetManager().capturePet(e.getPlayer(), entity);
