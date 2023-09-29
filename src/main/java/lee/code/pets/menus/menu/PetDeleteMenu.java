@@ -58,7 +58,7 @@ public class PetDeleteMenu extends MenuGUI {
           getMenuSoundManager().playClickSound(player);
           final String name = cachePets.getPetName(petID);
           cachePets.deletePet(petID);
-          player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_DELETE_PET_SUCCESSFUL.getComponent(new String[]{name})));
+          player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_DELETE_PET_CONFIRM_SUCCESSFUL.getComponent(new String[]{name})));
           pets.getMenuManager().openMenu(new PetMenu(pets), player);
         }));
   }

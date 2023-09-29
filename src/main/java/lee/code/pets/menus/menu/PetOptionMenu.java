@@ -126,9 +126,11 @@ public class PetOptionMenu extends MenuGUI {
       }));
     addButton(32, new MenuButton()
       .creator(p -> MenuItem.SPAWN_PET.createSpawnPetItem(entityType)).consumer(e -> {
+        final CachePets cachePets = pets.getCacheManager().getCachePets();
         getMenuSoundManager().playClickSound(player);
         pets.getPetManager().removeActivePet(player);
-        pets.getPetManager().spawn(player, petID, entityType, pets.getCacheManager().getCachePets().getPetData(petID));
+        pets.getPetManager().spawn(player, petID, entityType, cachePets.getPetData(petID));
+        player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_SPAWN_SUCCESSFUL.getComponent(new String[]{cachePets.getPetName(petID)})));
         getInventory().close();
       }));
   }
