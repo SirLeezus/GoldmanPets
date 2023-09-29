@@ -16,6 +16,8 @@ public enum MenuItem {
   PREVIOUS_PAGE(Material.PAPER, "&e&l<- Prev Page", null, false, false, null),
   BACK_MENU(Material.BARRIER, "&c&l<-- Back", null, false, false, null),
   SPAWN_PET(Material.PLAYER_HEAD, "&a&lSpawn Pet", null, false, false, null),
+  CONFIRM(Material.LIME_STAINED_GLASS_PANE, "&2&lConfirm Delete", null, false, false, null),
+  CANCEL(Material.RED_STAINED_GLASS_PANE, "&c&lCancel Delete", null, false, false, null),
   ;
 
   private final Material material;

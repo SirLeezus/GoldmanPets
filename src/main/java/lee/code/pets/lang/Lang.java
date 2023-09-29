@@ -11,6 +11,7 @@ public enum Lang {
   MENU_PETS_TITLE("&5&lPets"),
   MENU_PET_OPTIONS_TITLE("&5&lPet Options"),
   MENU_DELETE_PET_SUCCESSFUL("&aYou successfully deleted pet &f{0}&a!"),
+  MENU_DELETE_PET_CANCEL_SUCCESSFUL("&aYou successfully canceled deleting pet &f{0}&a!"),
   MENU_RENAME_SUCCESSFUL("&aYou successfully renamed your pet to &f{0}&a!"),
   MENU_RENAME_MESSAGE("&aPlease type your new pet's name in chat&7:"),
   MENU_PET_ITEM_NAME("&e&lPet Name&7:"),

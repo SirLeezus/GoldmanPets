@@ -101,7 +101,16 @@ public enum PetItem {
     return head;
   }
 
-  public ItemStack getHead(String name) {
+  public ItemStack getHeadWithName(String name) {
+    final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+    final ItemMeta headMeta = head.getItemMeta();
+    ItemUtil.applyHeadSkin(headMeta, skin);
+    headMeta.displayName(CoreUtil.parseColorComponent(name));
+    head.setItemMeta(headMeta);
+    return head;
+  }
+
+  public ItemStack getHomePageHead(String name) {
     final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
     final ItemMeta headMeta = head.getItemMeta();
     ItemUtil.applyHeadSkin(headMeta, skin);

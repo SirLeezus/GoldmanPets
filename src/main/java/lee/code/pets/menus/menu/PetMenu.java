@@ -47,26 +47,19 @@ public class PetMenu extends MenuPaginatedGUI {
   private MenuButton createPetButton(Player player, int petID) {
     final CachePets cachePets = pets.getCacheManager().getCachePets();
     final EntityType entityType = cachePets.getPetEntityType(petID);
-    final ItemStack item = PetItem.valueOf(entityType.name()).getHead(cachePets.getPetName(petID));
+    final ItemStack item = PetItem.valueOf(entityType.name()).getHomePageHead(cachePets.getPetName(petID));
     return new MenuButton().creator(p -> item)
       .consumer(e -> {
         if (e.isShiftClick()) {
-          final String name = cachePets.getPetName(petID);
-          cachePets.deletePet(petID);
-          player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_DELETE_PET_SUCCESSFUL.getComponent(new String[]{name})));
-          clearButtons();
-          clearInventory();
-          decorate(player);
-          return;
-        }
-        if (e.isLeftClick()) {
+          getMenuSoundManager().playClickSound(player);
+          pets.getMenuManager().openMenu(new PetDeleteMenu(pets, petID), player);
+        } else if (e.isLeftClick()) {
           getMenuSoundManager().playClickSound(player);
           final PetManager petManager = pets.getPetManager();
           petManager.removeActivePet(player);
           petManager.spawn(player, petID, entityType, cachePets.getPetData(petID));
           getInventory().close();
-        }
-        if (e.isRightClick()) {
+        } else if (e.isRightClick()) {
           getMenuSoundManager().playClickSound(player);
           pets.getMenuManager().openMenu(new PetOptionMenu(pets, entityType, petID), player);
         }
