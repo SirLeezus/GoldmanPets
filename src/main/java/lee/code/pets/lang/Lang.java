@@ -25,6 +25,8 @@ public enum Lang {
   ERROR_ONE_COMMAND_AT_A_TIME("&cYou're currently processing another command, please wait for it to finish."),
   ERROR_NO_ACTIVE_PET("&cYou currently don't have any pets active."),
   ERROR_MAX_PETS("&cYou can only capture &3{0} &cpets, if you want more consider subscribing to one of our premium ranks."),
+  ERROR_PREVIOUS_PAGE("&7You are already on the first page."),
+  ERROR_NEXT_PAGE("&7You are on the last page."),
 
   ;
   @Getter private final String string;

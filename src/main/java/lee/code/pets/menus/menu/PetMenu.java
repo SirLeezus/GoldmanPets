@@ -45,6 +45,7 @@ public class PetMenu extends MenuPaginatedGUI {
       slot++;
     }
     addDeactivateButton(player);
+    addPaginatedButtons(player);
     super.decorate(player);
   }
 
@@ -85,6 +86,33 @@ public class PetMenu extends MenuPaginatedGUI {
           player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_NO_ACTIVE_PET.getComponent(null)));
         }
         getInventory().close();
+      }));
+  }
+
+  private void addPaginatedButtons(Player player) {
+    final int petCount = pets.getCacheManager().getCachePets().getPlayerPetData().getPetCount(player.getUniqueId());
+    if (petCount < 29) return;
+    addButton(51, new MenuButton().creator(p -> MenuItem.NEXT_PAGE.createItem())
+      .consumer(e -> {
+        getMenuSoundManager().playClickSound(player);
+        if (!((index + 1) >= pets.getCacheManager().getCachePets().getPlayerPetData().getPetCount(player.getUniqueId()))) {
+          page += 1;
+          clearInventory();
+          clearButtons();
+          decorate(player);
+        } else player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_NEXT_PAGE.getComponent(null)));
+      }));
+    addButton(47, new MenuButton().creator(p -> MenuItem.PREVIOUS_PAGE.createItem())
+      .consumer(e -> {
+        getMenuSoundManager().playClickSound(player);
+        if (page == 0) {
+          player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_PREVIOUS_PAGE.getComponent(null)));
+        } else {
+          page -= 1;
+          clearInventory();
+          clearButtons();
+          decorate(player);
+        }
       }));
   }
 }
