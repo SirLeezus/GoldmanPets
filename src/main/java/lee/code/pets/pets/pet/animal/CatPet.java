@@ -52,4 +52,8 @@ public class CatPet extends Cat {
   public boolean save(CompoundTag compoundTag) {
     return false;
   }
+
+  @Override
+  protected void reassessTameGoals() {
+  }
 }
