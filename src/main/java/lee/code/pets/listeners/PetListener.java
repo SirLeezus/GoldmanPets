@@ -5,8 +5,8 @@ import lee.code.pets.lang.Lang;
 import lee.code.pets.pets.PetManager;
 import lee.code.pets.utils.CoreUtil;
 import org.bukkit.Effect;
-import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.Camel;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +20,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.spigotmc.event.entity.EntityDismountEvent;
 
 public class PetListener implements Listener {
   private final Pets pets;
@@ -35,13 +36,30 @@ public class PetListener implements Listener {
   }
 
   @EventHandler
+  public void onPlayerPetDismount(EntityDismountEvent e) {
+    if (!pets.getPetManager().isPet(e.getDismounted())) return;
+    if (!(e.getEntity() instanceof Player player)) return;
+    if (!(e.getDismounted() instanceof Camel)) return;
+    if (!pets.getPetManager().isPetOwner(player.getUniqueId(), e.getDismounted())) return;
+    for (Entity entity : e.getDismounted().getPassengers()) {
+      if (entity != player) e.getDismounted().removePassenger(entity);
+    }
+  }
+
+  @EventHandler
   public void onPlayerPetRide(PlayerInteractEntityEvent e) {
-    final PetManager petManager = pets.getPetManager();
-    if (!petManager.isPet(e.getRightClicked())) return;
+    if (!pets.getPetManager().isPet(e.getRightClicked())) return;
     e.setCancelled(true);
-    //TODO CHECK IF OWNER
+    if (!pets.getPetManager().isPetOwner(e.getPlayer().getUniqueId(), e.getRightClicked())) {
+      if (e.getRightClicked() instanceof Camel camel) {
+        if (camel.getPassengers().size() > 1 || camel.getPassengers().size() == 0) return;
+      } else return;
+    }
     final ItemStack handItem = e.getPlayer().getInventory().getItemInMainHand();
-    if (handItem.getType().equals(Material.LEAD)) return;
+    final ItemMeta itemMeta = handItem.getItemMeta();
+    if (itemMeta != null) {
+      if (!itemMeta.hasCustomModelData() || itemMeta.getCustomModelData() != 1) return;
+    }
     if (pets.getDelayManager().isOnDelayOrSchedule(e.getPlayer().getUniqueId(), 500)) return;
     e.getRightClicked().addPassenger(e.getPlayer());
   }
@@ -65,8 +83,7 @@ public class PetListener implements Listener {
   @EventHandler (priority = EventPriority.MONITOR)
   public void onCapturePet(PlayerInteractEntityEvent e) {
     if (e.isCancelled()) return;
-    final PetManager petManager = pets.getPetManager();
-    if (petManager.isPet(e.getRightClicked())) return;
+    if (pets.getPetManager().isPet(e.getRightClicked())) return;
     final ItemStack handItem = e.getPlayer().getInventory().getItemInMainHand();
     final ItemMeta itemMeta = handItem.getItemMeta();
     if (itemMeta == null) return;
@@ -81,7 +98,7 @@ public class PetListener implements Listener {
     if (health[0] <= threshold) {
       entity.getWorld().playEffect(entity.getLocation(), Effect.ENDER_SIGNAL, 1);
       entity.getWorld().playSound(entity.getBoundingBox().getCenter().toLocation(entity.getWorld()), Sound.ENTITY_ENDERMAN_TELEPORT, (float) 1, (float) 1);
-      petManager.capturePet(e.getPlayer(), entity);
+      pets.getPetManager().capturePet(e.getPlayer(), entity);
       e.getPlayer().sendMessage(Lang.PREFIX.getComponent(null).append(Lang.CAPTURE_SUCCESSFUL.getComponent(new String[]{CoreUtil.capitalize(entity.getType().name())})));
     }
   }

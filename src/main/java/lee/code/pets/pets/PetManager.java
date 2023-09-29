@@ -152,4 +152,9 @@ public class PetManager  {
     pets.getCacheManager().getCachePets().createNewPet(player.getUniqueId(), PetDataUtil.serializePetData(entity));
     entity.remove();
   }
+
+  public boolean isPetOwner(UUID uuid, org.bukkit.entity.Entity entity) {
+    if (!activePetTracker.containsKey(uuid)) return false;
+    return getActivePetUUID(getActivePetID(uuid)).equals(entity.getUniqueId());
+  }
 }
