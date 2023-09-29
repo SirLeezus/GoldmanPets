@@ -24,6 +24,10 @@ public class PlayerPetData {
     else return playerPetCache.get(uuid);
   }
 
+  public int getPetCount(UUID uuid) {
+    return getAllPets(uuid).size();
+  }
+
   public void removePlayerPet(UUID uuid, int id) {
     playerPetCache.get(uuid).remove(id);
     if (playerPetCache.get(uuid).isEmpty()) playerPetCache.remove(uuid);

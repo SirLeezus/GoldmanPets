@@ -85,22 +85,27 @@ public class PetListener implements Listener {
   public void onCapturePet(PlayerInteractEntityEvent e) {
     if (e.isCancelled()) return;
     if (pets.getPetManager().isPet(e.getRightClicked())) return;
-    final ItemStack handItem = e.getPlayer().getInventory().getItemInMainHand();
+    final Player player = e.getPlayer();
+    final ItemStack handItem = player.getInventory().getItemInMainHand();
     final ItemMeta itemMeta = handItem.getItemMeta();
     if (itemMeta == null) return;
     if (!itemMeta.hasCustomModelData() || itemMeta.getCustomModelData() != 1) return;
     e.setCancelled(true);
     final Entity entity = e.getRightClicked();
-    if (pets.getDelayManager().isOnDelayOrSchedule(e.getPlayer().getUniqueId(), 500)) return;
+    if (pets.getDelayManager().isOnDelayOrSchedule(player.getUniqueId(), 500)) return;
+    if (!pets.getPetManager().canCaptureNewPet(player)) {
+      player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_MAX_PETS.getComponent(new String[]{String.valueOf(pets.getPetManager().getMaxPets(player))})));
+      return;
+    }
     final int[] health = CoreUtil.getEntityHealth(entity);
     if (health == null) return;
     final double threshold = health[1] * 0.3;
-    CoreUtil.sendHealthProgress(e.getPlayer(), health[0], health[1]);
-    if (health[0] <= threshold || e.getPlayer().getGameMode().equals(GameMode.CREATIVE)) {
+    CoreUtil.sendHealthProgress(player, health[0], health[1]);
+    if (health[0] <= threshold || player.getGameMode().equals(GameMode.CREATIVE)) {
       entity.getWorld().playEffect(entity.getLocation(), Effect.ENDER_SIGNAL, 1);
       entity.getWorld().playSound(entity.getBoundingBox().getCenter().toLocation(entity.getWorld()), Sound.ENTITY_ENDERMAN_TELEPORT, (float) 1, (float) 1);
-      pets.getPetManager().capturePet(e.getPlayer(), entity);
-      e.getPlayer().sendMessage(Lang.PREFIX.getComponent(null).append(Lang.CAPTURE_SUCCESSFUL.getComponent(new String[]{CoreUtil.capitalize(entity.getType().name())})));
+      pets.getPetManager().capturePet(player, entity);
+      player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.CAPTURE_SUCCESSFUL.getComponent(new String[]{CoreUtil.capitalize(entity.getType().name())})));
     }
   }
 

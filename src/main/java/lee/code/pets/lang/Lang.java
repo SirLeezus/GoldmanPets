@@ -24,6 +24,7 @@ public enum Lang {
   ERROR_NO_PERMISSION("&cYou do not have permission for this."),
   ERROR_ONE_COMMAND_AT_A_TIME("&cYou're currently processing another command, please wait for it to finish."),
   ERROR_NO_ACTIVE_PET("&cYou currently don't have any pets active."),
+  ERROR_MAX_PETS("&cYou can only capture &3{0} &cpets, if you want more consider subscribing to one of our premium ranks."),
 
   ;
   @Getter private final String string;

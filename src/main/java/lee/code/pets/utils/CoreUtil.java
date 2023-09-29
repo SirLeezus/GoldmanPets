@@ -66,4 +66,15 @@ public class CoreUtil {
     final double maxHealth = maxHealthAttribute.getBaseValue();
     return new int[]{(int)health,(int)maxHealth};
   }
+
+  public static int getHighestPermission(Player player, String permission, int maxSearch) {
+    int highestLevel = 0;
+    for (int i = maxSearch; i >= 1; i--) {
+      final String targetPermission = permission + i;
+      if (player.hasPermission(targetPermission) && i > highestLevel) {
+        highestLevel = i;
+      }
+    }
+    return highestLevel;
+  }
 }

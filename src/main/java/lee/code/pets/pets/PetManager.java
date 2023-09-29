@@ -5,6 +5,7 @@ import lee.code.pets.pets.pet.animal.*;
 import lee.code.pets.pets.pet.animal.CatPet;
 import lee.code.pets.pets.pet.fish.*;
 import lee.code.pets.pets.pet.monster.*;
+import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.PetDataUtil;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftEntity;
@@ -156,5 +157,15 @@ public class PetManager  {
   public boolean isPetOwner(UUID uuid, org.bukkit.entity.Entity entity) {
     if (!activePetTracker.containsKey(uuid)) return false;
     return getActivePetUUID(getActivePetID(uuid)).equals(entity.getUniqueId());
+  }
+
+  public int getMaxPets(Player player) {
+    if (player.isOp()) return 100;
+    return CoreUtil.getHighestPermission(player, "pets.max.", 100);
+  }
+
+  public boolean canCaptureNewPet(Player player) {
+    final int count = pets.getCacheManager().getCachePets().getPlayerPetData().getPetCount(player.getUniqueId());
+    return count + 1 <= getMaxPets(player);
   }
 }

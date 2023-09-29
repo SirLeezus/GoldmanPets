@@ -47,6 +47,7 @@ public class TestCMD extends SubCommand {
 
   @Override
   public void perform(Player player, String[] args) {
+    //TODO max pet menu system and remove all this command stuff, not needed.
     //pets.getPetManager().spawn(player, 1, EntityType.RAVAGER, new String[]{"RAVAGER", "&d&lGIGA CHAD"});
   }
 
