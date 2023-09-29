@@ -2,7 +2,6 @@ package lee.code.pets.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.bukkit.DyeColor;
 
 @AllArgsConstructor
 public enum DyeColorChatColor {
@@ -21,8 +20,7 @@ public enum DyeColorChatColor {
   ORANGE("&#FFA500"),
   MAGENTA("&#FF00FF"),
   LIGHT_BLUE("&#ADD8E6"),
-  YELLOW("&e"),
-
+  YELLOW("&e")
   ;
   @Getter private String color;
 }

@@ -102,7 +102,8 @@ public class PetDataUtil {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
           case VARIANT -> {return data[3];}
-          case COLOR -> {return data[4];}
+          case COLLAR -> {return data[4];}
+          case COLOR -> {return data[5];}
         }
       }
       case WOLF -> {
@@ -237,7 +238,8 @@ public class PetDataUtil {
       case CAT -> {
         final Cat.Type catType = entity instanceof Cat cat ? cat.getCatType() : Cat.Type.ALL_BLACK;
         final DyeColor color = entity instanceof Cat cat ? cat.getCollarColor() : DyeColor.RED;
-        return startingData + sep + isBaby + sep + catType.name() + sep + color.name();
+        final boolean hasCollar = entity instanceof Cat cat && cat.isTamed();
+        return startingData + sep + isBaby + sep + catType.name() + sep + hasCollar + sep + color.name();
       }
       case RABBIT -> {
         final RabbitVariantUtil rabbitVariant = RabbitVariantUtil.getVariant(entity);
@@ -374,10 +376,11 @@ public class PetDataUtil {
       }
       case CAT -> {
         switch (option) {
-          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4];}
-          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4];}
-          case VARIANT -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4];}
-          case COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData;}
+          case NAME -> {return data[0] + sep + newData + sep + data[2] + sep + data[3] + sep + data[4] + sep + data[5];}
+          case BABY -> {return data[0] + sep + data[1] + sep + newData + sep + data[3] + sep + data[4] + sep + data[5];}
+          case VARIANT -> {return data[0] + sep + data[1] + sep + data[2] + sep + newData + sep + data[4] + sep + data[5];}
+          case COLLAR -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + newData + sep + data[5];}
+          case COLOR -> {return data[0] + sep + data[1] + sep + data[2] + sep + data[3] + sep + data[4] + sep + newData;}
         }
       }
       case BEE -> {

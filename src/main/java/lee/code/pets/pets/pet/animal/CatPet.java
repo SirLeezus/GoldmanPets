@@ -23,14 +23,16 @@ public class CatPet extends Cat {
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
-    setTame(true);
     setMaxUpStep(1.0F);
     collides = false;
     ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setBaby(Boolean.parseBoolean(data[2]));
     setVariant(CatVariantUtil.valueOf(data[3]).getCatVariant());
-    setCollarColor(DyeColor.valueOf(data[4]));
+    if (Boolean.parseBoolean(data[4])) {
+      setTame(true);
+      setCollarColor(DyeColor.valueOf(data[5]));
+    }
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();

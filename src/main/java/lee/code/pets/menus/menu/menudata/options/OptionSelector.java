@@ -12,7 +12,7 @@ public enum OptionSelector {
   BAT(new String[] {Option.NAME.name()}),
   BEE(new String[] {Option.NAME.name(), Option.BABY.name(), Option.ANGRY.name(), Option.NECTAR.name(), Option.STUNG.name()}),
   CAMEL(new String[] {Option.NAME.name(), Option.BABY.name(), Option.SADDLE.name()}),
-  CAT(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name(), Option.COLOR.name()}),
+  CAT(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name(), Option.COLLAR.name(), Option.COLOR.name()}),
   CHICKEN(new String[] {Option.NAME.name(), Option.BABY.name()}),
   DONKEY(new String[] {Option.NAME.name(), Option.BABY.name(), Option.CHEST.name(), Option.SADDLE.name()}),
   FOX(new String[] {Option.NAME.name(), Option.BABY.name(), Option.VARIANT.name()}),
