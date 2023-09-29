@@ -27,6 +27,7 @@ public enum Lang {
   ERROR_MAX_PETS("&cYou can only capture &3{0} &cpets, if you want more consider subscribing to one of our premium ranks."),
   ERROR_PREVIOUS_PAGE("&7You are already on the first page."),
   ERROR_NEXT_PAGE("&7You are on the last page."),
+  ERROR_NOT_CONSOLE_COMMAND("&cThis command does not work in console."),
 
   ;
   @Getter private final String string;

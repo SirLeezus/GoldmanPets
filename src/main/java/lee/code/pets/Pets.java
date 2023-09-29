@@ -3,7 +3,7 @@ package lee.code.pets;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.mojang.brigadier.tree.LiteralCommandNode;
-import lee.code.pets.commands.CommandManager;
+import lee.code.pets.commands.PetCMD;
 import lee.code.pets.commands.TabCompletion;
 import lee.code.pets.database.CacheManager;
 import lee.code.pets.database.DatabaseManager;
@@ -23,7 +23,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.IOException;
 
 public class Pets extends JavaPlugin {
-  @Getter private CommandManager commandManager;
   @Getter private PetManager petManager;
   @Getter private ProtocolManager protocolManager;
   @Getter private CacheManager cacheManager;
@@ -36,7 +35,6 @@ public class Pets extends JavaPlugin {
   public void onEnable() {
     this.databaseManager = new DatabaseManager(this);
     this.cacheManager = new CacheManager(this, databaseManager);
-    this.commandManager = new CommandManager(this);
     this.menuManager = new MenuManager();
     this.protocolManager = ProtocolLibrary.getProtocolManager();
     this.petManager = new PetManager(this);
@@ -61,8 +59,8 @@ public class Pets extends JavaPlugin {
   }
 
   private void registerCommands() {
-    getCommand("pets").setExecutor(commandManager);
-    getCommand("pets").setTabCompleter(new TabCompletion(commandManager));
+    getCommand("pets").setExecutor(new PetCMD(this));
+    getCommand("pets").setTabCompleter(new TabCompletion());
     loadCommodoreData();
   }
 
