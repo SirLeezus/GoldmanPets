@@ -17,6 +17,7 @@ import java.sql.SQLException;
 
 public class DatabaseManager {
   private final Pets pets;
+  private final Object synchronizedThreadLock = new Object();
   private Dao<PetTable, Integer> petsDao;
   private ConnectionSource connectionSource;
 
@@ -25,7 +26,6 @@ public class DatabaseManager {
   }
 
   private String getDatabaseURL() {
-    //Setup MongoDB
     if (!pets.getDataFolder().exists()) pets.getDataFolder().mkdir();
     return "jdbc:sqlite:" + new File(pets.getDataFolder(), "database.db");
   }
@@ -68,33 +68,39 @@ public class DatabaseManager {
     cacheManager.getCachePets().getNextID().set(highestID);
   }
 
-  public synchronized void createPetTable(PetTable petTable) {
-    Bukkit.getAsyncScheduler().runNow(pets, scheduledTask -> {
-      try {
-        petsDao.createIfNotExists(petTable);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
-    });
+  public void createPetTable(PetTable petTable) {
+    synchronized (synchronizedThreadLock) {
+      Bukkit.getAsyncScheduler().runNow(pets, scheduledTask -> {
+        try {
+          petsDao.createIfNotExists(petTable);
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      });
+    }
   }
 
-  public synchronized void updatePetTable(PetTable petTable) {
-    Bukkit.getAsyncScheduler().runNow(pets, scheduledTask -> {
-      try {
-        petsDao.update(petTable);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
-    });
+  public void updatePetTable(PetTable petTable) {
+    synchronized (synchronizedThreadLock) {
+      Bukkit.getAsyncScheduler().runNow(pets, scheduledTask -> {
+        try {
+          petsDao.update(petTable);
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      });
+    }
   }
 
-  public synchronized void deletePetTable(PetTable petTable) {
-    Bukkit.getAsyncScheduler().runNow(pets, scheduledTask -> {
-      try {
-        petsDao.delete(petTable);
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
-    });
+  public void deletePetTable(PetTable petTable) {
+    synchronized (synchronizedThreadLock) {
+      Bukkit.getAsyncScheduler().runNow(pets, scheduledTask -> {
+        try {
+          petsDao.delete(petTable);
+        } catch (SQLException e) {
+          e.printStackTrace();
+        }
+      });
+    }
   }
 }
