@@ -115,8 +115,9 @@ public class PetListener implements Listener {
     e.setCancelled(true);
   }
 
-  @EventHandler
+  @EventHandler (priority = EventPriority.MONITOR)
   public void onTeleportWithPetActive(PlayerTeleportEvent e) {
+    if (e.isCancelled()) return;
     pets.getPetManager().respawnActivePet(e.getPlayer(), e.getTo());
   }
 
