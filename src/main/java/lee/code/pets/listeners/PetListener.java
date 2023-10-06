@@ -15,6 +15,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -119,6 +120,11 @@ public class PetListener implements Listener {
   public void onTeleportWithPetActive(PlayerTeleportEvent e) {
     if (e.isCancelled()) return;
     pets.getPetManager().respawnActivePet(e.getPlayer(), e.getTo());
+  }
+
+  @EventHandler
+  public void onDeathWithPet(PlayerDeathEvent e) {
+    pets.getPetManager().removeActivePet(e.getPlayer());
   }
 
   @EventHandler
