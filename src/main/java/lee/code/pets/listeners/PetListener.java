@@ -1,11 +1,13 @@
 package lee.code.pets.listeners;
 
 import lee.code.pets.Pets;
+import lee.code.pets.enums.PettingSound;
 import lee.code.pets.lang.Lang;
 import lee.code.pets.pets.PetManager;
 import lee.code.pets.utils.CoreUtil;
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Entity;
@@ -22,6 +24,8 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Vector;
 import org.spigotmc.event.entity.EntityDismountEvent;
 
 public class PetListener implements Listener {
@@ -49,21 +53,31 @@ public class PetListener implements Listener {
   }
 
   @EventHandler
-  public void onPlayerPetRide(PlayerInteractEntityEvent e) {
+  public void onPlayerInteractWithPet(PlayerInteractEntityEvent e) {
     if (!pets.getPetManager().isPet(e.getRightClicked())) return;
     e.setCancelled(true);
-    if (!pets.getPetManager().isPetOwner(e.getPlayer().getUniqueId(), e.getRightClicked())) {
-      if (e.getRightClicked() instanceof Camel camel) {
+    final Entity entity = e.getRightClicked();
+    final Player player = e.getPlayer();
+    if (pets.getDelayManager().isOnDelayOrSchedule(player.getUniqueId(), 500)) return;
+    final ItemStack handItem = player.getInventory().getItemInMainHand();
+    final ItemMeta itemMeta = handItem.getItemMeta();
+    if (itemMeta != null) {
+      if (!itemMeta.hasCustomModelData() || itemMeta.getCustomModelData() == 1) return;
+    }
+    if (handItem.getType().isAir() && player.isSneaking()) {
+      final Sound petSound = PettingSound.valueOf(entity.getType().name()).getSound();
+      final BoundingBox boundingBox = entity.getBoundingBox();
+      final Location headLocation = boundingBox.getCenter().toLocation(entity.getWorld()).add(new Vector(0, boundingBox.getHeight() / 2, 0));
+      CoreUtil.spawnLoveAroundLocation(headLocation);
+      player.getWorld().playSound(entity, petSound, (float) 1, (float) 1);
+      return;
+    }
+    if (!pets.getPetManager().isPetOwner(player.getUniqueId(), entity)) {
+      if (entity instanceof Camel camel) {
         if (camel.getPassengers().size() > 1 || camel.getPassengers().size() == 0) return;
       } else return;
     }
-    final ItemStack handItem = e.getPlayer().getInventory().getItemInMainHand();
-    final ItemMeta itemMeta = handItem.getItemMeta();
-    if (itemMeta != null) {
-      if (!itemMeta.hasCustomModelData() || itemMeta.getCustomModelData() != 1) return;
-    }
-    if (pets.getDelayManager().isOnDelayOrSchedule(e.getPlayer().getUniqueId(), 500)) return;
-    e.getRightClicked().addPassenger(e.getPlayer());
+    entity.addPassenger(player);
   }
 
   @EventHandler (priority = EventPriority.MONITOR)

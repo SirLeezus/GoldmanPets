@@ -8,16 +8,20 @@ import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang3.text.WordUtils;
+import org.bukkit.Location;
+import org.bukkit.Particle;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CoreUtil {
+  private final static Random random = new Random();
   private final static Pattern colorPattern = Pattern.compile(Pattern.compile("\\&#[a-fA-F0-9]{6}").pattern() + "|" + Pattern.compile("\\&[0-9a-frklmno]").pattern());
 
   public static Component parseColorComponent(String text) {
@@ -76,5 +80,21 @@ public class CoreUtil {
       }
     }
     return highestLevel;
+  }
+
+  public static void spawnLoveAroundLocation(Location location) {
+    final int count = 3;
+    final double offset = 0.5;
+    for (int i = 0; i < count; i++) {
+      final double angle = random.nextDouble() * Math.PI * 2; // Random angle
+      final double distance = random.nextDouble() * offset; // Random distance
+
+      final double x = Math.cos(angle) * distance;
+      final double z = Math.sin(angle) * distance;
+
+      location.add(x, 0, z);
+      location.getWorld().spawnParticle(Particle.HEART, location, 1);
+      location.subtract(x, 0, z);
+    }
   }
 }
