@@ -129,7 +129,7 @@ public class PetOptionMenu extends MenuGUI {
         final CachePets cachePets = pets.getCacheManager().getCachePets();
         getMenuSoundManager().playClickSound(player);
         pets.getPetManager().removeActivePet(player);
-        pets.getPetManager().spawn(player, petID, entityType, cachePets.getPetData(petID));
+        pets.getPetManager().spawn(player, player.getLocation(), petID, entityType, cachePets.getPetData(petID));
         player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_SPAWN_SUCCESSFUL.getComponent(new String[]{cachePets.getPetName(petID)})));
         getInventory().close();
       }));

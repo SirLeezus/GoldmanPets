@@ -62,7 +62,7 @@ public class PetMenu extends MenuPaginatedGUI {
           getMenuSoundManager().playClickSound(player);
           final PetManager petManager = pets.getPetManager();
           petManager.removeActivePet(player);
-          petManager.spawn(player, petID, entityType, cachePets.getPetData(petID));
+          petManager.spawn(player, player.getLocation(), petID, entityType, cachePets.getPetData(petID));
           player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_SPAWN_SUCCESSFUL.getComponent(new String[]{cachePets.getPetName(petID)})));
           getInventory().close();
         } else if (e.isRightClick()) {

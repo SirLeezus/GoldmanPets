@@ -117,7 +117,7 @@ public class PetListener implements Listener {
 
   @EventHandler
   public void onTeleportWithPetActive(PlayerTeleportEvent e) {
-    pets.getPetManager().removeActivePet(e.getPlayer());
+    pets.getPetManager().respawnActivePet(e.getPlayer(), e.getTo());
   }
 
   @EventHandler
