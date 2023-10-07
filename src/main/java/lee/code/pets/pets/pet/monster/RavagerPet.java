@@ -1,5 +1,6 @@
 package lee.code.pets.pets.pet.monster;
 
+import lee.code.pets.pets.controllers.ControllerWASD;
 import lee.code.pets.pets.goals.FollowOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
@@ -15,8 +16,6 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 public class RavagerPet extends Mob {
 
-  // Move controller won't work, I think it's something client side...
-
   public RavagerPet(Player player, String[] data) {
     super(EntityType.RAVAGER, ((CraftWorld) player.getLocation().getWorld()).getHandle());
     setPos(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
@@ -28,7 +27,7 @@ public class RavagerPet extends Mob {
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
-    //moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
+    moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
   }
