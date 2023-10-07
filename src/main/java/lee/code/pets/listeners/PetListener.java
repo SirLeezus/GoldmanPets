@@ -2,13 +2,11 @@ package lee.code.pets.listeners;
 
 import lee.code.pets.Pets;
 import lee.code.pets.enums.PettingSound;
+import lee.code.pets.events.RideEvent;
 import lee.code.pets.lang.Lang;
 import lee.code.pets.pets.PetManager;
 import lee.code.pets.utils.CoreUtil;
-import org.bukkit.Effect;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -36,33 +34,14 @@ public class PetListener implements Listener {
   }
 
   @EventHandler
-  public void onPlayerPetInteractAtEntity(PlayerInteractAtEntityEvent e) {
-    if (!pets.getPetManager().isPet(e.getRightClicked())) return;
-    e.setCancelled(true);
-  }
-
-  @EventHandler
-  public void onPlayerPetDismount(EntityDismountEvent e) {
-    if (!pets.getPetManager().isPet(e.getDismounted())) return;
-    if (!(e.getEntity() instanceof Player player)) return;
-    if (!(e.getDismounted() instanceof Camel)) return;
-    if (!pets.getPetManager().isPetOwner(player.getUniqueId(), e.getDismounted())) return;
-    for (Entity entity : e.getDismounted().getPassengers()) {
-      if (entity != player) e.getDismounted().removePassenger(entity);
-    }
-  }
-
-  @EventHandler
-  public void onPlayerInteractWithPet(PlayerInteractEntityEvent e) {
-    if (!pets.getPetManager().isPet(e.getRightClicked())) return;
-    e.setCancelled(true);
-    final Entity entity = e.getRightClicked();
+  public void onRidePet(RideEvent e) {
+    final Entity entity = e.getEntity();
     final Player player = e.getPlayer();
-    if (pets.getDelayManager().isOnDelayOrSchedule(player.getUniqueId(), 500)) return;
+    if (pets.getDelayManager().isOnDelayOrSchedule(player.getUniqueId(), 1000)) return;
     final ItemStack handItem = player.getInventory().getItemInMainHand();
     final ItemMeta itemMeta = handItem.getItemMeta();
     if (itemMeta != null) {
-      if (!itemMeta.hasCustomModelData() || itemMeta.getCustomModelData() == 1) return;
+      if (itemMeta.hasCustomModelData() && itemMeta.getCustomModelData() == 1) return;
     }
     if (handItem.getType().isAir() && player.isSneaking()) {
       final Sound petSound = PettingSound.valueOf(entity.getType().name()).getSound();
@@ -78,6 +57,31 @@ public class PetListener implements Listener {
       } else return;
     }
     entity.addPassenger(player);
+  }
+
+  @EventHandler
+  public void onPlayerPetInteractAtEntity(PlayerInteractAtEntityEvent e) {
+    if (!pets.getPetManager().isPet(e.getRightClicked())) return;
+    e.setCancelled(true);
+    Bukkit.getServer().getPluginManager().callEvent(new RideEvent(e.getPlayer(), e.getRightClicked()));
+  }
+
+  @EventHandler
+  public void onPlayerInteractWithPet(PlayerInteractEntityEvent e) {
+    if (!pets.getPetManager().isPet(e.getRightClicked())) return;
+    e.setCancelled(true);
+    Bukkit.getServer().getPluginManager().callEvent(new RideEvent(e.getPlayer(), e.getRightClicked()));
+  }
+
+  @EventHandler
+  public void onPlayerPetDismount(EntityDismountEvent e) {
+    if (!pets.getPetManager().isPet(e.getDismounted())) return;
+    if (!(e.getEntity() instanceof Player player)) return;
+    if (!(e.getDismounted() instanceof Camel)) return;
+    if (!pets.getPetManager().isPetOwner(player.getUniqueId(), e.getDismounted())) return;
+    for (Entity entity : e.getDismounted().getPassengers()) {
+      if (entity != player) e.getDismounted().removePassenger(entity);
+    }
   }
 
   @EventHandler (priority = EventPriority.MONITOR)
