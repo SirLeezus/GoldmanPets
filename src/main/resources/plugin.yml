@@ -8,5 +8,5 @@ depend: [ProtocolLib, GoldmanEconomy, GoldmanColors, GoldmanPlayerData]
 commands:
   pets:
     description: Main pets command.
-    permission: pets.command.use
+    permission: pets.command.pets
     aliases: [pet]
