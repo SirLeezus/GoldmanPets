@@ -10,7 +10,7 @@ public enum Lang {
   PREFIX("&5&lPets &6➔ "),
   COMMAND_HELP_TITLE("&a------------------ &7[ &5&lPet Help &7] &a------------------"),
   COMMAND_HELP_LINE_1("&eYou can capture pets by purchasing a &5Pet Capture Lead"),
-  COMMAND_HELP_LINE_2("&efrom &3/shop&e. By default you can capture 3 entities,"),
+  COMMAND_HELP_LINE_2("&efrom &3/shop&e. By default you can capture three entities,"),
   COMMAND_HELP_LINE_3("&eif you want more you can subscribe to a premium rank."),
   COMMAND_HELP_LINE_4("&eAll entities captured can be found in your &3/pet &emenu."),
   COMMAND_HELP_LINE_5("&eAll entities can be captured besides the ender dragon."),
