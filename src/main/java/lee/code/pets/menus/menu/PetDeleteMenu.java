@@ -1,7 +1,6 @@
 package lee.code.pets.menus.menu;
 
 import lee.code.pets.Pets;
-import lee.code.pets.database.cache.CachePets;
 import lee.code.pets.lang.Lang;
 import lee.code.pets.menus.menu.menudata.MenuItem;
 import lee.code.pets.menus.menu.menudata.PetItem;
@@ -34,7 +33,6 @@ public class PetDeleteMenu extends MenuGUI {
   }
 
   private void addButtons(Player player) {
-    final CachePets cachePets = pets.getCacheManager().getCachePets();
     addButton(2,
       new MenuButton()
         .creator(p -> MenuItem.CANCEL.createItem())
@@ -45,7 +43,7 @@ public class PetDeleteMenu extends MenuGUI {
         }));
     addButton(4,
       new MenuButton()
-        .creator(p -> PetItem.valueOf(cachePets.getPetEntityType(petID).name()).getHeadWithName(cachePets.getPetName(petID)))
+        .creator(p -> PetItem.valueOf(pets.getCacheManager().getCachePets().getPetEntityType(petID).name()).getHeadWithName(pets.getCacheManager().getCachePets().getPetName(petID)))
         .consumer(e -> {
           getMenuSoundManager().playClickSound(player);
           player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_DELETE_PET_CANCEL_SUCCESSFUL.getComponent(new String[]{pets.getCacheManager().getCachePets().getPetName(petID)})));
@@ -56,8 +54,9 @@ public class PetDeleteMenu extends MenuGUI {
         .creator(p -> MenuItem.CONFIRM.createItem())
         .consumer(e -> {
           getMenuSoundManager().playClickSound(player);
-          final String name = cachePets.getPetName(petID);
-          cachePets.deletePet(petID);
+          pets.getPetManager().removeActivePet(player);
+          final String name = pets.getCacheManager().getCachePets().getPetName(petID);
+          pets.getCacheManager().getCachePets().deletePet(petID);
           player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.MENU_DELETE_PET_CONFIRM_SUCCESSFUL.getComponent(new String[]{name})));
           pets.getMenuManager().openMenu(new PetMenu(pets), player);
         }));
