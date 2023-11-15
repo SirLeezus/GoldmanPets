@@ -7,6 +7,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.camel.Camel;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_20_R2.CraftWorld;
@@ -25,7 +27,7 @@ public class CamelPet extends Camel {
     setCustomNameVisible(true);
     setPersistenceRequired(true);
     setCanPickUpLoot(false);
-    setMaxUpStep(1.0F);
+    setMaxUpStep(1.5F);
     collides = false;
     ageLocked = true;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
@@ -35,11 +37,12 @@ public class CamelPet extends Camel {
     moveControl = new ControllerWASD(this, player.getUniqueId(), 0.4F);
     targetSelector.getAvailableGoals().clear();
     getBrain().removeAllBehaviors();
+    getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.2f);
   }
 
   @Override
   protected void registerGoals() {
-    goalSelector.addGoal(0, new FollowOwnerGoal(this, 5));
+    goalSelector.addGoal(0, new FollowOwnerGoal(this, 3));
   }
 
   @Override
