@@ -15,11 +15,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityPortalEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerInteractAtEntityEvent;
-import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.BoundingBox;
@@ -148,5 +146,17 @@ public class PetListener implements Listener {
   @EventHandler
   public void onQuitPetActive(PlayerQuitEvent e) {
     pets.getPetManager().removeActivePet(e.getPlayer());
+  }
+
+  @EventHandler (priority = EventPriority.MONITOR)
+  public void onPlayerPortal(PlayerPortalEvent e) {
+    if (e.isCancelled()) return;
+    pets.getPetManager().removeActivePet(e.getPlayer());
+  }
+
+  @EventHandler (priority = EventPriority.MONITOR)
+  public void onEntityPortal(EntityPortalEvent e) {
+    if (e.isCancelled()) return;
+    if (pets.getPetManager().isPet(e.getEntity())) e.setCancelled(true);
   }
 }
