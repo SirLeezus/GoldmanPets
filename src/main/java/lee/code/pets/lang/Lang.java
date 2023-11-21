@@ -35,7 +35,7 @@ public enum Lang {
   ERROR_PREVIOUS_PAGE("&7You are already on the first page."),
   ERROR_NEXT_PAGE("&7You are on the last page."),
   ERROR_NOT_CONSOLE_COMMAND("&cThis command does not work in console."),
-
+  ERROR_RENAME_BLANK("&cThe pet name input was blank, please pick a pet name using normal letters and numbers."),
   ;
   @Getter private final String string;
 
