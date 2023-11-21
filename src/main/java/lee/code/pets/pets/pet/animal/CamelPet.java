@@ -52,4 +52,8 @@ public class CamelPet extends Camel {
   public boolean save(CompoundTag compoundTag) {
     return false;
   }
+
+  @Override
+  public void openCustomInventoryScreen(net.minecraft.world.entity.player.Player player) {
+  }
 }
