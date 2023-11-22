@@ -13,10 +13,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityPortalEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -158,5 +155,29 @@ public class PetListener implements Listener {
   public void onEntityPortal(EntityPortalEvent e) {
     if (e.isCancelled()) return;
     if (pets.getPetManager().isPet(e.getEntity())) e.setCancelled(true);
+  }
+
+  @EventHandler
+  public void onDamagePlayerOnPet(EntityDamageByEntityEvent e) {
+    if (e.getDamager() instanceof Player attacker && e.getEntity() instanceof Player victim) {
+      if (attacker.getVehicle() != null) {
+        if (pets.getPetManager().isPet(attacker.getVehicle())) e.setCancelled(true);
+      }
+      if (victim.getVehicle() != null) {
+        if (pets.getPetManager().isPet(victim.getVehicle())) e.setCancelled(true);
+      }
+    }
+  }
+
+  @EventHandler
+  public void onShootPlayerOnPet(ProjectileHitEvent e) {
+    if (e.getEntity().getShooter() instanceof Player attacker && e.getHitEntity() instanceof Player victim) {
+      if (attacker.getVehicle() != null) {
+        if (pets.getPetManager().isPet(attacker.getVehicle())) e.setCancelled(true);
+      }
+      if (victim.getVehicle() != null) {
+        if (pets.getPetManager().isPet(victim.getVehicle())) e.setCancelled(true);
+      }
+    }
   }
 }
