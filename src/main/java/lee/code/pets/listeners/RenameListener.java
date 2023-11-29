@@ -21,7 +21,7 @@ public class RenameListener implements Listener {
   public void onPetRename(AsyncChatEvent e) {
     if (!pets.getRenameManager().isPlayerRenaming(e.getPlayer().getUniqueId())) return;
     e.setCancelled(true);
-    final String name = CoreUtil.trimToMaxCharacters(CoreUtil.removeSpecialCharacters(PlainTextComponentSerializer.plainText().serialize(e.message())), 20);
+    final String name = CoreUtil.trimToMaxCharacters(CoreUtil.removeSpecialCharactersButColorCodes(PlainTextComponentSerializer.plainText().serialize(e.message())), 20);
     if (name.isBlank()) {
       e.getPlayer().sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_RENAME_BLANK.getComponent(null)));
       return;

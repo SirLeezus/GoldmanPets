@@ -6,7 +6,6 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import net.md_5.bungee.api.ChatColor;
 import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -98,9 +97,9 @@ public class CoreUtil {
     }
   }
 
-  public static String removeSpecialCharacters(String input) {
+  public static String removeSpecialCharactersButColorCodes(String input) {
     final StringBuilder output = new StringBuilder();
-    final String regex = "[^a-zA-Z0-9\\s]";
+    final String regex = "[^a-zA-Z0-9\\s#&]";
     for (int i = 0; i < input.length(); i++) {
       final char c = input.charAt(i);
       if (Character.toString(c).matches(regex)) continue;
