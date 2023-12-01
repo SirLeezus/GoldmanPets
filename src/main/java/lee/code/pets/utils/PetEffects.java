@@ -40,7 +40,7 @@ public enum PetEffects {
   VILLAGER(EntityType.VILLAGER, new PotionEffect(PotionEffectType.HEAL, 20 * 10, 1)),
   WANDERING_TRADER(EntityType.WANDERING_TRADER, new PotionEffect(PotionEffectType.INVISIBILITY, 20 * 10, 0)),
   CAVE_SPIDER(EntityType.CAVE_SPIDER, new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 10, 0)),
-  DOLPHIN(EntityType.DOLPHIN, new PotionEffect(PotionEffectType.WATER_BREATHING, 20 * 10, 0)),
+  DOLPHIN(EntityType.DOLPHIN, new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 0)),
   ENDERMAN(EntityType.ENDERMAN, new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 10, 0)),
   GOAT(EntityType.GOAT, new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 10, 0)),
   IRON_GOLEM(EntityType.IRON_GOLEM, new PotionEffect(PotionEffectType.HEALTH_BOOST, 20 * 10, 1)),
