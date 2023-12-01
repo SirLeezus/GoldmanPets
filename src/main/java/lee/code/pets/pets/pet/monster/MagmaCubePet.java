@@ -47,6 +47,10 @@ public class MagmaCubePet extends MagmaCube {
   }
 
   @Override
+  public void playerTouch(net.minecraft.world.entity.player.Player player) {
+  }
+
+  @Override
   public void tick() {
     super.tick();
     if (jumpCooldown >= 25 && onGround()) {
