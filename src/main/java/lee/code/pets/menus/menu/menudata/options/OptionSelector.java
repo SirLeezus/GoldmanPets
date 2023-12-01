@@ -75,7 +75,7 @@ public enum OptionSelector {
   VINDICATOR(new String[] {Option.NAME.name()}),
   WARDEN(new String[] {Option.NAME.name()}),
   WITCH(new String[] {Option.NAME.name()}),
-  WITHER(new String[] {Option.NAME.name()}),
+  WITHER(new String[] {Option.NAME.name(), Option.POWERED.name()}),
   WITHER_SKELETON(new String[] {Option.NAME.name()}),
   ZOMBIE(new String[] {Option.NAME.name(), Option.BABY.name()}),
   ZOMBIE_VILLAGER(new String[] {Option.NAME.name(), Option.BABY.name(), Option.TYPE.name(), Option.PROFESSION.name(), Option.LEVEL.name()}),

@@ -8,13 +8,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
 import org.bukkit.craftbukkit.v1_20_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
-public class WitherPet extends Mob {
+public class WitherPet extends Monster {
 
   public WitherPet(Player player, String[] data) {
     super(EntityType.WITHER, ((CraftWorld) player.getLocation().getWorld()).getHandle());
@@ -27,6 +28,10 @@ public class WitherPet extends Mob {
     setMaxUpStep(1.0F);
     collides = false;
     setCustomName(Component.Serializer.fromJson(CoreUtil.serializeColorComponentJson(data[1])));
+    if (Boolean.parseBoolean(data[2])) {
+      getAttribute(Attributes.MAX_HEALTH).setBaseValue(0.1);
+      setHealth(0.1f);
+    }
     setTarget(((CraftPlayer) player).getHandle(), EntityTargetEvent.TargetReason.CUSTOM, false);
     moveControl = new ControllerWASDFlying(this, player.getUniqueId(), 0.3F);
     targetSelector.getAvailableGoals().clear();

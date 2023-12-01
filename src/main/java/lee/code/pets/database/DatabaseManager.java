@@ -6,6 +6,7 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.jdbc.db.DatabaseTypeUtils;
 import com.j256.ormlite.logger.LogBackendType;
 import com.j256.ormlite.logger.LoggerFactory;
+import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import lee.code.pets.Pets;
@@ -50,6 +51,20 @@ public class DatabaseManager {
       connectionSource.close();
     } catch (Exception e) {
       e.printStackTrace();
+    }
+  }
+
+  private void updateDatabase() {
+    try {
+      final QueryBuilder<PetTable, Integer> queryBuilder = petsDao.queryBuilder();
+      queryBuilder.where().like("data", "%WITHER,%");
+
+      for (PetTable petTable : queryBuilder.query()) {
+        petTable.setData(petTable.getData() + ",false");
+        petsDao.update(petTable);
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
     }
   }
 
