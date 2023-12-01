@@ -25,6 +25,7 @@ public enum Lang {
   MENU_RENAME_SUCCESSFUL("&aYou successfully renamed your pet to &f{0}&a!"),
   MENU_RENAME_MESSAGE("&aPlease type your new pet's name in chat&7:"),
   MENU_PET_ITEM_NAME("&e&lPet Name&7:"),
+  MENU_PET_EFFECT_LORE("&3&lEffect&7: &e{0}\n&3&lAmplifier&7: &e{1}\n&3&lEnabled&7: &e{2}"),
   MENU_PET_ITEM_LORE("&f{0}\n \n&e&lActions&7:\n&e» &7Right-Click &eEdit Pet\n&e» &7Left-Click &eSpawn Pet\n&e» &7Sneak-Click &eDelete Pet"),
   CAPTURE_SUCCESSFUL("&aYou successfully captured a &3{0}&a!"),
   ERROR_RENAME_COMMAND("&cYou can't use commands until you type in a new pet name."),

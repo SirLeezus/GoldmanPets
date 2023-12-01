@@ -54,12 +54,29 @@ public class DatabaseManager {
     }
   }
 
+  private void alterDatabase() {
+    try {
+      //effects
+      petsDao.executeRaw("ALTER TABLE pets ADD COLUMN effect BOOLEAN DEFAULT 1;");
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   private void updateDatabase() {
     try {
-      final QueryBuilder<PetTable, Integer> queryBuilder = petsDao.queryBuilder();
-      queryBuilder.where().like("data", "%WITHER,%");
+      //blaze
+      final QueryBuilder<PetTable, Integer> blazeBuilder = petsDao.queryBuilder();
+      blazeBuilder.where().like("data", "%BLAZE,%");
+      for (PetTable petTable : blazeBuilder.query()) {
+        petTable.setData(petTable.getData() + ",false");
+        petsDao.update(petTable);
+      }
 
-      for (PetTable petTable : queryBuilder.query()) {
+      //vex
+      final QueryBuilder<PetTable, Integer> vexBuilder = petsDao.queryBuilder();
+      vexBuilder.where().like("data", "%VEX,%");
+      for (PetTable petTable : vexBuilder.query()) {
         petTable.setData(petTable.getData() + ",false");
         petsDao.update(petTable);
       }

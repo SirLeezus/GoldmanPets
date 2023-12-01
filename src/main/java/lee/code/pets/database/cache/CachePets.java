@@ -61,4 +61,14 @@ public class CachePets extends DatabaseHandler {
     playerPetData.removePlayerPet(petTable.getOwner(), id);
     petsCache.remove(id);
   }
+
+  public void setPetEffect(int id, boolean result) {
+    final PetTable petTable = getPetTable(id);
+    petTable.setEffect(result);
+    updatePetDatabase(petTable);
+  }
+  
+  public boolean getPetEffect(int id) {
+    return getPetTable(id).isEffect();
+  }
 }

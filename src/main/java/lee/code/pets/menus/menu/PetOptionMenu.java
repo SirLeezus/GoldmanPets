@@ -87,7 +87,7 @@ public class PetOptionMenu extends MenuGUI {
             final String marking = PetDataUtil.getNextHorseMarking(targetData);
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, marking, option));
           }
-          case BABY, SADDLE, CHEST, HORNS, ANGRY, STUNG, NECTAR, PUMPKIN, COLLAR, POWERED, DYE -> {
+          case BABY, SADDLE, CHEST, HORNS, ANGRY, STUNG, NECTAR, PUMPKIN, COLLAR, POWERED, DYE, CHARGED -> {
             final String petOption = String.valueOf(!Boolean.parseBoolean(targetData));
             cachePets.updatePetData(petID, PetDataUtil.addNewPetData(entityType, petData, petOption, option));
           }
@@ -118,14 +118,25 @@ public class PetOptionMenu extends MenuGUI {
   }
 
   private void addInterfaceButtons(Player player) {
-    addButton(30, new MenuButton()
+    addButton(29, new MenuButton()
+      .creator(p -> MenuItem.PET_EFFECT.createPetEffectItem(entityType, pets.getCacheManager().getCachePets().getPetEffect(petID)))
+      .consumer(e -> {
+        final CachePets cachePets = pets.getCacheManager().getCachePets();
+        getMenuSoundManager().playClickSound(player);
+        cachePets.setPetEffect(petID, !cachePets.getPetEffect(petID));
+        pets.getPetManager().removeActivePet(player);
+        clearButtons();
+        decorate(player);
+      }));
+    addButton(31, new MenuButton()
       .creator(p -> MenuItem.BACK_MENU.createItem())
       .consumer(e -> {
         getMenuSoundManager().playClickSound(player);
         pets.getMenuManager().openMenu(new PetMenu(pets), player);
       }));
-    addButton(32, new MenuButton()
-      .creator(p -> MenuItem.SPAWN_PET.createSpawnPetItem(entityType)).consumer(e -> {
+    addButton(33, new MenuButton()
+      .creator(p -> MenuItem.SPAWN_PET.createSpawnPetItem(entityType))
+      .consumer(e -> {
         final CachePets cachePets = pets.getCacheManager().getCachePets();
         getMenuSoundManager().playClickSound(player);
         pets.getPetManager().removeActivePet(player);

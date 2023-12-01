@@ -1,5 +1,6 @@
 package lee.code.pets.pets;
 
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import lee.code.pets.Pets;
 import lee.code.pets.database.cache.CachePets;
 import lee.code.pets.pets.pet.animal.*;
@@ -8,8 +9,12 @@ import lee.code.pets.pets.pet.fish.*;
 import lee.code.pets.pets.pet.monster.*;
 import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.PetDataUtil;
+import lee.code.pets.utils.PetEffects;
+import lee.code.playerdata.PlayerDataAPI;
 import net.minecraft.world.entity.Entity;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.craftbukkit.v1_20_R2.entity.CraftEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -17,11 +22,13 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 public class PetManager  {
   private final Pets pets;
   private final ConcurrentHashMap<Integer, UUID> petTracker = new ConcurrentHashMap<>();
   private final ConcurrentHashMap<UUID, Integer> activePetTracker = new ConcurrentHashMap<>();
+  private final ConcurrentHashMap<UUID, ScheduledTask> petEffectTasks = new ConcurrentHashMap<>();
   
   public PetManager(Pets pets) {
     this.pets = pets;
@@ -112,6 +119,7 @@ public class PetManager  {
     final CraftEntity craftEntity = entity.getBukkitEntity();
     addToPetTracker(id, craftEntity.getUniqueId(), player.getUniqueId());
     craftEntity.spawnAt(location, CreatureSpawnEvent.SpawnReason.CUSTOM);
+    startEffectTimer(player.getUniqueId(), craftEntity.getType(), id);
   }
 
   private void addToPetTracker(int id, UUID entity, UUID player) {
@@ -157,6 +165,7 @@ public class PetManager  {
     final org.bukkit.entity.Entity entity = player.getWorld().getEntity(getActivePetUUID(activePet));
     if (entity != null) entity.remove();
     removeFromPetTracker(activePet, player.getUniqueId());
+    stopEffectTimer(player.getUniqueId());
   }
 
   public void capturePet(Player player, org.bukkit.entity.Entity entity) {
@@ -177,5 +186,25 @@ public class PetManager  {
   public boolean canCaptureNewPet(Player player) {
     final int count = pets.getCacheManager().getCachePets().getPlayerPetData().getPetCount(player.getUniqueId());
     return count + 1 <= getMaxPets(player);
+  }
+
+  private void startEffectTimer(UUID uuid, EntityType entityType, int petID) {
+    stopEffectTimer(uuid);
+    if (!pets.getCacheManager().getCachePets().getPetEffect(petID)) return;
+    petEffectTasks.put(uuid, Bukkit.getAsyncScheduler().runAtFixedRate(pets, scheduledTask -> {
+      final Player player = PlayerDataAPI.getOnlinePlayer(uuid);
+      if (player == null) {
+        stopEffectTimer(uuid);
+        return;
+      }
+      player.getScheduler().run(pets, task -> player.addPotionEffect(PetEffects.valueOf(entityType.name()).getPotionEffect()), null);
+    }, 0, 3, TimeUnit.SECONDS));
+  }
+
+  public void stopEffectTimer(UUID uuid) {
+    if (petEffectTasks.containsKey(uuid)) {
+      petEffectTasks.get(uuid).cancel();
+      petEffectTasks.remove(uuid);
+    }
   }
 }

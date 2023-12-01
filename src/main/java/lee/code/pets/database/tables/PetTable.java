@@ -22,9 +22,13 @@ public class PetTable {
   @DatabaseField(columnName = "data", canBeNull = false)
   private String data;
 
+  @DatabaseField(columnName = "effect", canBeNull = false)
+  private boolean effect;
+
   public PetTable(int id, UUID owner, String data) {
     this.id = id;
     this.owner = owner;
     this.data = data;
+    this.effect = true;
   }
 }

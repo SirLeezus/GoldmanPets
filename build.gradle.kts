@@ -33,9 +33,13 @@ dependencies {
 
   //protocol-lib
   compileOnly ("com.comphenix.protocol:ProtocolLib:5.1.0")
+
+  //goldman player data
+  compileOnly ("lee.code.playerdata:playerdata:1.0.0")
 }
 
 repositories {
+  mavenLocal()
   mavenCentral() // You can add more repositories if needed
   maven {
     name = "protocollib"

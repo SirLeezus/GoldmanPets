@@ -13,13 +13,25 @@ public class PetDataUtil {
 
   public static String getPetData(EntityType entityType, String[] data, Option option) {
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE, PILLAGER, RAVAGER, SILVERFISH, SKELETON, SPIDER, STRAY, VEX, VINDICATOR, WARDEN, WITCH, WITHER_SKELETON -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE, PILLAGER, RAVAGER, SILVERFISH, SKELETON, SPIDER, STRAY, VINDICATOR, WARDEN, WITCH, WITHER_SKELETON -> {
         return data[1];
       }
       case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK, PIGLIN, ZOMBIE, ZOMBIFIED_PIGLIN -> {
         switch (option) {
           case NAME -> {return data[1];}
           case BABY -> {return data[2];}
+        }
+      }
+      case BLAZE -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case CHARGED -> {return data[2];}
+        }
+      }
+      case VEX -> {
+        switch (option) {
+          case NAME -> {return data[1];}
+          case ANGRY -> {return data[2];}
         }
       }
       case MAGMA_CUBE, SLIME -> {
@@ -171,7 +183,7 @@ public class PetDataUtil {
     final String sep = ",";
     final String startingData = entityType.name() + sep + petName;
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE, PILLAGER, RAVAGER, SILVERFISH, SKELETON, SPIDER, STRAY, VEX, VINDICATOR, WARDEN, WITCH, WITHER_SKELETON -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE, PILLAGER, RAVAGER, SILVERFISH, SKELETON, SPIDER, STRAY, VINDICATOR, WARDEN, WITCH, WITHER_SKELETON -> {
         return startingData;
       }
       case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK, PIGLIN, ZOMBIE, ZOMBIFIED_PIGLIN -> {
@@ -280,7 +292,7 @@ public class PetDataUtil {
         final boolean charged = entity instanceof Creeper creeper && creeper.isPowered();
         return startingData + sep + charged;
       }
-      case WITHER -> {
+      case WITHER, VEX, BLAZE -> {
         return startingData + sep + "false";
       }
       case VILLAGER, ZOMBIE_VILLAGER -> {
@@ -311,7 +323,7 @@ public class PetDataUtil {
   public static String addNewPetData(EntityType entityType, String[] data, String newData, Option option) {
     final String sep = ",";
     switch (entityType) {
-      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, BLAZE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE, PILLAGER, RAVAGER, SILVERFISH, SKELETON, SPIDER, STRAY, VEX, VINDICATOR, WARDEN, WITCH, WITHER_SKELETON -> {
+      case ALLAY, BAT, IRON_GOLEM, WANDERING_TRADER, COD, DOLPHIN, ELDER_GUARDIAN, GLOW_SQUID, GUARDIAN, PUFFERFISH, SALMON, SQUID, TADPOLE, CAVE_SPIDER, ENDERMAN, EVOKER, GHAST, ILLUSIONER, PHANTOM, PIGLIN_BRUTE, PILLAGER, RAVAGER, SILVERFISH, SKELETON, SPIDER, STRAY, VINDICATOR, WARDEN, WITCH, WITHER_SKELETON -> {
         return data[0] + sep + newData;
       }
       case COW, CHICKEN, HOGLIN, OCELOT, PIG, POLAR_BEAR, SNIFFER, ZOGLIN, TURTLE, DROWNED, HUSK, PIGLIN, ZOMBIE, ZOMBIFIED_PIGLIN -> {
@@ -331,6 +343,18 @@ public class PetDataUtil {
         switch (option) {
           case NAME -> {return data[0] + sep + newData + sep + data[2];}
           case SIZE -> {return data[0] + sep + data[1] + sep + newData;}
+        }
+      }
+      case BLAZE -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2];}
+          case CHARGED -> {return data[0] + sep + data[1] + sep + newData;}
+        }
+      }
+      case VEX -> {
+        switch (option) {
+          case NAME -> {return data[0] + sep + newData + sep + data[2];}
+          case ANGRY -> {return data[0] + sep + data[1] + sep + newData;}
         }
       }
       case SHULKER -> {
