@@ -10,6 +10,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 
 @AllArgsConstructor
@@ -49,6 +50,9 @@ public enum MenuItem {
 
   public ItemStack createPetEffectItem(EntityType entityType, boolean effect) {
     final ItemStack item = ItemUtil.createItem(material, name, createPetEffectLore(entityType, effect), 0, skin);
+    final PotionMeta potionMeta = (PotionMeta) item.getItemMeta();
+    potionMeta.setBasePotionType(PetEffects.valueOf(entityType.name()).getPotionType());
+    item.setItemMeta(potionMeta);
     if (hideItemFlags) ItemUtil.hideItemFlags(item);
     if (enchantItem) ItemUtil.enchantItem(item, Enchantment.ARROW_INFINITE, 1);
     return item;
