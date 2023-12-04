@@ -45,4 +45,9 @@ public class ZombiePet extends Zombie {
   public boolean save(CompoundTag compoundTag) {
     return false;
   }
+
+  @Override
+  protected boolean convertsInWater() {
+    return false;
+  }
 }

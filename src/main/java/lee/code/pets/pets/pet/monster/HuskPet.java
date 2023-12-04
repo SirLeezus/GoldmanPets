@@ -44,4 +44,9 @@ public class HuskPet extends Husk {
   public boolean save(CompoundTag compoundTag) {
     return false;
   }
+
+  @Override
+  protected boolean convertsInWater() {
+    return false;
+  }
 }
