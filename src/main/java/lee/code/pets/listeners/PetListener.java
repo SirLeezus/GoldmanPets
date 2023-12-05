@@ -111,6 +111,10 @@ public class PetListener implements Listener {
       player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_MAX_PETS.getComponent(new String[]{String.valueOf(pets.getPetManager().getMaxPets(player))})));
       return;
     }
+    if (!pets.getPetManager().getSupportedPets().contains(e.getRightClicked().getType())) {
+      player.sendActionBar(Lang.ERROR_ENTITY_NOT_SUPPORTED.getComponent(new String[]{CoreUtil.capitalize(e.getRightClicked().getType().name())}));
+      return;
+    }
     final int[] health = CoreUtil.getEntityHealth(entity);
     if (health == null) return;
     final double threshold = health[1] * 0.3;

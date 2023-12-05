@@ -37,6 +37,7 @@ public enum Lang {
   ERROR_NEXT_PAGE("&7You are on the last page."),
   ERROR_NOT_CONSOLE_COMMAND("&cThis command does not work in console."),
   ERROR_RENAME_BLANK("&cThe pet name input was blank, please pick a pet name using normal letters and numbers."),
+  ERROR_ENTITY_NOT_SUPPORTED("&cThe entity {0} is not a supported pet type!"),
   ;
   @Getter private final String string;
 

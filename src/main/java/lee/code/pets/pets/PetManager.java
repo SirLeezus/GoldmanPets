@@ -11,27 +11,109 @@ import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.PetDataUtil;
 import lee.code.pets.utils.PetEffects;
 import lee.code.playerdata.PlayerDataAPI;
+import lombok.Getter;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.craftbukkit.v1_20_R2.entity.CraftEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 public class PetManager  {
   private final Pets pets;
+  @Getter private final Set<EntityType> supportedPets = ConcurrentHashMap.newKeySet();
   private final ConcurrentHashMap<Integer, UUID> petTracker = new ConcurrentHashMap<>();
   private final ConcurrentHashMap<UUID, Integer> activePetTracker = new ConcurrentHashMap<>();
   private final ConcurrentHashMap<UUID, ScheduledTask> petEffectTasks = new ConcurrentHashMap<>();
   
   public PetManager(Pets pets) {
     this.pets = pets;
+    loadSupportedPets();
+  }
+
+  private void loadSupportedPets() {
+    supportedPets.add(EntityType.SHEEP);
+    supportedPets.add(EntityType.CHICKEN);
+    supportedPets.add(EntityType.PHANTOM);
+    supportedPets.add(EntityType.WOLF);
+    supportedPets.add(EntityType.CAT);
+    supportedPets.add(EntityType.VILLAGER);
+    supportedPets.add(EntityType.BEE);
+    supportedPets.add(EntityType.ZOMBIE);
+    supportedPets.add(EntityType.BLAZE);
+    supportedPets.add(EntityType.SNIFFER);
+    supportedPets.add(EntityType.RABBIT);
+    supportedPets.add(EntityType.SLIME);
+    supportedPets.add(EntityType.MAGMA_CUBE);
+    supportedPets.add(EntityType.RAVAGER);
+    supportedPets.add(EntityType.CREEPER);
+    supportedPets.add(EntityType.SKELETON);
+    supportedPets.add(EntityType.HORSE);
+    supportedPets.add(EntityType.COD);
+    supportedPets.add(EntityType.DOLPHIN);
+    supportedPets.add(EntityType.GHAST);
+    supportedPets.add(EntityType.BAT);
+    supportedPets.add(EntityType.ALLAY);
+    supportedPets.add(EntityType.STRIDER);
+    supportedPets.add(EntityType.SNOWMAN);
+    supportedPets.add(EntityType.IRON_GOLEM);
+    supportedPets.add(EntityType.ZOGLIN);
+    supportedPets.add(EntityType.TURTLE);
+    supportedPets.add(EntityType.AXOLOTL);
+    supportedPets.add(EntityType.WITCH);
+    supportedPets.add(EntityType.COW);
+    supportedPets.add(EntityType.MUSHROOM_COW);
+    supportedPets.add(EntityType.WARDEN);
+    supportedPets.add(EntityType.WITHER);
+    supportedPets.add(EntityType.ENDERMAN);
+    supportedPets.add(EntityType.CAMEL);
+    supportedPets.add(EntityType.DONKEY);
+    supportedPets.add(EntityType.FROG);
+    supportedPets.add(EntityType.FOX);
+    supportedPets.add(EntityType.SQUID);
+    supportedPets.add(EntityType.GLOW_SQUID);
+    supportedPets.add(EntityType.OCELOT);
+    supportedPets.add(EntityType.PARROT);
+    supportedPets.add(EntityType.PIG);
+    supportedPets.add(EntityType.PUFFERFISH);
+    supportedPets.add(EntityType.SALMON);
+    supportedPets.add(EntityType.SKELETON_HORSE);
+    supportedPets.add(EntityType.ZOMBIE_HORSE);
+    supportedPets.add(EntityType.TADPOLE);
+    supportedPets.add(EntityType.TROPICAL_FISH);
+    supportedPets.add(EntityType.WANDERING_TRADER);
+    supportedPets.add(EntityType.SPIDER);
+    supportedPets.add(EntityType.LLAMA);
+    supportedPets.add(EntityType.GOAT);
+    supportedPets.add(EntityType.CAVE_SPIDER);
+    supportedPets.add(EntityType.PANDA);
+    supportedPets.add(EntityType.PIGLIN);
+    supportedPets.add(EntityType.ZOMBIFIED_PIGLIN);
+    supportedPets.add(EntityType.POLAR_BEAR);
+    supportedPets.add(EntityType.HUSK);
+    supportedPets.add(EntityType.SILVERFISH);
+    supportedPets.add(EntityType.ENDERMITE);
+    supportedPets.add(EntityType.PILLAGER);
+    supportedPets.add(EntityType.ELDER_GUARDIAN);
+    supportedPets.add(EntityType.GUARDIAN);
+    supportedPets.add(EntityType.VEX);
+    supportedPets.add(EntityType.DROWNED);
+    supportedPets.add(EntityType.HOGLIN);
+    supportedPets.add(EntityType.PIGLIN_BRUTE);
+    supportedPets.add(EntityType.SHULKER);
+    supportedPets.add(EntityType.STRAY);
+    supportedPets.add(EntityType.VINDICATOR);
+    supportedPets.add(EntityType.WITHER_SKELETON);
+    supportedPets.add(EntityType.ZOMBIE_VILLAGER);
+    supportedPets.add(EntityType.EVOKER);
+    supportedPets.add(EntityType.ILLUSIONER);
+    supportedPets.add(EntityType.TRADER_LLAMA);
   }
 
   public void spawn(Player player, Location location, int id, EntityType entityType, String[] data) {
