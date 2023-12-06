@@ -2,6 +2,7 @@ package lee.code.pets.pets.pet.animal;
 
 import lee.code.pets.pets.controllers.ControllerWASDFlying;
 import lee.code.pets.pets.goals.FollowOwnerFlyingGoal;
+import lee.code.pets.pets.goals.LookAtOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -55,6 +56,7 @@ public class BeePet extends Animal implements NeutralMob {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.3, 5, 10));
+    goalSelector.addGoal(1, new LookAtOwnerGoal(this));
   }
 
   @Override

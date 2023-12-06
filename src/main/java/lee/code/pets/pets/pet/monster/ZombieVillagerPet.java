@@ -2,6 +2,7 @@ package lee.code.pets.pets.pet.monster;
 
 import lee.code.pets.pets.controllers.ControllerWASD;
 import lee.code.pets.pets.goals.FollowOwnerGoal;
+import lee.code.pets.pets.goals.LookAtOwnerGoal;
 import lee.code.pets.pets.pet.util.VillagerProfessionUtil;
 import lee.code.pets.pets.pet.util.VillagerTypeUtil;
 import lee.code.pets.utils.CoreUtil;
@@ -40,6 +41,7 @@ public class ZombieVillagerPet extends ZombieVillager {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
+    goalSelector.addGoal(1, new LookAtOwnerGoal(this));
   }
 
   @Override

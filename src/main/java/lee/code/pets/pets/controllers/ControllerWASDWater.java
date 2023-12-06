@@ -51,20 +51,17 @@ public class ControllerWASDWater extends ControllerWASD {
 
     if (!mob.isInWater()) {
       // Limit upward motion if out of water
-      motionY = -0.5D;
+      motionY = -0.4D;
 
-      // If solid block below entity out of water, slow down
-      final BlockPos downPos = mob.blockPosition().relative(Direction.DOWN);
-      final BlockState frontBlockState = mob.level().getBlockState(downPos);
-      if (!(frontBlockState.getBlock() instanceof LiquidBlock)) {
-        if (!landSupport) {
-          if (jumpOnLand) mob.getJumpControl().jump();
-          return;
-        }
-        if (rider.jumping) mob.getJumpControl().jump();
-        motionX *= 0.2;
-        motionZ *= 0.2;
+      // slow down on land
+      motionX *= 0.2;
+      motionZ *= 0.2;
+
+      if (!landSupport) {
+        if (jumpOnLand) mob.getJumpControl().jump();
+        return;
       }
+      if (rider.jumping) mob.getJumpControl().jump();
     }
 
     // Set the mob's motion

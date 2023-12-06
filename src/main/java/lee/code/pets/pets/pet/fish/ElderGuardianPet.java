@@ -2,6 +2,7 @@ package lee.code.pets.pets.pet.fish;
 
 import lee.code.pets.pets.controllers.ControllerWASDWater;
 import lee.code.pets.pets.goals.FollowOwnerWaterGoal;
+import lee.code.pets.pets.goals.LookAtOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -35,6 +36,7 @@ public class ElderGuardianPet extends Monster {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerWaterGoal(this, 0.4f, 5, 20, false));
+    goalSelector.addGoal(1, new LookAtOwnerGoal(this));
   }
 
   @Override

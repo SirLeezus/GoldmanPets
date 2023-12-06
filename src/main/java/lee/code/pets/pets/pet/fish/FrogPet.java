@@ -2,11 +2,13 @@ package lee.code.pets.pets.pet.fish;
 
 import lee.code.pets.pets.controllers.ControllerWASDWater;
 import lee.code.pets.pets.goals.FollowOwnerWaterGoal;
+import lee.code.pets.pets.goals.LookAtOwnerGoal;
 import lee.code.pets.pets.pet.util.FrogVariantUtil;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.animal.frog.Frog;
 import org.bukkit.craftbukkit.v1_20_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R2.entity.CraftPlayer;
@@ -36,6 +38,7 @@ public class FrogPet extends Frog {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerWaterGoal(this, 0.4f, 5, 20, true));
+    goalSelector.addGoal(1, new LookAtOwnerGoal(this));
   }
 
   @Override

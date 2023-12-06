@@ -48,7 +48,7 @@ public class FollowOwnerGoal extends Goal {
 
   @Override
   public boolean canContinueToUse() {
-    return !mob.getPassengers().isEmpty();
+    return !mob.getPassengers().isEmpty() && mob.distanceTo(owner) > 4.0;
   }
 
   @Override

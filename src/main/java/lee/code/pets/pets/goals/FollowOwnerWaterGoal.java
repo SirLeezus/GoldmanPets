@@ -30,6 +30,13 @@ public class FollowOwnerWaterGoal extends Goal {
   }
 
   @Override
+  public boolean canContinueToUse() {
+    if (!mob.getPassengers().isEmpty() || mob.getTarget() == null) return false;
+    final double distanceToOwner = mob.distanceTo(mob.getTarget());
+    return distanceToOwner >= minDistance;
+  }
+
+  @Override
   public void start() {
   }
 

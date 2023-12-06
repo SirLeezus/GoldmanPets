@@ -2,6 +2,7 @@ package lee.code.pets.pets.pet.monster;
 
 import lee.code.pets.pets.controllers.ControllerWASD;
 import lee.code.pets.pets.goals.FollowOwnerGoal;
+import lee.code.pets.pets.goals.LookAtOwnerGoal;
 import lee.code.pets.utils.CoreUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -33,6 +34,7 @@ public class SpiderPet extends Spider {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerGoal(this, 2));
+    goalSelector.addGoal(1, new LookAtOwnerGoal(this));
   }
 
   @Override
