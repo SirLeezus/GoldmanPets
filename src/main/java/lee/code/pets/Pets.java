@@ -1,7 +1,5 @@
 package lee.code.pets;
 
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import lee.code.pets.commands.PetCMD;
 import lee.code.pets.commands.TabCompletion;
@@ -24,7 +22,6 @@ import java.io.IOException;
 
 public class Pets extends JavaPlugin {
   @Getter private PetManager petManager;
-  @Getter private ProtocolManager protocolManager;
   @Getter private CacheManager cacheManager;
   @Getter private MenuManager menuManager;
   @Getter private DelayManager delayManager;
@@ -36,7 +33,6 @@ public class Pets extends JavaPlugin {
     this.databaseManager = new DatabaseManager(this);
     this.cacheManager = new CacheManager(this, databaseManager);
     this.menuManager = new MenuManager();
-    this.protocolManager = ProtocolLibrary.getProtocolManager();
     this.petManager = new PetManager(this);
     this.delayManager = new DelayManager(this);
     this.renameManager = new RenameManager(this);

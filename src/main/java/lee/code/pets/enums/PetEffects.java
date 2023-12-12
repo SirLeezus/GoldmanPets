@@ -1,4 +1,4 @@
-package lee.code.pets.utils;
+package lee.code.pets.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -86,7 +86,8 @@ public enum PetEffects {
   ZOMBIE_VILLAGER(EntityType.ZOMBIE_VILLAGER, new PotionEffect(PotionEffectType.REGENERATION, 20 * 20, 0), PotionType.REGEN),
   ENDER_DRAGON(EntityType.ENDER_DRAGON, new PotionEffect(PotionEffectType.HEALTH_BOOST, 20 * 20, 5), PotionType.INSTANT_HEAL),
   ZOMBIE_HORSE(EntityType.ZOMBIE_HORSE, new PotionEffect(PotionEffectType.HEALTH_BOOST, 20 * 20, 1), PotionType.INSTANT_HEAL),
-  BEE(EntityType.BEE, new PotionEffect(PotionEffectType.SPEED, 20 * 20, 1), PotionType.SPEED)
+  BEE(EntityType.BEE, new PotionEffect(PotionEffectType.SPEED, 20 * 20, 1), PotionType.SPEED),
+  BREEZE(EntityType.BREEZE, new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 20, 1), PotionType.INSTANT_DAMAGE)
   ;
 
   @Getter private final EntityType entityType;

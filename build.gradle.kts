@@ -15,7 +15,7 @@ java {
 }
 
 dependencies {
-  paperweight.paperDevBundle("1.20.2-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle("1.20.4-R0.1-SNAPSHOT")
   // paperweight.foliaDevBundle("1.20.1-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.20.1-R0.1-SNAPSHOT")
 
@@ -30,9 +30,6 @@ dependencies {
   //commodore
   implementation ("me.lucko:commodore:2.2")
   implementation ("me.lucko:commodore-file:1.0")
-
-  //protocol-lib
-  compileOnly ("com.comphenix.protocol:ProtocolLib:5.1.0")
 
   //goldman player data
   compileOnly ("lee.code.playerdata:playerdata:1.0.0")

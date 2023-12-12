@@ -4,7 +4,7 @@ main: lee.code.pets.Pets
 description: $description
 author: Lee
 api-version: "$apiVersion"
-depend: [ProtocolLib, GoldmanPlayerData]
+depend: [GoldmanPlayerData]
 commands:
   pets:
     description: Main pets command.

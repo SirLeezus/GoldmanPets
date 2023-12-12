@@ -3,7 +3,7 @@ package lee.code.pets.pets.pet.util;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.minecraft.world.entity.animal.Rabbit;
-import org.bukkit.craftbukkit.v1_20_R2.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 
 @AllArgsConstructor

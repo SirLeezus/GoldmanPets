@@ -8,8 +8,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Phantom;
-import org.bukkit.craftbukkit.v1_20_R2.CraftWorld;
-import org.bukkit.craftbukkit.v1_20_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_20_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
@@ -35,7 +35,6 @@ public class PhantomPet extends Phantom {
   @Override
   protected void registerGoals() {
     goalSelector.addGoal(0, new FollowOwnerFlyingGoal(this, 0.3, 5, 20));
-    goalSelector.addGoal(1, new LookAtOwnerGoal(this));
   }
 
   @Override

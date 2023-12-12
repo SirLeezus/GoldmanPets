@@ -9,13 +9,13 @@ import lee.code.pets.pets.pet.fish.*;
 import lee.code.pets.pets.pet.monster.*;
 import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.PetDataUtil;
-import lee.code.pets.utils.PetEffects;
+import lee.code.pets.enums.PetEffects;
 import lee.code.playerdata.PlayerDataAPI;
 import lombok.Getter;
 import net.minecraft.world.entity.Entity;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_20_R2.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -114,6 +114,7 @@ public class PetManager  {
     supportedPets.add(EntityType.EVOKER);
     supportedPets.add(EntityType.ILLUSIONER);
     supportedPets.add(EntityType.TRADER_LLAMA);
+    supportedPets.add(EntityType.BREEZE);
   }
 
   public void spawn(Player player, Location location, int id, EntityType entityType, String[] data) {
@@ -194,6 +195,7 @@ public class PetManager  {
       case EVOKER -> spawn(player, location, id, new EvokerPet(player, data));
       case ILLUSIONER -> spawn(player, location, id, new IllusionerPet(player, data));
       case TRADER_LLAMA -> spawn(player, location, id, new TraderLlamaPet(player, data));
+      case BREEZE -> spawn(player, location, id, new BreezePet(player, data));
     }
   }
 

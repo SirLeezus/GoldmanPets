@@ -3,7 +3,7 @@ package lee.code.pets.menus.menu.menudata;
 import lee.code.pets.lang.Lang;
 import lee.code.pets.utils.CoreUtil;
 import lee.code.pets.utils.ItemUtil;
-import lee.code.pets.utils.PetEffects;
+import lee.code.pets.enums.PetEffects;
 import lombok.AllArgsConstructor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -61,6 +61,6 @@ public enum MenuItem {
   private String createPetEffectLore(EntityType entityType, boolean effect) {
     final String effectColor = effect ? "&2" : "&c";
     final PotionEffect potionEffect = PetEffects.valueOf(entityType.name()).getPotionEffect();
-    return Lang.MENU_PET_EFFECT_LORE.getString(new String[]{CoreUtil.capitalize(potionEffect.getType().getName()), String.valueOf(potionEffect.getAmplifier()), effectColor + CoreUtil.capitalize(String.valueOf(effect))});
+    return Lang.MENU_PET_EFFECT_LORE.getString(new String[]{CoreUtil.capitalize(potionEffect.getType().getKey().asString()), String.valueOf(potionEffect.getAmplifier()), effectColor + CoreUtil.capitalize(String.valueOf(effect))});
   }
 }
