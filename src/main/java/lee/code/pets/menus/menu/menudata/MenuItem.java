@@ -61,6 +61,6 @@ public enum MenuItem {
   private String createPetEffectLore(EntityType entityType, boolean effect) {
     final String effectColor = effect ? "&2" : "&c";
     final PotionEffect potionEffect = PetEffects.valueOf(entityType.name()).getPotionEffect();
-    return Lang.MENU_PET_EFFECT_LORE.getString(new String[]{CoreUtil.capitalize(potionEffect.getType().getKey().asString()), String.valueOf(potionEffect.getAmplifier()), effectColor + CoreUtil.capitalize(String.valueOf(effect))});
+    return Lang.MENU_PET_EFFECT_LORE.getString(new String[]{CoreUtil.capitalize(potionEffect.getType().getName()), String.valueOf(potionEffect.getAmplifier()), effectColor + CoreUtil.capitalize(String.valueOf(effect))});
   }
 }
