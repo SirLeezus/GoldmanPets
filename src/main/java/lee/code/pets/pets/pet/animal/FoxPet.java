@@ -16,11 +16,14 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.Fox;
 import org.bukkit.craftbukkit.v1_20_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_20_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class FoxPet extends Animal implements VariantHolder<Fox.Type> {
+  private volatile CraftEntity bukkitEntity;
   private static final EntityDataAccessor<Integer> DATA_TYPE_ID = SynchedEntityData.defineId(FoxPet.class, EntityDataSerializers.INT);
 
   public FoxPet(Player player, String[] data) {
@@ -81,5 +84,24 @@ public class FoxPet extends Animal implements VariantHolder<Fox.Type> {
   @Override
   public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
     return null;
+  }
+
+  // 1.20.4+ fix
+  @Override
+  public CraftEntity getBukkitEntity() {
+    if (this.bukkitEntity == null) {
+      synchronized (this) {
+        if (this.bukkitEntity == null) {
+          return this.bukkitEntity = new CraftLivingEntity(this.level().getCraftServer(), this) {};
+        }
+      }
+    }
+    return this.bukkitEntity;
+  }
+
+  // 1.20.4+ fix
+  @Override
+  public CraftLivingEntity getBukkitLivingEntity() {
+    return (CraftLivingEntity) this.getBukkitEntity();
   }
 }

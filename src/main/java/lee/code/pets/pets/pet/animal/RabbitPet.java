@@ -20,6 +20,8 @@ import net.minecraft.world.entity.animal.Rabbit;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import org.bukkit.craftbukkit.v1_20_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_20_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
@@ -27,6 +29,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 import java.util.UUID;
 
 public class RabbitPet extends Animal implements VariantHolder<Rabbit.Variant> {
+  private volatile CraftEntity bukkitEntity;
   private static final EntityDataAccessor<Integer> DATA_TYPE_ID = SynchedEntityData.defineId(RabbitPet.class, EntityDataSerializers.INT);
   private int jumpTicks;
   private int jumpDuration;
@@ -227,6 +230,25 @@ public class RabbitPet extends Animal implements VariantHolder<Rabbit.Variant> {
       super.setWantedPosition(x, y, z, speed);
       if (speed > 0.0D) nextJumpSpeed = speed;
     }
+  }
+
+  // 1.20.4 fix
+  @Override
+  public CraftEntity getBukkitEntity() {
+    if (this.bukkitEntity == null) {
+      synchronized (this) {
+        if (this.bukkitEntity == null) {
+          return this.bukkitEntity = new CraftLivingEntity(this.level().getCraftServer(), this) {};
+        }
+      }
+    }
+    return this.bukkitEntity;
+  }
+
+  // 1.20.4 fix
+  @Override
+  public CraftLivingEntity getBukkitLivingEntity() {
+    return (CraftLivingEntity) this.getBukkitEntity();
   }
 
   public class RabbitJumpControl extends JumpControl {

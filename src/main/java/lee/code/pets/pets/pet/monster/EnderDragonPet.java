@@ -9,11 +9,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import org.bukkit.craftbukkit.v1_20_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_20_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class EnderDragonPet extends Mob {
+  private volatile CraftEntity bukkitEntity;
 
   public EnderDragonPet(Player player, String[] data) {
     super(EntityType.ENDER_DRAGON, ((CraftWorld) player.getLocation().getWorld()).getHandle());
@@ -45,5 +48,24 @@ public class EnderDragonPet extends Mob {
   @Override
   public boolean save(CompoundTag compoundTag) {
     return false;
+  }
+
+  // 1.20.4 fix
+  @Override
+  public CraftEntity getBukkitEntity() {
+    if (this.bukkitEntity == null) {
+      synchronized (this) {
+        if (this.bukkitEntity == null) {
+          return this.bukkitEntity = new CraftLivingEntity(this.level().getCraftServer(), this) {};
+        }
+      }
+    }
+    return this.bukkitEntity;
+  }
+
+  // 1.20.4 fix
+  @Override
+  public CraftLivingEntity getBukkitLivingEntity() {
+    return (CraftLivingEntity) this.getBukkitEntity();
   }
 }

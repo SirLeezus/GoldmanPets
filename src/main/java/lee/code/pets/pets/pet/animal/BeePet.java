@@ -19,6 +19,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.animal.Animal;
 import org.bukkit.craftbukkit.v1_20_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_20_R3.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_20_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
@@ -27,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.UUID;
 
 public class BeePet extends Animal implements NeutralMob {
+  private volatile CraftEntity bukkitEntity;
   private static final UniformInt PERSISTENT_ANGER_TIME = TimeUtil.rangeOfSeconds(20, 39);
   private static final EntityDataAccessor<Byte> DATA_FLAGS_ID = SynchedEntityData.defineId(BeePet.class, EntityDataSerializers.BYTE);
   private static final EntityDataAccessor<Integer> DATA_REMAINING_ANGER_TIME = SynchedEntityData.defineId(BeePet.class, EntityDataSerializers.INT);
@@ -153,5 +156,24 @@ public class BeePet extends Animal implements NeutralMob {
 
   private boolean getFlag(int location) {
     return (entityData.get(DATA_FLAGS_ID) & location) != 0;
+  }
+
+  // 1.20.4 fix
+  @Override
+  public CraftEntity getBukkitEntity() {
+    if (this.bukkitEntity == null) {
+      synchronized (this) {
+        if (this.bukkitEntity == null) {
+          return this.bukkitEntity = new CraftLivingEntity(this.level().getCraftServer(), this) {};
+        }
+      }
+    }
+    return this.bukkitEntity;
+  }
+
+  // 1.20.4 fix
+  @Override
+  public CraftLivingEntity getBukkitLivingEntity() {
+    return (CraftLivingEntity) this.getBukkitEntity();
   }
 }

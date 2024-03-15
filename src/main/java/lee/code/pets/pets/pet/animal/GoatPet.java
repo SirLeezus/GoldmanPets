@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 public class GoatPet extends Goat {
-  //TODO look into riding movement, something seems off
 
   public GoatPet(Player player, String[] data) {
     super(EntityType.GOAT, ((CraftWorld) player.getLocation().getWorld()).getHandle());
