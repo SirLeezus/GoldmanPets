@@ -10,11 +10,13 @@ import org.bukkit.*;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Vehicle;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
+import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.BoundingBox;
@@ -170,6 +172,13 @@ public class PetListener implements Listener {
         if (pets.getPetManager().isPet(victim.getVehicle())) e.setCancelled(true);
       }
     }
+  }
+
+  @EventHandler
+  public void onRidingPet(PlayerMoveEvent e) {
+    if (e.getPlayer().getVehicle() == null) return;
+    if (!pets.getPetManager().isPet(e.getPlayer().getVehicle())) return;
+    Bukkit.getServer().getPluginManager().callEvent(new VehicleMoveEvent((Vehicle) e.getPlayer().getVehicle(), e.getFrom(), e.getTo()));
   }
 
   @EventHandler
