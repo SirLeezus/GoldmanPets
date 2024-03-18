@@ -1,5 +1,6 @@
 package lee.code.pets.listeners;
 
+import io.papermc.paper.event.entity.EntityMoveEvent;
 import lee.code.hooks.Hooks;
 import lee.code.pets.Pets;
 import lee.code.pets.enums.PettingSound;
@@ -163,5 +164,17 @@ public class PetListener implements Listener {
   public void onEntityPortal(EntityPortalEvent e) {
     if (e.isCancelled()) return;
     if (pets.getPetManager().isPet(e.getEntity())) e.setCancelled(true);
+  }
+
+  @EventHandler
+  public void onPetMoveIntoProtectedRegion(EntityMoveEvent e) {
+    if (!pets.getPetManager().isPet(e.getEntity())) return;
+    if (e.getEntity().getPassengers().isEmpty()) return;
+    for (Entity passenger : e.getEntity().getPassengers()) {
+      if (passenger instanceof Player player && Hooks.isLocationProtected(player)) {
+        e.getEntity().removePassenger(passenger);
+        player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_RIDE_PROTECTED_REGION.getComponent(null)));
+      }
+    }
   }
 }

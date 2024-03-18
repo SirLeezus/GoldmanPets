@@ -38,7 +38,7 @@ public enum Lang {
   ERROR_NOT_CONSOLE_COMMAND("&cThis command does not work in console."),
   ERROR_RENAME_BLANK("&cThe pet name input was blank, please pick a pet name using normal letters and numbers."),
   ERROR_ENTITY_NOT_SUPPORTED("&cThe entity {0} is not a supported pet type!"),
-  ERROR_RIDE_PROTECTED_REGION("&cYou can't mount your pet while inside a protected spawn region."),
+  ERROR_RIDE_PROTECTED_REGION("&cYou can't ride your pet while inside a protected spawn region."),
   ;
   @Getter private final String string;
 
