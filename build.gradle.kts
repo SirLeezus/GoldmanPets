@@ -33,15 +33,14 @@ dependencies {
 
   //goldman player data
   compileOnly ("lee.code.playerdata:playerdata:1.0.0")
+
+  //world guard
+  implementation ("lee.code.hooks:townshooks:1.0.0")
 }
 
 repositories {
   mavenLocal()
-  mavenCentral() // You can add more repositories if needed
-  maven {
-    name = "protocollib"
-    url = uri("https://repo.dmulloy2.net/repository/public/")
-  }
+  mavenCentral()
 }
 
 tasks {
@@ -88,10 +87,12 @@ tasks {
       include(dependency("com.j256.ormlite:ormlite-jdbc:6.1"))
       include(dependency("me.lucko:commodore:2.2"))
       include(dependency("me.lucko:commodore-file:1.0"))
+      include(dependency("lee.code.hooks:townshooks:1.0.0"))
       exclude(dependency("com.mojang:brigadier"))
     }
 
     // Relocate packages
+    relocate("lee.code.hooks", "lee.code.pets.hooks")
     relocate("com.j256.ormlite", "lee.code.pets.ormlite")
     relocate("me.lucko.commodore", "lee.code.pets.commodore")
     relocate("me.lucko.commodore-file", "lee.code.pets.commodore-file")

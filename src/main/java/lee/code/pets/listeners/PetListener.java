@@ -1,5 +1,6 @@
 package lee.code.pets.listeners;
 
+import lee.code.hooks.Hooks;
 import lee.code.pets.Pets;
 import lee.code.pets.enums.PettingSound;
 import lee.code.pets.events.RideEvent;
@@ -10,13 +11,11 @@ import org.bukkit.*;
 import org.bukkit.entity.Camel;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Vehicle;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
-import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.BoundingBox;
@@ -34,6 +33,10 @@ public class PetListener implements Listener {
     final Entity entity = e.getEntity();
     final Player player = e.getPlayer();
     if (pets.getDelayManager().isOnDelayOrSchedule(player.getUniqueId(), 1000)) return;
+    if (Hooks.isLocationProtected(player)) {
+      player.sendMessage(Lang.PREFIX.getComponent(null).append(Lang.ERROR_RIDE_PROTECTED_REGION.getComponent(null)));
+      return;
+    }
     final ItemStack handItem = player.getInventory().getItemInMainHand();
     final ItemMeta itemMeta = handItem.getItemMeta();
     if (itemMeta != null) {
@@ -160,36 +163,5 @@ public class PetListener implements Listener {
   public void onEntityPortal(EntityPortalEvent e) {
     if (e.isCancelled()) return;
     if (pets.getPetManager().isPet(e.getEntity())) e.setCancelled(true);
-  }
-
-  @EventHandler
-  public void onDamagePlayerOnPet(EntityDamageByEntityEvent e) {
-    if (e.getDamager() instanceof Player attacker && e.getEntity() instanceof Player victim) {
-      if (attacker.getVehicle() != null) {
-        if (pets.getPetManager().isPet(attacker.getVehicle())) e.setCancelled(true);
-      }
-      if (victim.getVehicle() != null) {
-        if (pets.getPetManager().isPet(victim.getVehicle())) e.setCancelled(true);
-      }
-    }
-  }
-
-  @EventHandler
-  public void onRidingPet(PlayerMoveEvent e) {
-    if (e.getPlayer().getVehicle() == null) return;
-    if (!pets.getPetManager().isPet(e.getPlayer().getVehicle())) return;
-    Bukkit.getServer().getPluginManager().callEvent(new VehicleMoveEvent((Vehicle) e.getPlayer().getVehicle(), e.getFrom(), e.getTo()));
-  }
-
-  @EventHandler
-  public void onShootPlayerOnPet(ProjectileHitEvent e) {
-    if (e.getEntity().getShooter() instanceof Player attacker && e.getHitEntity() instanceof Player victim) {
-      if (attacker.getVehicle() != null) {
-        if (pets.getPetManager().isPet(attacker.getVehicle())) e.setCancelled(true);
-      }
-      if (victim.getVehicle() != null) {
-        if (pets.getPetManager().isPet(victim.getVehicle())) e.setCancelled(true);
-      }
-    }
   }
 }
